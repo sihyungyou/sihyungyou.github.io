@@ -7,10 +7,9 @@ comments: true
 
 > Fuzzing: Breaking Things with Random Inputs  
 
-### 요약  
 둘째 장의 첫 토픽은 `Fuzzing`에 대한 간략한 소개와 배경설명이다. `Fuzzing` 이란 무엇인며 어떻게 내부적으로 구현되어있는지 정리한다. 또한 이를 이용해서 `Software Testing`에 어떻게 적용하는지 공부해보았다.  
 
-- What is Fuzzing?  
+### What is Fuzzing?  
 invalid, unexpected, random data 를 입력으로 받아 버그 테스팅을 하는 기술을 말한다. 비가 많이 오고 천둥이 치던 밤 우연히 발견되었는데 뇌우가 컴퓨터를 연결해놓은 전화선에 노이즈를 발생시켰고 이것이 UNIX command를 crash 하거나 bad input을 집어넣었다. 그 결과 놀랍게도 프로그램이 더욱 견고해져서 이를 과학적으로 조사하기 위해서 fuzzing 이라는 기술이 발전하기 시작했다.  
 
 가장 간단한 fuzz generator로는 random characters가 있다. implementation은 다음과 같다.  
@@ -30,7 +29,7 @@ def fuzzer(max_length=100, char_start=32, char_range=32):
 2. Long-Running Fuzzing  
 프로그램에 수 많은 입력값을 줘서 그 중 몇이라도 crash가 나는지 testing 해보는 것이 motivation이다. 역시 bc calculator program을 대상으로 테스팅을 하는데 valid arithmetic expression을 가진 fuzzed data가 있다면 stderr가 "" 로 나올 것이다. 100번의 시도중 거의 대부분이 (당연히) invalid 하다. 또한 모든 경우 에러메세지는 "illegal character", "parse error", "syntax error" 중 하나였다. 그리고 returncode가 0이 아닌 경우는 전혀 없었다. 하지만 100번이 아니라 이보다 훨씬 오랫동안 fuzzing을 한다면 결과는 달라질 수 있다. (버그를 찾을 수도 있다)  
 
-- Bugs Fuzzers Find  
+### Bugs Fuzzers Find  
 Fuzzing의 장점은 많은 일반적이지 않은 입력을 통해 온갖 흥미로운 behavior를 검사할 수 있다는 점이다.  
 
 1. Buffer Overflows  
@@ -42,7 +41,7 @@ C언어를 비롯한 대부분의 언어는 buffer overflow에 대해서 error m
 3. Rogue Numbers  
 memory 영역을 벗어나는 할당의 경우 시스템의 속도가 현저히 느려지고 통제불능이 되어버려 재부팅밖에는 해결책이 없을 수 있다. 정수에 들어갈 수 없는 큰 수를 생성시켜서 이와 같은 상황에 대해 testing이 가능하다.
 
-- Catching Errors  
+### Catching Errors  
 
 
 ### 배운 점  
