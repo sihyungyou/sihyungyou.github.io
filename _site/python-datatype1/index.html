@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>파이썬 시작하기 - 자료형1 – 글 쓰는 공돌이 – Love people, basketball, and programming</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="
+  reference : 점프 투 파이썬 (https://wikidocs.net/book/1)
+
+
+" />
+    <meta property="og:description" content="
+  reference : 점프 투 파이썬 (https://wikidocs.net/book/1)
+
+
+" />
+    
+    <meta name="author" content="글 쓰는 공돌이" />
+
+    
+    <meta property="og:title" content="파이썬 시작하기 - 자료형1" />
+    <meta property="twitter:title" content="파이썬 시작하기 - 자료형1" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="글 쓰는 공돌이" href="/feed.xml" />
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      
+        <a href="/" class="site-avatar"><img src="https://user-images.githubusercontent.com/35067611/60385470-662cf280-9ac4-11e9-8dc4-f9ed73cd671a.jpeg" /></a>
+      
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/">글 쓰는 공돌이</a></h1>
+        <p class="site-description">Love people, basketball, and programming</p>
+      </div>
+
+      <nav>
+        
+        
+        <a href="/">Blog</a>
+        
+        
+        
+        <a href="/about">About</a>
+        
+        
+        
+        <a href="/archive">Archive</a>
+        
+        
+        
+        <a href="/tags">Tags</a>
+        
+        
+      </nav>
+    </header>
+  </div>
+</div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>파이썬 시작하기 - 자료형1</h1>
+
+  <div clsss="meta">
+    <span class="date">
+      2019-06-30
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#파이썬">
+          파이썬
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#언어">
+          언어
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#공부">
+          공부
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <blockquote>
+  <p>reference : 점프 투 파이썬 (https://wikidocs.net/book/1)</p>
+</blockquote>
+
+<p>요즘 대세는 파이썬이라고들 한다. 배우기 쉽고, 적용하기 쉬운 언어이고 실제 기업에서도 많이 쓰이기 떄문이다. 나도 교양수업으로 정확히 기억은 안나지만 1, 2년 전쯤 수업을 들었다. (주입식 교육의 폐혜인지 1도 기억이 나질 않는 게 함정이다..) 최근 해커톤 참여도 그렇고 머신러닝에서 필수적으로 쓰이는 등 여기저기서 파이썬 파이썬 하는 것 같다. 방학도 했고 슬슬 취업준비를 위해 알고리즘 공부도 해야하기에 파이썬을 다시 복습하려 한다. 지인이 추천해준 점프 투 파이썬이라는 튜토리얼을 보며 하나하나 개념을 복습하고 어느정도 복기가 된 후에는 파이썬으로 백준 문제를 풀어볼 생각이다. 첫번째 포스팅의 주제는 data type 이다.</p>
+
+<h3 id="no-data-type">no data type?</h3>
+<p>사실 ‘자료형이 없다’ 라는 것은 말이 안된다. data를 다루어야 하는데 그것들의 type이 나뉘어있지 않다면 어떻게 프로그래밍을 할 수 있겠는가! 다만, 파이썬에서는 여러 다른 자료형을 변수에 store하거나 handle 할 때에 ‘자료형 구분 없이’ 한다는 것이 강점이다. 파이썬에도 당연히 정수, 실수, 배열 등 여러 자료형이 있으며 각각을 manage하는 함수들도 무수히 많다. 그 중 자주 쓸만한 것들을 정리해보려 한다. 이 블로그는 친절히 파이썬을 하나하나 알려주는 것이 아니라 내가 몰랐던 것 위주로 정리하는 매우 불친절한 블로그이므로 내 마음대로 내용을 빼고 더할 예정이다.</p>
+
+<h3 id="number">Number</h3>
+<p>정수, 실수, 8진수, 16진수<br />
+<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">%</code> 외에 흥미로웠던 것 : <code class="highlighter-rouge">**</code> (제곱), <code class="highlighter-rouge">//</code> (몫)</p>
+
+<h3 id="string">String</h3>
+<p>“this is string”, ‘this is also string’, “"”another one!”””, ‘'’the last one’’’<br />
+위와 같이 여러 방법으로 문자열을 나타낼 수 있는데 굳이 이렇게 네 가지 방법이나 가능한 이유를 오늘에서야 알았다(?)<br />
+먼저 C에서 반드시 " 로 표기해야했다면 파이썬에서는 “ “ 내에서는 자유롭게 ‘ 문자를 쓸수 있고 반대의 경우도 가능하다. 따옴표를 세 번이나 쓰는 것은 여러줄인 문자열을 변수에 대입하는 용도이다.</p>
+
+<p>문자열 끼리 더하고(concatenation), 곱하는 것(multiplication)이 가능하다.<br />
+더하여, 문자열 길이를 구하는 내장함수가 구현되어 있다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"guess my length"</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>string indexing, slicing은 자주 써보면 익숙해 질 것 같다.
+formatting이 흥미로웠다!<br />
+숫자 바로 대입</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"i am </span><span class="si">%</span><span class="s">d years old"</span> <span class="o">%</span> <span class="mi">26</span>  
+</code></pre></div></div>
+<p>문자열 바로 대입</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"my name is </span><span class="si">%</span><span class="s">s"</span> <span class="o">%</span> <span class="s">"Jason"</span>  
+</code></pre></div></div>
+<p>숫자 변수 대입</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">year</span> <span class="o">=</span> <span class="mi">2020</span>
+<span class="s">"i am class of </span><span class="si">%</span><span class="s">d"</span> <span class="o">%</span> <span class="n">year</span>
+</code></pre></div></div>
+<p>두개 이상의 값 넣기</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">"Jason"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">26</span>
+<span class="s">"my name is </span><span class="si">%</span><span class="s">s and </span><span class="si">%</span><span class="s">d years old"</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span>  
+</code></pre></div></div>
+<p>f 문자열 포매팅 (파이썬 3.6 이상)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">"Jason"</span>  
+<span class="n">age</span> <span class="o">=</span> <span class="mi">26</span>  
+<span class="n">f</span><span class="s">"my name is {name} and {age} years old"</span>  
+</code></pre></div></div>
+<p>이 외에도 여러 경우의 포맷팅이 있는데 모든걸 외우고 있기보다는 필요할 때 찾아 쓰면 편할 것 같다.</p>
+
+<p>매우매우 유용할 것 같은 문자열 함수들</p>
+<ol>
+  <li>count
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"hobby"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">'b'</span><span class="p">)</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="mi">2</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>find
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"Python is the best choice"</span>
+<span class="n">a</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'b'</span><span class="p">)</span>
+<span class="err">결과</span> <span class="p">:</span> <span class="mi">14</span>
+</code></pre></div>    </div>
+  </li>
+  <li>index
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"Life is too short"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="s">'t'</span><span class="p">)</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="mi">8</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>upper
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"hi"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="s">'HI'</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>lower
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"HI"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="s">'hi'</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>split
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"Life is too short"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="p">[</span><span class="s">'Life'</span><span class="p">,</span> <span class="s">'is'</span><span class="p">,</span> <span class="s">'too'</span><span class="p">,</span> <span class="s">'short'</span><span class="p">]</span>  
+<span class="n">b</span> <span class="o">=</span> <span class="s">"a:b:c:d"</span>  
+<span class="n">b</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">':'</span><span class="p">)</span>  
+<span class="err">결과</span>  <span class="p">:[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">]</span>  
+</code></pre></div>    </div>
+  </li>
+  <li>replace
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="s">"Life is too short"</span>  
+<span class="n">a</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">"Life"</span><span class="p">,</span> <span class="s">"Your leg"</span><span class="p">)</span>  
+<span class="err">결과</span> <span class="p">:</span> <span class="s">'Your leg is too short'</span>  
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>이제부터는 진짜 파이썬에서 쓰이는 리스트, 튜플 등의 자료형인데 한 포스팅에 정리하기에 너무 길어져 다음 포스팅으로 넘기려 한다..!</p>
+
+  </div>
+
+  <div class="pagination">
+    
+      <span class="prev" >
+          <a href="/openhack-2019/">
+          <!-- <a href="http://localhost:4000/openhack-2019/"> -->
+            &#xE000; 오픈핵2019 후기
+          </a>
+      </span>
+    
+    
+      <span class="next" >
+          <a href="/python-datatype2/">
+            파이썬 시작하기 - 자료형2 &#xE001;
+          </a>
+      </span>
+    
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+
+  
+
+  
+  <li><a href="mailto:sihyungyou@gmail.com" class="icon-8 email" title="Email"><svg viewBox="0 0 512 512"><path d="M101.3 141.6v228.9h0.3 308.4 0.8V141.6H101.3zM375.7 167.8l-119.7 91.5 -119.6-91.5H375.7zM127.6 194.1l64.1 49.1 -64.1 64.1V194.1zM127.8 344.2l84.9-84.9 43.2 33.1 43-32.9 84.7 84.7L127.8 344.2 127.8 344.2zM384.4 307.8l-64.4-64.4 64.4-49.3V307.8z"/></svg><!--[if lt IE 9]><em>Email</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/sihyungyou" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 127.1 176.4 9.3 1.7 12.3-4 12.3-8.9V389.4c-51.7 11.3-62.5-21.9-62.5-21.9 -8.4-21.5-20.6-27.2-20.6-27.2 -16.9-11.5 1.3-11.3 1.3-11.3 18.7 1.3 28.5 19.2 28.5 19.2 16.6 28.4 43.5 20.2 54.1 15.4 1.7-12 6.5-20.2 11.8-24.9 -41.3-4.7-84.7-20.6-84.7-91.9 0-20.3 7.3-36.9 19.2-49.9 -1.9-4.7-8.3-23.6 1.8-49.2 0 0 15.6-5 51.1 19.1 14.8-4.1 30.7-6.2 46.5-6.3 15.8 0.1 31.7 2.1 46.6 6.3 35.5-24 51.1-19.1 51.1-19.1 10.1 25.6 3.8 44.5 1.8 49.2 11.9 13 19.1 29.6 19.1 49.9 0 71.4-43.5 87.1-84.9 91.7 6.7 5.8 12.8 17.1 12.8 34.4 0 24.9 0 44.9 0 51 0 4.9 3 10.7 12.4 8.9 73.8-24.6 127-94.3 127-176.4C441.9 153.9 358.6 70.7 256 70.7z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://youtube.com/channel/UCxb0aG8YjuLpkvBZekp1C5g" class="icon-28 youtube" title="YouTube"><svg viewBox="0 0 512 512"><path d="M422.6 193.6c-5.3-45.3-23.3-51.6-59-54 -50.8-3.5-164.3-3.5-215.1 0 -35.7 2.4-53.7 8.7-59 54 -4 33.6-4 91.1 0 124.8 5.3 45.3 23.3 51.6 59 54 50.9 3.5 164.3 3.5 215.1 0 35.7-2.4 53.7-8.7 59-54C426.6 284.8 426.6 227.3 422.6 193.6zM222.2 303.4v-94.6l90.7 47.3L222.2 303.4z"/></svg><!--[if lt IE 9]><em>YouTube</em><![endif]--></a></li>
+  
+
+</ul>
+
+
+
+<p>© Sihyung You. 2019</p>
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>

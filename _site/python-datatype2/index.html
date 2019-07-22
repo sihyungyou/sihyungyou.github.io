@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>파이썬 시작하기 - 자료형2 – 글 쓰는 공돌이 – Love people, basketball, and programming</title>
+
+      <meta charset="utf-8" />
+    <meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    
+    <meta name="description" content="
+  reference : 점프 투 파이썬 (https://wikidocs.net/book/1)
+
+
+" />
+    <meta property="og:description" content="
+  reference : 점프 투 파이썬 (https://wikidocs.net/book/1)
+
+
+" />
+    
+    <meta name="author" content="글 쓰는 공돌이" />
+
+    
+    <meta property="og:title" content="파이썬 시작하기 - 자료형2" />
+    <meta property="twitter:title" content="파이썬 시작하기 - 자료형2" />
+    
+  <!-- Async font loading -->
+<script>
+  window.WebFontConfig = {
+      custom: {
+          families: ['Spoqa Han Sans:100,300,400,700'],
+          urls: ['https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css']
+      },
+      timeout: 60000
+  };
+  (function(d) {
+      var wf = d.createElement('script'), s = d.scripts[0];
+      wf.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js';
+      s.parentNode.insertBefore(wf, s);
+  })(document);
+</script>
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link rel="stylesheet" type="text/css" href="/style.css" />
+  <link rel="alternate" type="application/rss+xml" title="글 쓰는 공돌이" href="/feed.xml" />
+
+  <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      
+        <a href="/" class="site-avatar"><img src="https://user-images.githubusercontent.com/35067611/60385470-662cf280-9ac4-11e9-8dc4-f9ed73cd671a.jpeg" /></a>
+      
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="/">글 쓰는 공돌이</a></h1>
+        <p class="site-description">Love people, basketball, and programming</p>
+      </div>
+
+      <nav>
+        
+        
+        <a href="/">Blog</a>
+        
+        
+        
+        <a href="/about">About</a>
+        
+        
+        
+        <a href="/archive">Archive</a>
+        
+        
+        
+        <a href="/tags">Tags</a>
+        
+        
+      </nav>
+    </header>
+  </div>
+</div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>파이썬 시작하기 - 자료형2</h1>
+
+  <div clsss="meta">
+    <span class="date">
+      2019-06-30
+    </span>
+
+    <ul class="tag">
+      
+      <li>
+        <a href="http://localhost:4000/tags#파이썬">
+          파이썬
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#언어">
+          언어
+        </a>
+      </li>
+      
+      <li>
+        <a href="http://localhost:4000/tags#공부">
+          공부
+        </a>
+      </li>
+      
+    </ul>
+  </div>
+
+  <div class="entry">
+    <blockquote>
+  <p>reference : 점프 투 파이썬 (https://wikidocs.net/book/1)</p>
+</blockquote>
+
+<h3 id="파이썬-자료형-정리-두번째-포스팅">파이썬 자료형 정리 두번째 포스팅</h3>
+
+<h3 id="list">List</h3>
+<p>파이썬에서 리스트는 이미 익숙한 개념인 배열이다. 다만 훨씬 편하다. indexing, slicing 함수가 배열을 다루는 데에 큰 도움을 주고 특히 list 안에 list가 들어가도 무관하다.<br />
+slicing 은 string에서와 같은 문법으로 작동한다.<br />
+concatenation, multiplication, length 구하는 것 또한 string과 같은 방식이다.</p>
+
+<p>list element 삭제는 del 함수로 한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  
+<span class="k">del</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  
+
+<span class="err">결과</span> <span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  
+</code></pre></div></div>
+<p>유용한 함수들
+a.append(x) : 리스트의 맨 마지막에 x를 추가<br />
+a.sort() : 리스트의 요소를 순서대로 정렬<br />
+a.reverse() : 리스트를 역순으로 뒤집음<br />
+a.index(x) : 리스트에 x 값이 있으면 3의 위치 값을 반환<br />
+a.insert(a,b) : 리스트의 a번째 위치에 b를 삽입<br />
+a.remove(x) : 리스트에서 첫 번째로 나오는 x를 삭제<br />
+a.pop() : 리스트의 맨 마지막 요소를 돌려주고 그 요소는 삭제<br />
+a.count(x) : 리스트 안에 x가 몇 개 있는지 조사<br />
+a.extend(x) : x에는 리스트만 올 수 있으며 원래의 a 리스트에 x 리스트를 더함</p>
+
+<h3 id="tuple">Tuple</h3>
+<p>element의 삭제, 변경 등이 불가한 것을 제외하면 list와 동일함!</p>
+
+<h3 id="dictionary">Dictionary</h3>
+<p>주의사항 : key 는 고유한 값이므로 중복되는 key의 경우 나머지 value는 무시된다!</p>
+
+<p>유용한 함수들<br />
+dict.keys() : key들을 list로 만듦
+dict.values()  : value들을 list로 만듦<br />
+dict.items() : key - value 쌍 return<br />
+dict.clear() : 모두 지우기<br />
+dict.get(key) == dict[key] : 해당 key의 value return</p>
+
+<h3 id="set">Set</h3>
+<ul>
+  <li>중복을 허용하지 않는다.</li>
+  <li>순서가 없다.</li>
+</ul>
+
+<p>유용한 함수들<br />
+s1 &amp; s2 or s1.intersection(s2) : 교집합<br />
+s1 | s2 or s1.union(s2) : 합집합<br />
+s1 - s2 or s1.difference(s2) : 차집합<br />
+s2 - s1 or s2.difference(s1) : 차집합<br />
+s1.add(x) : 1개의 값 집합에 추가<br />
+s1.update([1, 2, 3]) : 여러개의 값 집합에 추가<br />
+s1.remove(x) : x element 제거</p>
+
+  </div>
+
+  <div class="pagination">
+    
+      <span class="prev" >
+          <a href="/python-datatype1/">
+          <!-- <a href="http://localhost:4000/python-datatype1/"> -->
+            &#xE000; 파이썬 시작하기 - 자료형1
+          </a>
+      </span>
+    
+    
+      <span class="next" >
+          <a href="/baekjoon-1158/">
+            백준 1158번 &#xE001;
+          </a>
+      </span>
+    
+  </div>
+
+  
+</article>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          <!-- Refer to https://codepen.io/ruandre/pen/howFi -->
+<ul class="svg-icon">
+
+  
+
+  
+
+  
+  <li><a href="mailto:sihyungyou@gmail.com" class="icon-8 email" title="Email"><svg viewBox="0 0 512 512"><path d="M101.3 141.6v228.9h0.3 308.4 0.8V141.6H101.3zM375.7 167.8l-119.7 91.5 -119.6-91.5H375.7zM127.6 194.1l64.1 49.1 -64.1 64.1V194.1zM127.8 344.2l84.9-84.9 43.2 33.1 43-32.9 84.7 84.7L127.8 344.2 127.8 344.2zM384.4 307.8l-64.4-64.4 64.4-49.3V307.8z"/></svg><!--[if lt IE 9]><em>Email</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+  <li><a href="https://github.com/sihyungyou" class="icon-13 github" title="GitHub"><svg viewBox="0 0 512 512"><path d="M256 70.7c-102.6 0-185.9 83.2-185.9 185.9 0 82.1 53.3 151.8 127.1 176.4 9.3 1.7 12.3-4 12.3-8.9V389.4c-51.7 11.3-62.5-21.9-62.5-21.9 -8.4-21.5-20.6-27.2-20.6-27.2 -16.9-11.5 1.3-11.3 1.3-11.3 18.7 1.3 28.5 19.2 28.5 19.2 16.6 28.4 43.5 20.2 54.1 15.4 1.7-12 6.5-20.2 11.8-24.9 -41.3-4.7-84.7-20.6-84.7-91.9 0-20.3 7.3-36.9 19.2-49.9 -1.9-4.7-8.3-23.6 1.8-49.2 0 0 15.6-5 51.1 19.1 14.8-4.1 30.7-6.2 46.5-6.3 15.8 0.1 31.7 2.1 46.6 6.3 35.5-24 51.1-19.1 51.1-19.1 10.1 25.6 3.8 44.5 1.8 49.2 11.9 13 19.1 29.6 19.1 49.9 0 71.4-43.5 87.1-84.9 91.7 6.7 5.8 12.8 17.1 12.8 34.4 0 24.9 0 44.9 0 51 0 4.9 3 10.7 12.4 8.9 73.8-24.6 127-94.3 127-176.4C441.9 153.9 358.6 70.7 256 70.7z"/></svg><!--[if lt IE 9]><em>GitHub</em><![endif]--></a></li>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <li><a href="https://youtube.com/channel/UCxb0aG8YjuLpkvBZekp1C5g" class="icon-28 youtube" title="YouTube"><svg viewBox="0 0 512 512"><path d="M422.6 193.6c-5.3-45.3-23.3-51.6-59-54 -50.8-3.5-164.3-3.5-215.1 0 -35.7 2.4-53.7 8.7-59 54 -4 33.6-4 91.1 0 124.8 5.3 45.3 23.3 51.6 59 54 50.9 3.5 164.3 3.5 215.1 0 35.7-2.4 53.7-8.7 59-54C426.6 284.8 426.6 227.3 422.6 193.6zM222.2 303.4v-94.6l90.7 47.3L222.2 303.4z"/></svg><!--[if lt IE 9]><em>YouTube</em><![endif]--></a></li>
+  
+
+</ul>
+
+
+
+<p>© Sihyung You. 2019</p>
+
+        </footer>
+      </div>
+    </div>
+
+    
+
+  </body>
+</html>
