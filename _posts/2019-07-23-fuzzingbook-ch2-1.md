@@ -48,4 +48,4 @@ memory 영역을 벗어나는 할당의 경우 시스템의 속도가 현저히 
 
 
 ### 생각 및 질문  
-- subprocess module에 대해 공부해야 겠다.  
+- subprocess module에 대해 공부해보즈아...
