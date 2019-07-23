@@ -42,10 +42,84 @@ C언어를 비롯한 대부분의 언어는 buffer overflow에 대해서 error m
 memory 영역을 벗어나는 할당의 경우 시스템의 속도가 현저히 느려지고 통제불능이 되어버려 재부팅밖에는 해결책이 없을 수 있다. 정수에 들어갈 수 없는 큰 수를 생성시켜서 이와 같은 상황에 대해 testing이 가능하다.
 
 ### Catching Errors  
+위의 버그들 (hang or crash를 야기하는) 외에도 여러 에러들 또한 잡을 수 있다.  
+
+1. Checking Memory Access  
+할당되지 않은 메모리 영역에 접근하는지 여부를 체크한다. 일반적으로 out of bounds 에러를 의미한다.  
+
+2. Information Leaks  
+컴퓨터에게 기대하는 reply보다 그 length가 클 경우에 그 뒤에 붙여진 정보들이 누출된다. 이러한 이슈를 잡아내기 위해서 누출되면 안 되는 정보를 marker로 정해놓고 reply에서 marker까지 return했다면 leak이라고 판단한다.  
+
+### Fuzzing Architecture  
+위와 같은 여러 테스팅을 하기 위해서 fuzzing 기술을 이용한다고 했다. 그렇다면 실제 runner, fuzzer class는 어떻게 구현되어있는지 살펴보자.  
+
+~~~python
+class Runner(object):
+    # Test outcomes
+    PASS = "PASS"
+    FAIL = "FAIL"
+    UNRESOLVED = "UNRESOLVED"
+
+    def __init__(self):
+        """Initialize"""
+        pass
+
+    def run(self, inp):
+        """Run the runner with the given input"""
+        return (inp, Runner.UNRESOLVED)
+~~~
+run() 함수는 input을 runner에게 전달하고 result, outcome pair를 반환한다. 이 때 result는 runner-specific value이며 outcome은 테스트 통과 여부다.
+
+~~~python
+class Fuzzer(object):
+    def __init__(self):
+        pass
+
+    def fuzz(self):
+        """Return fuzz input"""
+        return ""
+
+    def run(self, runner=Runner()):
+        """Run `runner` with fuzz input"""
+        return runner.run(self.fuzz())
+
+    def runs(self, runner=PrintRunner(), trials=10):
+        """Run `runner` with fuzz input, `trials` times"""
+        # Note: the list comprehension below does not invoke self.run() for subclasses
+        # return [self.run(runner) for i in range(trials)]
+        outcomes = []
+        for i in range(trials):
+            outcomes.append(self.run(runner))
+        return outcomes
+~~~
+
+~~~python
+
+class RandomFuzzer(Fuzzer):
+    def __init__(self, min_length=10, max_length=100,
+                 char_start=32, char_range=32):
+        """Produce strings of `min_length` to `max_length` characters
+           in the range [`char_start`, `char_start` + `char_range`]"""
+        self.min_length = min_length
+        self.max_length = max_length
+        self.char_start = char_start
+        self.char_range = char_range
+
+    def fuzz(self):
+        string_length = random.randrange(self.min_length, self.max_length + 1)
+        out = ""
+        for i in range(0, string_length):
+            out += chr(random.randrange(self.char_start,
+                                        self.char_start + self.char_range))
+        return out
+~~~
+Fuzzer의 에서 주목할 것은 fuzz()와 run()이다. 먼저 fuzz()는 입력값을 그대로 반환함으로써 출력하거나 다른 메소드에 전달할 수 있도록 한다. 하지만 아래 코드 RandomFuzzer 에서는 랜덤한 문자열을 생성하는 역할을 한다. run()을 통해 fuzzed data를 Runner class에 전달하여 result, outcome pair를 반환받는다.  
 
 
 ### 배운 점  
-
+- Fuzzer, Runner에 대한 기본 개념, 사용법 및 배경  
+- Fuzzing으로 생성한 input은 랜덤하면서 많은 경우의 수를 통해 예상하지 못했던 여러 behavior들을 이끌어냄으로써 Software Testing 영역에 적용된다.  
 
 ### 생각 및 질문  
-- subprocess module에 대해 공부해보즈아...
+- python subprocess module에 대해 공부해보즈아...  
+
