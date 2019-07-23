@@ -17,9 +17,9 @@ comments: true
 그래서 단순 fuzzing이 아니라, `Mutating Inputs` 이라는 개념을 더한다.  
 random generated string의 대안으로써 하나의 given valid input으로 시작해서 조금씩 바꿔나가는 것이다. 이는 `simple string manipulation` 이라고도 한다. "바꾼다"는 말은 insertion, deletion, flipping a bit in a character 등을 포함한다. 이렇게 하면 앞서 말한 138년이라는 비현실적인 시간동안 valid input을 기다리는 불상사가 생기지 않고 비로소 유의미한 software testing이 가능해진다.  
 
-![delete](https://user-images.githubusercontent.com/35067611/61734980-f279bf00-adbd-11e9-9368-84660ed50b04.png/200x200)
-![insert](https://user-images.githubusercontent.com/35067611/61735002-ff96ae00-adbd-11e9-8a3a-ea2bbb73cb53.png/200x200)
-![flip]https://user-images.githubusercontent.com/35067611/61735025-0b827000-adbe-11e9-86f9-4c7bf0740b2a.png/200x200)
+![delete](https://user-images.githubusercontent.com/35067611/61734980-f279bf00-adbd-11e9-9368-84660ed50b04.png)
+![insert](https://user-images.githubusercontent.com/35067611/61735002-ff96ae00-adbd-11e9-8a3a-ea2bbb73cb53.png)
+![flip]https://user-images.githubusercontent.com/35067611/61735025-0b827000-adbe-11e9-86f9-4c7bf0740b2a.png)
 
 ### Multiple Mutations  
 지금까지는 sample string에 한번의 mutation을 적용시켰다. 하지만 여러번의 mutation을 적용시켜 더 많은 변화를 기대할 수 있다. 아래 코드는 20번의 mutation을 실행하는 코드이다.  
