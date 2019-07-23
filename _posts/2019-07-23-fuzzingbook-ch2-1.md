@@ -10,7 +10,7 @@ comments: true
 둘째 장의 첫 토픽은 `Fuzzing`에 대한 간략한 소개와 배경설명이다. `Fuzzing` 이란 무엇인며 어떻게 내부적으로 구현되어있는지 정리한다. 또한 이를 이용해서 `Software Testing`에 어떻게 적용하는지 공부해보았다.  
 
 ### What is Fuzzing?  
-invalid, unexpected, random data 를 입력으로 받아 버그 테스팅을 하는 기술을 말한다. 비가 많이 오고 천둥이 치던 밤 우연히 발견되었는데 뇌우가 컴퓨터를 연결해놓은 전화선에 노이즈를 발생시켰고 이것이 UNIX command를 crash 하거나 bad input을 집어넣었다. 그 결과 놀랍게도 프로그램이 더욱 견고해져서 이를 과학적으로 조사하기 위해서 fuzzing 이라는 기술이 발전하기 시작했다.  
+invalid, unexpected, random data 를 입력으로 받아 버그 테스팅을 하는 기술을 말한다. 비가 많이 오고 천둥이 치던 밤 우연히 발견되었는데 뇌우가 컴퓨터를 연결해놓은 전화선에 노이즈를 발생시켰고 이것이 UNIX command를 crash 하거나 bad input을 집어넣었다. 프로그램이 그런 random input에 의해 crash될 정도로 견고하지 못하다는 것에 놀란 한 교수는 이 노이즈가 미치는 영향에 대해서 과학적으로 조사하기 시작했고 fuzzing이 발전하게 되었다.  
 
 가장 간단한 fuzz generator로는 random characters가 있다. implementation은 다음과 같다.  
 ~~~python
