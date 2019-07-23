@@ -19,7 +19,7 @@ random generated string의 대안으로써 하나의 given valid input으로 시
 
 
 ### Multiple Mutations  
-지금까지는 sample string에 한번의 mutation을 적용시켰다. 하지만 여러번의 mutation을 적용시켜 더 많은 변화를 기대할 수 있다. 아래 코드는 20번의 mutation을 실행하는 코드이다.  
+지금까지는 sample string에 한번의 mutation을 적용시켰다. 하지만 여러번의 mutation을 적용시켜 더 많은 변화를 기대할 수 있다. 아래 코드는 10번의 mutation을 실행하는 코드이다.  
 
 ~~~python
 seed_input = "http://www.google.com/search?q=fuzzing"
