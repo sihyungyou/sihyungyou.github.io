@@ -19,7 +19,7 @@ random generated string의 대안으로써 하나의 given valid input으로 시
 
 ![delete](https://user-images.githubusercontent.com/35067611/61734980-f279bf00-adbd-11e9-9368-84660ed50b04.png)
 ![insert](https://user-images.githubusercontent.com/35067611/61735002-ff96ae00-adbd-11e9-8a3a-ea2bbb73cb53.png)
-![flip] (https://user-images.githubusercontent.com/35067611/61735025-0b827000-adbe-11e9-86f9-4c7bf0740b2a.png)
+![flip](https://user-images.githubusercontent.com/35067611/61735025-0b827000-adbe-11e9-86f9-4c7bf0740b2a.png)
 
 ### Multiple Mutations  
 지금까지는 sample string에 한번의 mutation을 적용시켰다. 하지만 여러번의 mutation을 적용시켜 더 많은 변화를 기대할 수 있다. 아래 코드는 20번의 mutation을 실행하는 코드이다.  
