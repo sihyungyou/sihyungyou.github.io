@@ -7,7 +7,7 @@ comments: true
 
 > Code Coverage  
 
-이 장에서는 Software Teting 중에 몇 번째 line에 위치한 어떤 함수가 몇 번 execute 되었는지 trace 하는 과정을 다룬다. 지난 장에서 이야기한 basic fuzzing의 case에서 버그가 적거나 충분치 않게 검출되었을 때 유용하게 쓰이는 개념이다. 이를 설명하기 위해 CGI Decoder(공백이 들어가면 안되고 16진수를 %xx로 표시하도록 되어있는 등 규칙이 있는 URL을 decode 하는 함수)로 demo를 진행한다.  
+이 장에서는 Software Teting 의 효율을 어떻게 측정하는 지에 대해서 다룬다. Coverage라는 개념을 소개하는데 지난 장에서 이야기한 basic fuzzing의 case에서 버그가 적거나 충분치 않게 검출되었을 때 유용하게 쓰이는 개념이다. Coverage는 프로그램의 어떤 부분이 테스팅 중에 실제로 실행되었는지 파악하고 실행된 함수들의 위치(line number) 정보까지 프로그래머에게 전달한다. 이를 설명하기 위해 CGI Decoder(공백이 들어가면 안되고 16진수를 %xx로 표시하도록 되어있는 등 규칙이 있는 URL을 decode 하는 함수)로 demo를 진행한다.  
 
 ~~~python
 def cgi_decode(s):
@@ -102,6 +102,5 @@ class Coverage(object):
 위의 tracing 과정에서 fuzzing의 개념을 추가하면 random, massive한 입력값에 대해 coverage를 기록하면서 버그를 검출하는 것으로 개념을 확장시킬 수 있다. 예를 들면 문자열의 끝에 %가 오는 경우는 뒤에 두 자릿수 숫자 대신 널 문자가 자리한다. digit high, low를 검사하는데 문자열의 범위를 벗어난 memory를 접근하게 되는 것이다. 이와 같이 fuzzing을 통해 error finding의 가능성을 높일 수 있다.  
 
 ### 배운 점  
-
-
-### 생각 및 질문  
+- Difference between black-Box and white-Box testing  
+- Measuring the effectiveness of software testing via coverage  
