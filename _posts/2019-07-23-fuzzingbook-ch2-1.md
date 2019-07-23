@@ -49,11 +49,11 @@ Generic, 뜻 그대로 일반적인 오류를 점검한다. 특정 프로그램�
 - Checking Memory Access : 할당되지 않은 메모리 영역에 접근하는지 여부를 체크한다. 일반적으로 out of bounds 에러를 의미한다.  
 - Information Leaks : 컴퓨터에게 기대하는 reply보다 그 length가 클 경우에 그 뒤에 붙여진 정보들이 누출된다. 이러한 이슈를 잡아내기 위해서 누출되면 안 되는 정보를 marker로 정해놓고 reply에서 marker까지 return했다면 leak이라고 판단한다.  
 
-2. Program-Specified Chekcers  
-모든 프로그램에 적용될 수 있는 generic checkers와는 다르게 특정한 프로그램이 요하는 오류에 대해 validity를 테스팅 한다. 주로 assertion 개념을 통해 error detecting을 한다. 프로그램마다 목적과 용도가 다르기 때문에 program-specified checkers는 개발자가 직접 함수로 정의한다.  
+2. Program-Specific Chekcers  
+모든 프로그램에 적용될 수 있는 generic checkers와는 다르게 특정한 프로그램이 요하는 오류에 대해 validity를 테스팅 한다. 주로 assertion 개념을 통해 error detecting을 한다. 프로그램마다 목적과 용도가 다르기 때문에 program-specific checkers는 개발자가 직접 함수로 정의한다.  
 
 3. Static Code Checkers  
-assertion 으로 program-specified chekcers을 수행했다면 static type checkers로도 같은 역할을 수행할 수 있다. 예를 들면 파이썬에는 str, str type의 Dict에 대해 int, str이 들어올 경우 error detecting 을 해주는 MyPy static checker가 있다.  
+assertion 으로 program-specific chekcers을 수행했다면 static type checkers로도 같은 역할을 수행할 수 있다. 예를 들면 파이썬에는 str, str type의 Dict에 대해 int, str이 들어올 경우 error detecting 을 해주는 MyPy static checker가 있다.  
 
 ### Fuzzing Architecture  
 위와 같은 여러 테스팅을 하기 위해서 fuzzing 기술을 이용한다고 했다. 그렇다면 실제 runner, fuzzer class는 어떻게 구현되어있는지 살펴보자.  
