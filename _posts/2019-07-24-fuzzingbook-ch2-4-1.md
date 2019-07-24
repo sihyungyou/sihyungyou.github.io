@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Software Testing Study CH 2-4"
+title: "Software Testing Study CH 2-4 (1)"
 tags: [Software Testing, Fuzzing, 공부]
 comments: true
 ---
@@ -164,8 +164,6 @@ reybox_fuzzer.population
 
 Greybox fuzzer에서 seeds들이 더 많은 테스팅 과정으로 fuzzer를 가이드해주는 것을 확인할 수 있는데, 위의 결과는 input good이 exception을 일으키는 input인 bad로 mutate되는 과정을 보여준다.
 
-![Center example image](https://user-images.githubusercontent.com/35067611/61800448-fc57fc80-ae67-11e9-8214-344f93330adb.png "Center"){: .center-image}  
-
 3. Boosted Greybox Fuzzer
 Boosted greybox fuzzer는 더 많은 coverage를 약속하는 seed에게 더 많은 energy를 준다. 즉, power schedule 알고리즘을 살짝 바꾸는 것이다. generated input에 의해서 적게 exercise 되는 코드를 unusual paths 라고 하는데, 이 unusual path를 많이 exercise하는 seed가 그것이다.  
 
@@ -217,3 +215,41 @@ class CountingGreyboxFuzzer(GreyboxFuzzer):
 'ccab8793361783ff88e8cafc58ed178b', 0.00173, 'bad\x0f'
 'd5b7040bdd60ea92a98a0d715bdb7ced', 0.99825, 'bad!\x0e'
 ~~~
+
+![Center example image](https://user-images.githubusercontent.com/35067611/61802628-c4eb4f00-ae6b-11e9-861a-350d55fa4ef7.png "Center"){: .center-image}  
+
+~~~python
+blackbox_fuzzer.inputs[-10:]
+~~~
+~~~
+['gNood',
+ 'jeo',
+ '~g/ome',
+ 'gXOoqd',
+ '5gCood',
+ 'oko&Yd',
+ 'od',
+ 'god,',
+ '\x7foW',
+ 'wo']
+~~~
+
+~~~python
+greybox_fuzzer.inputs[-10:]
+~~~
+~~~
+['goQo]${d',
+ 'vbaboaN"u',
+ '0boo',
+ 'goo4t',
+ 'wBok>d',
+ 'ad3uom\x1bN"',
+ 'ad!u/\x1b`N"',
+ 'bqdo`J+"',
+ 'aZ!\x1b]5`N"t',
+ 'bHaoo`$N"']
+~~~
+
+greybox fuzzer가 더 복잡한 input generating을 수행하는 것을 확인할 수 있다. 이는 더 많은 경우의 수에 대해 테스팅을 진행할 수 있을 것이고 결국 에러를 찾을 수 있는 더 높은 확률로 직결된다.  
+
+쓰다보니 포스팅이 매우 길어졌다. 이번 챕터부터는 내용이 본격적으로 greybox fuzzer에 대해 다루기 시작하면서 양과 난이도가 이전보다 매우 올라갔다. 다음 포스팅에서 계속...  
