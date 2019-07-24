@@ -50,7 +50,7 @@ for i in range(mutations):
 이런거를 패키지화 해놓은 것이 MutationFuzzer Class 이다. 이 클래스는 seed, minimum, maximum number of mutation을 인자로 전달받아 fuzzing을 수행한다.  
 하지만 the higher variety, the higher risk to having invalid input 라는 것을 명심하자. 단순히 mutation을 많이 한다고 좋은 것만은 아닐 것이다.
 
-이런 문제점을 보완할 수 있는 주요 아이디어가 이런 mutations들을 guide 하는 것이다. 즉, 가치있는 입력값들을 keep 하는 것이다.  
+이런 문제점을 보완할 수 있는 주요 아이디어가 이런 mutations들을 guide 하는 것이다. MutationCoverageFuzzer로 확장시켜 보자.  
 
 ### Guiding by Coverage  
-이 부분은 이해가 쉽지 않다.. 더 공부해 봐야할 것 같다 ㅠ_ㅠ  
+먼저 specification of program behavior가 없다고 가정한다. 
