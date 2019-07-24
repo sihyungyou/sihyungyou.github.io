@@ -12,6 +12,7 @@ comments: true
 
 1. Solving a Maze  
 문자열 미로를 예로 들어보자. 시작점에서 끝점까지 미로를 푸는 문자열을 입력으로 준다. D = down, L = left, R = right, U = up 이다.  
+
 ~~~python
 maze_string = """
 +-+-----+
@@ -46,7 +47,8 @@ If the current tile is a "trap" (+,|,-), it returns "INVALID" and the current ma
 If the current tile is the "target" (#), it returns "SOLVED" and the current maze state.  
 
 2. 접근  
-아직 fuzzing과 미로가 무슨관련인가 싶다. 그 접근을 천천히 살펴보자. DictMutator class는 문자열을 주어진 dictionary에서 keyword를 뽑아 삽입하는 방식으로 mutate하는 class다. 미로를 fuzz 하기 위해서 이 클래스를 keyword를 seed의 끝에 append하고 seed의 마지막 문자를 삭제하는 방식으로 확장시킨다.
+아직 fuzzing과 미로가 무슨관련인가 싶다. 그 접근을 천천히 살펴보자. DictMutator class는 문자열을 주어진 dictionary에서 keyword를 뽑아 삽입하는 방식으로 mutate하는 class다. 미로를 fuzz 하기 위해서 이 클래스를 keyword를 seed의 끝에 append하고 seed의 마지막 문자를 삭제하는 방식으로 확장시킨다.  
+
 ~~~python
 class MazeMutator(DictMutator):
     def __init__(self, dictionary):
