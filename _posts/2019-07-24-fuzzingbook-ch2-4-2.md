@@ -87,4 +87,71 @@ Out of 888 seeds,
 ~~~
 
 ### Computing Function-Level Distance  
-static call graph를 이용하면 함수 f와 타겟 t사이의 거리를 계산할 수 있다. 그리고 그것을 기반으로 call graph에 상응하는 function을 찾아야 한다. 
+(이 부분 아직 이해 부족크..)  
+static call graph를 이용하면 함수 f와 타겟 t사이의 거리를 계산할 수 있다. 그리고 그것을 기반으로 call graph에 상응하는 function을 찾아야 한다. distance dictionary는 각 function과 target까지의 거리 정보를 담고 있다. 만약 target 까지 길이 없다면 최댓값으로 거리를 조정한다.  
+
+### Directed Power Schedule  
+위의 function-level distance 계산을 마쳤다면 power schedule algorithm을 다시한번 고쳐본다. lower average distance to target function일 수록 더 높은 seed energy를 주는 것이다.  
+~~~python
+class DirectedSchedule(PowerSchedule):
+    def __init__(self, distance, exponent):
+        self.distance = distance
+        self.exponent = exponent
+
+    def __getFunctions__(self, coverage):
+        functions = set()
+        for f, _ in set(coverage):
+            functions.add(f)
+        return functions
+    
+    def assignEnergy(self, population):
+        """Assigns each seed energy inversely proportional
+           to the average function-level distance to target."""
+        for seed in population:
+            if not hasattr(seed, 'distance'):
+                num_dist = 0
+                sum_dist = 0
+                for f in self.__getFunctions__(seed.coverage):
+                    if f in list(distance):
+                        sum_dist += distance[f]
+                        num_dist += 1
+                seed.distance = sum_dist / num_dist
+                seed.energy = (1 / seed.distance) ** self.exponent
+~~~
+
+### Improved Directed Power Schedule  
+directed power schedule을 한 번 더 개선시켜보자. 최소, 최대 사이의 거리로 seed distance를 normalize 시키는 방법을 이용한다. 
+~~~python
+class AFLGoSchedule(DirectedSchedule):
+    def assignEnergy(self, population):
+        """Assigns each seed energy inversely proportional
+           to the average function-level distance to target."""
+        min_dist = 0xFFFF
+        max_dist = 0
+        for seed in population:
+            if not hasattr(seed, 'distance'):
+                num_dist = 0
+                sum_dist = 0
+                for f in self.__getFunctions__(seed.coverage):
+                    if f in list(distance):
+                        sum_dist += distance[f]
+                        num_dist += 1
+                seed.distance = sum_dist / num_dist
+            if seed.distance < min_dist: min_dist = seed.distance
+            if seed.distance > max_dist: max_dist = seed.distance
+
+        for seed in population:
+            if (seed.distance == min_dist):
+                if min_dist == max_dist:
+                    seed.energy = 1
+                else: 
+                    seed.energy = max_dist - min_dist
+            else:
+                seed.energy = ((max_dist - min_dist) / (seed.distance - min_dist)) 
+~~~
+
+### 배운 점  
+- blackbox mutation-based fuzzer는 mutator와 power schedule 개념을 합쳐서 population으로부터 입력값을 랜덤하게 선택해와 mutation을 적용한다.  
+- greybox mutation-based fuzzer는 coverage information을 활용하는데, seed population에 coverage를 증가시키는 입력값을 더해가는 방식으로 작동한다.  
+- boosted greybox fuzzer는 더 많은 coverage를 약속하는 seed에게 더 많은 energy를 주는 power schedule algorithm을 사용한다. 더 많은 coverage란 unusual paths를 더 많이 학습하는 코드를 의미한다.  
+- directed greybox fuzzer는 unusual path 보다는 target 까지 더 가까운 함수를 제공하는 seed에게 더 많은 energy를 준다.
