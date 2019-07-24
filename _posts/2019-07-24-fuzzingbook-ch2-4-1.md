@@ -11,14 +11,14 @@ comments: true
 
 ### Ingredients for Greybox Fuzzing
 
-1. Background  
+### Background  
 
 AFL은 mutation-based fuzzer이다. 즉, seed input을 조금씩 바꾸거나 두 개의 다른 input을 합쳐서 새로운 문자열을 만든다는 뜻이다. AFL은 또한 greybox fuzzer 인데 coverage-feedback을 통해 프로그램에 어떻게 더 깊이 reach 할 지 배우기 때문이다. AFL은 완전한 black-box도, white-box도 아니다. 전자가 아닌 이유는 프로그램 분석을 조금이라도 이용하기 때문이다. 후자의 경우는 AFL이 심도있는 프로그램 분석을 기반으로 작동하지 않기 때문이다. 대신 generated input의 coverage information을 주워모으는 가벼운 방식으로 작동한다. 만약 생성된 입력값이 coverage를 증가시킨다면 그것은 후의 fuzzing을 위해서 seed corpus에 추가된다.  
 
-2. Mutator and Seed  
+### Mutator and Seed  
 mutator class implementation는 insert, delete, flip 세 가지 경우의 mutation 방식 함수를 포함하고 있다. 어떤 방법으로 mutate 할 건지도 랜덤으로 선택된다.  
 
-3. Power Schedules  
+### Power Schedules  
 Power schedule은 fuzzing time을 seeds 사이에 균등하게 배분하는 개념이다. 그러기 위해서 seeds에서 input을 선택해서 가져올 때 seed’s energy 값에 의존한다. fuzzing이 진행되는 동안 우리는 더 가능성이 있는 (더 짧은 문자열, 더 빠른 실행속도, coverage를 더 자주 증가시키는) seed에 높은 우선순위를 두고 선택한다. 그러므로 seed는 data 뿐만 아니라 energy 값도 가진다.  
 
 ~~~python
@@ -69,7 +69,7 @@ hits
 
 ### Blackbox, Greybox, and Boosted Greybox Fuzzing
 
-1. Blackbox Mutation-based Fuzzer  
+### Blackbox Mutation-based Fuzzer  
 mutator + power schedule의 개념을 fuzzer에 합쳐서 넣어보자. 먼저 blackbox fuzzer로 시작해볼 것이다.  
 black box fuzzer이기 때문에 기본적으로 coverage information leverage를 하지 않는다. fuzz 함수는 return generated input, run 함수는 executes fuzz specified number of times를 수행한다.  
 
@@ -123,7 +123,7 @@ class MutationFuzzer(Fuzzer):
 
 Black box mutation-based fuzzer의 작동 방식을 요약하면 "처음에 제공되는 initial seeds set을 fuzzing함으로써 새로운 입력값을 생성하되, 다음 seed를 선택할 때는 power schedule 방식을 도입하여 선택한다" 이다.  
 
-2. Greybox Mutation-based Fuzzer  
+### Greybox Mutation-based Fuzzer  
 Black-box fuzzer와는 반대로 greybox fuzzer는 coverage information을 활용한다. 구체적으로는, seed population에 code coverage를 증가시키는 generated input을 더해가는 방식으
 로 활용한다.  
 
@@ -164,7 +164,7 @@ reybox_fuzzer.population
 
 Greybox fuzzer에서 seeds들이 더 많은 테스팅 과정으로 fuzzer를 가이드해주는 것을 확인할 수 있는데, 위의 결과는 input good이 exception을 일으키는 input인 bad로 mutate되는 과정을 보여준다.
 
-3. Boosted Greybox Fuzzer
+### Boosted Greybox Fuzzer
 Boosted greybox fuzzer는 더 많은 coverage를 약속하는 seed에게 더 많은 energy를 준다. 즉, power schedule 알고리즘을 살짝 바꾸는 것이다. generated input에 의해서 적게 exercise 되는 코드를 unusual paths 라고 하는데, 이 unusual path를 많이 exercise하는 seed가 그것이다.  
 
 ~~~python

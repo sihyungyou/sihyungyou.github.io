@@ -10,7 +10,7 @@ comments: true
 ### Directed Greybox Fuzzing  
 가끔은 buffer overflow를 기대하고 fuzzer가 위험한 메모리 영역을 접근하기를 바랄 때도 있다. 혹은 가장 최근에 수정된 코드에 대해서 테스팅을 해보고 싶을 수도 있다. 어떻게 그러한 특정 영역으로 fuzzer를 가이드 할 수 있을까. 이번 장에서는 directed greybox fuzzer를 통해 이 주제에 대해서 알아본다.  
 
-1. Solving a Maze  
+### Solving a Maze  
 문자열 미로를 예로 들어보자. 시작점에서 끝점까지 미로를 푸는 문자열을 입력으로 준다. D = down, L = left, R = right, U = up 이다.  
 
 ~~~python
@@ -46,7 +46,7 @@ If the current tile is "benign" (), the tile-function corresponding to the next 
 If the current tile is a "trap" (+,|,-), it returns "INVALID" and the current maze state.  
 If the current tile is the "target" (#), it returns "SOLVED" and the current maze state.  
 
-2. 접근  
+### 접근  
 아직 fuzzing과 미로가 무슨관련인가 싶다. 그 접근을 천천히 살펴보자. DictMutator class는 문자열을 주어진 dictionary에서 keyword를 뽑아 삽입하는 방식으로 mutate하는 class다. 미로를 fuzz 하기 위해서 이 클래스를 keyword를 seed의 끝에 append하고 seed의 마지막 문자를 삭제하는 방식으로 확장시킨다.  
 
 ~~~python
@@ -77,7 +77,7 @@ maze_mutator = MazeMutator(["L","R","U","D"])
 maze_schedule = PowerSchedule()
 maze_fuzzer  = GreyboxFuzzer([seed_input], maze_mutator, maze_schedule)
 
-pritn_stats(maze_fuzzer)
+print_stats(maze_fuzzer)
 ~~~
 ~~~
 Out of 888 seeds, 
@@ -86,5 +86,5 @@ Out of 888 seeds,
 *  704 were invalid
 ~~~
 
-3. Computing Function-Level Distance  
+### Computing Function-Level Distance  
 static call graph를 이용하면 함수 f와 타겟 t사이의 거리를 계산할 수 있다. 그리고 그것을 기반으로 call graph에 상응하는 function을 찾아야 한다. 
