@@ -50,7 +50,9 @@ for i in range(mutations):
 이런거를 패키지화 해놓은 것이 MutationFuzzer Class 이다. 이 클래스는 seed, minimum, maximum number of mutation을 인자로 전달받아 fuzzing을 수행한다.  
 하지만 the higher variety, the higher risk to having invalid input 라는 것을 명심하자. 단순히 mutation을 많이 한다고 좋은 것만은 아닐 것이다.
 
-이런 문제점을 보완할 수 있는 주요 아이디어가 이런 mutations들을 guide 하는 것이다. MutationCoverageFuzzer로 확장시켜 보자.  
-
 ### Guiding by Coverage  
-먼저 specification of program behavior가 없다고 가정한다. 
+이런 문제점을 보완할 수 있는 주요 아이디어가 이런 mutations들을 coverage를 통해 guide 하는 것이다. specification of program behavior은 없다고 가정한다. 또한 위의 url 예제에서 valid check의 결과가 pass인 fuzzed input에 대해서만 mutation을 적용한다.
+
+basic fuzzing과 mutation-based fuzzing 의 testig effectiveness 비교를 위해 coverage information을 수집한다.  
+
+가능한 많은 기능들에 대해서 테스팅을 할 때 까지 발견되는 프로그램 코드를 population에 넣는다. 즉, uncovered code에서 coverage information을 통해 새로운 길을 발견하면 cover하고 (mutation-based fuzzed input으로 테스팅을 하고) 다음 단계로 넘어간다.  
