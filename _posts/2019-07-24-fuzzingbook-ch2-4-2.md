@@ -11,7 +11,8 @@ comments: true
 가끔은 buffer overflow를 기대하고 fuzzer가 위험한 메모리 영역을 접근하기를 바랄 때도 있다. 혹은 가장 최근에 수정된 코드에 대해서 테스팅을 해보고 싶을 수도 있다. 어떻게 그러한 특정 영역으로 fuzzer를 가이드 할 수 있을까. 이번 장에서는 directed greybox fuzzer를 통해 이 주제에 대해서 알아본다.  
 
 ### Solving a Maze  
-문자열 미로를 예로 들어보자. 시작점에서 끝점까지 미로를 푸는 문자열을 입력으로 준다. D = down, L = left, R = right, U = up 이다.  
+문자열 미로를 예로 들어보자. 시작점에서 끝점까지 미로를 푸는 문자열을 입력으로 준다.  
+D = down, L = left, R = right, U = up 이다.  
 
 ~~~python
 maze_string = """

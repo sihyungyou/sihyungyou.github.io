@@ -62,3 +62,16 @@ def test_me2_instrumented(x, y):
 지금까지는 x, y 값을 -1000 ~ 1000 범위의 작은 수로 제한시켰다. 이는 작은 수부터 시작해서 search하면 더 빨리 많은 테스트 케이스에 대해서 찾을 수 있기 때문이다. 하지만 찾으려는 답이 만약 search space와 완전히 다른곳에 있다면 어떨까. 작은 수로 시작한 hillclimber 알고리즘은 엄청나게 오래 걸릴 것이고 답을 찾을 가능성도 낮아질 것이다. 실제로 1000이 아니라 100000으로 범위를 확장하면 답을 찾는데 훨씬 많은 테스트케이스를 필요로 한다.  
 
 ### CGI Decoder as Search Problem  
+CH2-2 에서 봤던 CGI Decoder 함수도 search-based fuzzing 개념을 적용할 수 있다. CGI Decoder는 문자열을 입력값으로 받는 함수인데 문자열에 속한 문자요소들도 숫자처럼 비교, 증가, 감소가 가능하기 때문이다. 예를 들어 입력값이 "test"일 때, 각 문자에 대해서 distance가 +1, -1인 모든 경우의 수를 나열하면 다음과 같다.  
+~~~
+uest
+tfst
+tett
+tesu
+sest
+tdst
+tert
+tess
+~~~
+
+문자는 숫자와 동일하게 다뤄질 수 있으므로 위의 test_me() 예제에서 처럼 distance를 문자열에 대해서도 계산할 수 있다. 
