@@ -30,7 +30,8 @@ def neighbours(x, y):
                  and (MIN <= y + dy <= MAX))]
 ~~~
 
-이 알고리즘을 hillclimbing이라고 하는데 distance의 값이 점점 작아져서 0에 도달하는 과정을 그래프로 나타내면 언덕을 올라가는(실제로는 내려가는) 모양을 띠기 때문이다.  
+### Hillclimbing  
+neighbours 에 대한 searching 알고리즘을 hillclimbing이라고 하는데 distance의 값이 점점 작아져서 0에 도달하는 과정을 그래프로 나타내면 언덕을 올라가는(실제로는 내려가는) 모양을 띠기 때문이다.  
 ~~~python
 def hillclimber():
     # Create and evaluate starting point
