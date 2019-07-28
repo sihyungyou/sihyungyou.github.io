@@ -117,7 +117,6 @@ class GrammarFuzzer(Fuzzer):
         """Process children after selection.  By default, does nothing."""
         return chosen_children
 ~~~
-  
 <!-- ![Center example image](https://user-images.githubusercontent.com/35067611/62006447-932ffc00-b17b-11e9-8653-f52ff6ea5d93.png "Center"){: .center-image} -->
 
 ### Expanding a Tree  
