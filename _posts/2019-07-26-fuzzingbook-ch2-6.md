@@ -107,4 +107,6 @@ Mutation Analysis는 잘 다듬어진 set of fault의 좋은 대안을 제시한
 ![Center example image](https://user-images.githubusercontent.com/35067611/62007570-fa54ad00-b189-11e9-9a6f-5985f799ffaf.png "Center"){: .center-image}  
 
 ### A Simple Mutator for Functions  
-그렇다면 어떻게 프로그램에서 valid한 mutant를 만들 수 있을까? 가장 간단한 방법은 몇몇 statement를 pass로 대체하는 것이다.  
+그렇다면 어떻게 프로그램에서 valid한 mutant를 만들 수 있을까? 가장 간단한 방법은 몇몇 statement를 pass로 대체하는 것이다. (코드상의 구현은 설명이 너무 길어지므로 생략한다)  
+
+### Evaluating Mutations  
