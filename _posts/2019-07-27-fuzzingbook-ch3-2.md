@@ -17,7 +17,7 @@ expr_grammar['<factor>']
 ~~~
 ['<sign-1><factor>', '(<expr>)', '<integer><symbol-1>']
 ~~~
-위의 코드와 결과에서 expr을 제외한 모든 선택의 경우들은 symbol의 수를 증가시킨다. 우리는 symbol expansion에 maximum값을 한계로 두었었다. 그러므로 <factor>의 선택권은 (<expr>) 하나 밖에 남지 않는다. 이는 무한하게 괄호를 증가시킨다. (infinite expansion)  
+위의 코드와 결과에서 expr을 제외한 모든 선택의 경우들은 symbol의 수를 증가시킨다. 우리는 symbol expansion에 maximum값을 한계로 두었었다. 그러므로 factor의 선택권은 (expr) 하나 밖에 남지 않는다. 이는 무한하게 괄호를 증가시킨다. (infinite expansion)  
 이것 말고도 한계점은 더 있다. 첫번째로 비효율적이다. 매 반복에서 fuzzer는 symbol expansion을 위해 그때까지 생성된 문자열들을 모두 찾는다. 이런 알고리즘은 문자열이 자랄수록 매우 비효율적일 것이다. 두번째로는 control하기 쉽지 않다는 점이다. symbol의 갯수를 제한시킨다고 해도 여전히 매우 긴 문자열을 받을 수 있다.  
 
 ### Derivation Trees  
