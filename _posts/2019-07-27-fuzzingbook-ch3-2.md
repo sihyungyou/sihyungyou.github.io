@@ -117,8 +117,8 @@ class GrammarFuzzer(Fuzzer):
         """Process children after selection.  By default, does nothing."""
         return chosen_children
 ~~~
-
-![Center example image](https://user-images.githubusercontent.com/35067611/62006447-932ffc00-b17b-11e9-8653-f52ff6ea5d93.png "Center"){: .center-image}
+  
+<!-- ![Center example image](https://user-images.githubusercontent.com/35067611/62006447-932ffc00-b17b-11e9-8653-f52ff6ea5d93.png "Center"){: .center-image} -->
 
 ### Expanding a Tree  
 위의 random node expansion 과정을 실제로 몇몇 노드에 적용시켜보자. 가장 핵심적인 알고리즘은 expand_tree_once(self, tree) 함수이다. 이 함수는 새로운 tree를 반환하는 것이 아니라 전달받은 tree 자체에서 mutate을 한다. 이런 in-place mutation 메카니즘은 이 알고리즘을 효율적으로 하는 주요한 요소다.  
@@ -149,6 +149,21 @@ def expand_tree_once(self, tree):
 
         return tree
 ~~~
+### Closing the Expansion  
+이제 tree expand는 가능하다. 하지만 언제 어떻게 멈춰야 할까? 최대 사이즈로 derivation tree가 확장된 후 부터는 최소로 트리를 확장시키는 곳에만 적용시킨다. 그러기 위해서 cost를 먼저 계산해 놓는다.  
+
+- symbol_cost() returns the minimum cost of all expansions of a symbol, using expansion_cost() to compute the cost for each expansion.  
+- expansion_cost() returns the sum of all expansions in expansions. If a nonterminal is encountered again during traversal, the cost of the expansion is  ∞ , indicating (potentially infinite) recursion.  
+
+### Node Inflation  
+fuzzing을 위해 확장을 막 시작할 때는 할 수 있는 최대한의 expansion을 원한다. 즉, expand_node_max_cost()는 minimum cost를 계산해서 tree를 가장 적게 expansion 시키는 함수와는 정반대다. 노드들 중 가장 높은 cost를 가진 노드를 선택하는 함수로써 구현할 수 있다.  
+
+### Putting it all Together  
+이로써 tree expansion에도 세 가지 다른 방식 (cost min, cost max, randomly expansion)을 구현했다. 이것을 하나로 합쳐서 fuzzing 과정에서 더 다양한 input을 생성할 수 있도록 유도한다. 이렇게 하면 fuzzing 시간도 훨씬 줄어들고 input들의 size도 훨씬 작아진다. grammar production을 더 효과적으로 컨트롤할 수 있다.  
+
+### 배운 점  
+- derivation tree based grammar fuzzing이 string based보다 효과적이다  
+- infinite expansion을 방지할 수 있다  
 
 ### 질문  
 - display tree function implementation  
