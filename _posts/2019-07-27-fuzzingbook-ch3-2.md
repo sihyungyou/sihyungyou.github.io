@@ -58,7 +58,7 @@ class GrammarFuzzer(Fuzzer):
         pass
 
     def check_grammar(self):
-        # checks the given grammar for the consistency
+        """ checks the given grammar for the consistency """
         assert self.start_symbol in self.grammar
         assert is_valid_grammar(
             self.grammar,
@@ -69,25 +69,86 @@ class GrammarFuzzer(Fuzzer):
         return set()
     
     def init_tree(self):
-        # constructs tree w/ just the start symbol
+        """ constructs tree w/ just the start symbol """
         return (self.start_symbol, None)
     
     def expansion_to_children(expansion):
-    # print("Converting " + repr(expansion))
-    # strings contains all substrings -- both terminals and nonterminals such
-    # that ''.join(strings) == expansion
+        """ takes an expansion string and decomposes it into a list of derivation trees """
 
-    expansion = exp_string(expansion)
-    assert isinstance(expansion, str)
+        expansion = exp_string(expansion)
+        assert isinstance(expansion, str)
 
-    if expansion == "":  # Special case: epsilon expansion
-        return [("", [])]
+        if expansion == "":  # Special case: epsilon expansion
+            return [("", [])]
 
-    strings = re.split(RE_NONTERMINAL, expansion)
-    return [(s, None) if is_nonterminal(s) else (s, [])
-            for s in strings if len(s) > 0]
+        strings = re.split(RE_NONTERMINAL, expansion)
+        return [(s, None) if is_nonterminal(s) else (s, [])
+                for s in strings if len(s) > 0]
+
+    def choose_node_expansion(self, node, possible_children):
+        """Return index of expansion in `possible_children` to be selected.  Defaults to random."""
+        return random.randrange(0, len(possible_children))
+
+    def expand_node_randomly(self, node):
+        """ take some unexpanded node in the tree, choose a random expansion, and return the new tree """
+        (symbol, children) = node
+        assert children is None
+
+        if self.log:
+            print("Expanding", all_terminals(node), "randomly")
+
+        # Fetch the possible expansions from grammar...
+        expansions = self.grammar[symbol]
+        possible_children = [self.expansion_to_children(
+            expansion) for expansion in expansions]
+
+        # ... and select a random expansion
+        index = self.choose_node_expansion(node, possible_children)
+        chosen_children = possible_children[index]
+
+        # Process children (for subclasses)
+        chosen_children = self.process_chosen_children(chosen_children,
+                                                       expansions[index])
+
+        # Return with new children
+        return (symbol, chosen_children)
+    
+    def process_chosen_children(self, chosen_children, expansion):
+        """Process children after selection.  By default, does nothing."""
+        return chosen_children
 ~~~
 
+![Center example image](https://user-images.githubusercontent.com/35067611/62006447-932ffc00-b17b-11e9-8653-f52ff6ea5d93.png "Center"){: .center-image}
+
+### Expanding a Tree  
+위의 random node expansion 과정을 실제로 몇몇 노드에 적용시켜보자. 가장 핵심적인 알고리즘은 expand_tree_once(self, tree) 함수이다. 이 함수는 새로운 tree를 반환하는 것이 아니라 전달받은 tree 자체에서 mutate을 한다. 이런 in-place mutation 메카니즘은 이 알고리즘을 효율적으로 하는 주요한 요소다.  
+~~~python
+def expand_tree_once(self, tree):
+        """Choose an unexpanded symbol in tree; expand it.  Can be overloaded in subclasses."""
+        (symbol, children) = tree
+        if children is None:
+            # Expand this node
+            return self.expand_node(tree)
+
+        # Find all children with possible expansions
+        expandable_children = [
+            c for c in children if self.any_possible_expansions(c)]
+
+        # `index_map` translates an index in `expandable_children`
+        # back into the original index in `children`
+        index_map = [i for (i, c) in enumerate(children)
+                     if c in expandable_children]
+
+        # Select a random child
+        child_to_be_expanded = \
+            self.choose_tree_expansion(tree, expandable_children)
+
+        # Expand in place
+        children[index_map[child_to_be_expanded]] = \
+            self.expand_tree_once(expandable_children[child_to_be_expanded])
+
+        return tree
+~~~
 
 ### 질문  
 - display tree function implementation  
