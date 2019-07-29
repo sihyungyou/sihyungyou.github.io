@@ -110,3 +110,78 @@ Mutation Analysis는 잘 다듬어진 set of fault의 좋은 대안을 제시한
 그렇다면 어떻게 프로그램에서 valid한 mutant를 만들 수 있을까? 가장 간단한 방법은 몇몇 statement를 pass로 대체하는 것이다. (코드상의 구현은 설명이 너무 길어지므로 생략한다)  
 
 ### Evaluating Mutations  
+~~~python
+for mutant in MuFunctionAnalyzer(function):
+    with mutant:
+        assert function(x) == y
+~~~
+mutant가 active할 동안 기존의 함수는 mutant 함수로 대체되어 작동한다.  
+
+### The Problem of Equivalent Mutants  
+Mutant analysis의 문제점은 생성된 모든 mutants가 fault는 아니라는 것이다. 예를 들어 아래 코드 결과에서 1번 mutant는 기존의 것과 구별이 불가능하다. 이런 것들을 equivalent Mutants라고 하는데 mutantion score을 제대로 계산하기 매우 어려워 진다. 그러므로 equivalent mutants의 갯수를 정확히 파악하고 mutant analysis를 해야한다.  
+~~~python
+def new_gcd(a, b):
+    if a < b:
+        a, b = b, a
+    else:
+        a, b = a, b
+
+    while b != 0:
+        a, b = b, a % b
+    return a
+~~~
+아래와 같이 mutation 했을 때,  
+~~~python
+def gcd(a, b):
+    if a < b:
+        a, b = b, a
+    else:
+        pass
+
+    while b != 0:
+        a, b = b, a % b
+    return a
+~~~
+
+결과  
+~~~python
+for i, mutant in enumerate(MuFunctionAnalyzer(new_gcd)):
+    print(i,mutant.src())
+~~~
+~~~
+0 def new_gcd(a, b):
+    if a < b:
+        pass
+    else:
+        a, b = a, b
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+1 def new_gcd(a, b):
+    if a < b:
+        a, b = b, a
+    else:
+        pass
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+2 def new_gcd(a, b):
+    if a < b:
+        a, b = b, a
+    else:
+        a, b = a, b
+    while b != 0:
+        pass
+    return a
+
+3 def new_gcd(a, b):
+    if a < b:
+        a, b = b, a
+    else:
+        a, b = a, b
+    while b != 0:
+        a, b = b, a % b
+    pass
+~~~
