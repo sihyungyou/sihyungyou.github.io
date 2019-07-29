@@ -82,3 +82,11 @@ CSV_GRAMMAR = {
 그리고 1000개의 값을 만들어서 process_vehicle() 의 결과를 보면 (당연히) 그 어떤 입력값도 제대로 프로그램에 적용되지 않는다. 이유는 단순하다. "Invalid Entry" 현재 사용 중인 GrammarFuzzer는 위에서 작성한 CSV_GRAMMAR를 이해하고 있지 않기 때문이다. 설사 CSV_GRAMMAR를 이해한다고 해도 입력값이 그에 맞는 format을 갖추지 않으면 높은 확률로 쓸모없는 값이 나올 것이다. 그렇다면 실제 template과 valid value를 샘플에서 뽑아온 후 그것을 fuzzing하는 데에 사용하면 어떨까? parser를 쓰면 가능하다.  
 
 ### Using a Parser  
+Parser는 입력을 처리하는 프로그램이다 (general meaning) 이번 장에서 다룰 parser는 input string을 derivation tree로 바꾸는 프로그램을 의미한다. 유저의 입장에서 두 가지 단계를 거쳐서 그것을 수행한다.  
+1. parser를 정의한 grammar로 initialize (grammar 이해시키기)  
+2. parser 사용 (derivation tree로 변환)  
+변환이 끝나면 그대로 grammar fuzzing에 의해 만들어진 tree로써 사용하면 된다.  
+
+### An Ad Hoc Parser  
+위의 예시에서 보았듯 프로그래머는 어떤 규칙을 가진 data로부터 특정 부분을 뽑아와야 할 때가 있다. 그리고 그 규칙을 프로그래머가 하나하나 이해하고 parser에 더할 부분이 있으면 고친다. 규칙이 늘어날수록, 재귀적인 문법이 필요할수록 (json format) 점점 어려워 진다. 하지만 입력될 문자열들이 이미 정의된, 통일된 문법을 가지고 있다면 parser는 그 문법을 이해하면 된다.  
+
