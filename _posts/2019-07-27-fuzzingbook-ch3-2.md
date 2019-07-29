@@ -160,6 +160,16 @@ fuzzing을 위해 확장을 막 시작할 때는 할 수 있는 최대한의 exp
 ### Putting it all Together  
 이로써 tree expansion에도 세 가지 다른 방식 (cost min, cost max, randomly expansion)을 구현했다. 이것을 하나로 합쳐서 fuzzing 과정에서 더 다양한 input을 생성할 수 있도록 유도한다. 이렇게 하면 fuzzing 시간도 훨씬 줄어들고 input들의 size도 훨씬 작아진다. grammar production을 더 효과적으로 컨트롤할 수 있다.  
 
+~~~
+tree = self.expand_tree_with_strategy(tree, self.expand_node_max_cost, self.min_nonterminals)
+tree = self.expand_tree_with_strategy(tree, self.expand_node_randomly, self.max_nonterminals)
+tree = self.expand_tree_with_strategy(tree, self.expand_node_min_cost)
+~~~
+~~~python
+f = GrammarFuzzer(CGI_GRAMMAR, min_nonterminals=3, max_nonterminals=5)
+~~~
+프로그래머가 정의해주는 min_nonterminal 갯수까지는 max cost로 expand, max_nonterminals 갯수까지는 randomly expand, 그 이후에는 closing expansion을 위해 min cost로 tree를 expand한다.  
+
 ### 배운 점  
 - derivation tree based grammar fuzzing이 string based보다 효과적이다  
 - infinite expansion을 방지할 수 있다  

@@ -91,7 +91,7 @@ class GrammarCoverageFuzzer(SimpleGrammarCoverageFuzzer):
         """Return new coverage that would be obtained by expanding (symbol, children)"""
         new_cov = self._new_child_coverage(children, max_depth)
         new_cov.add(expansion_key(symbol, children))
-        new_cov -= self.expansion_coverage()   # -= is set subtraction
+        new_cov -= self.expansion_coverage()
         return new_cov
 ~~~
 
@@ -99,5 +99,6 @@ class GrammarCoverageFuzzer(SimpleGrammarCoverageFuzzer):
 
 ### Adaptive Lookahead  
 child를 선택할 때 maximum overall coverage to be obtained 를 확인하지 않는다면 많은 uncovered expansion이 남을 것이다. 그래서 BFS 방식으로 하는데, 먼저 모든 expansion에 대해 주어진 depth까지 cover한다. 그리고 greater depth만 찾아다니는 알고리즘이다. maximum depth는 0부터 시작해서 uncovered expansion을 찾을 떄 까지 계속 증가한다.  
+
 ### All Together  
 종합해보면, 먼저 얻을 수 있는 possible coverages를 결정한다. 그리고 maximum coverage를 주는 child들 중에서 random으로 선택해서 fuzzing한다.  
