@@ -44,6 +44,7 @@ _max_expansion_coverage는 start symbol로 부터 시작해서 recursive하게 e
 1. We determine children yet uncovered (in uncovered_children)  
 2. If all children are covered, we fall back to the original method (i.e., choosing one expansion randomly)  
 3. Otherwise, we select a child from the uncovered children and mark it as covered.  
+
 ~~~python
 class SimpleGrammarCoverageFuzzer(TrackingGrammarCoverageFuzzer):
     def choose_node_expansion(self, node, possible_children):
