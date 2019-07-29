@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Software Testing Study CH 2-4 (1)"
-tags: [Software Testing, Fuzzing, 공부]
+tags: [Software Testing, Fuzzing, 공부, 한동대, 공프기]
 comments: true
 ---
 
