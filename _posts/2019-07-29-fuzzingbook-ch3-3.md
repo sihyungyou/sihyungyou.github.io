@@ -109,7 +109,7 @@ child를 선택할 때 maximum overall coverage to be obtained 를 확인하지 
 ['+<factor>', '-<factor>', '(<expr>)', '<integer>.<integer>', '<integer>']
 ~~~
 위와 같이 integer symbol이 floating point, integer number 모두에서 쓰이는 경우를 말한다.  
-지금까지 정의한 coverage production은 integer expansion에 대해서는 보장해준다. 하지만 individual digits(개별적 숫자)는 모든 integer가 등장하는 곳에 분포될 것이다. 만약 coverage-based fuzzer가 1234.56과 7890이라는 수를 만든다면 digit expansion에 대해 full coverage를 가질 수 있다. 하지만 integer.integer이나 ingeter 형태는 숫자의 일부밖에 cover하지 못한다. 만약 소숫점 이하의 수가 전체 수와 읽히는데 있어서 다르게 기능한다면 우리는 모든 기능에 대해서 모든 자릿수의 숫자에 테스트를 해봐야 한다. 이렇듯 맥락을 무시하는 것이 때로는 (예를 들어 모든 symbol occurrences가 동일하게 여겨지는 상황) 유용할 수 있다. 그렇지 않은 경우라면 단순히 문법을 확장시켜서는 안된다.  
+지금까지 정의한 coverage production은 integer expansion에 대해서는 보장해준다. 하지만 individual digits(개별적 숫자)는 모든 integer가 등장하는 곳에 분포될 것이다. 만약 coverage-based fuzzer가 1234.56과 7890이라는 수를 만든다면 digit expansion에 대해 full coverage를 가질 수 있다. 하지만 integer.integer과 ingeter 형태를 읽는 함수가 다르다면 각각의 함수는 숫자의 일부밖에 cover하지 못한 것이다. 이렇듯 맥락을 무시하는 것이 때로는 (예를 들어 모든 symbol occurrences가 동일하게 여겨지는 상황) 유용할 수 있다. 그렇지 않은 경우라면 단순히 문법을 확장시켜서는 안된다.  
 
 ### Extending Grammars for Context Coverage Manually  
 coverage의 맥락(context)을 무시하지 않는 간단한 방법은 symbol을 복제하는 것이다. 예를 들어 interger.integer를 integer-1.integer-2 로 대체하고 integer-1 과 integer-2에 각각 다른 정의를 주는 것이다. 당연히 이 둘에 대한 expansion도 이루어져야 한다.  
