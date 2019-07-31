@@ -16,7 +16,6 @@ leading digit을 d라고 할 때, probability P(d)는 다음의 공식을 통해
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/62181568-a666e580-b38e-11e9-98a5-f32732b35389.png "Center"){: .center-image}  
 
-
 ### Specifying Probabilities  
 이번 장의 목표는 문법의 개별적 expansion에 probabilities를 부여해서 특정 expansion이 다른 것들 보다 더 favored 되도록 만드는 것이다. 이것은 natural-looking numbers를 찾는 데에 유용할 뿐 아니라 특정한 목표를 갖고 테스팅의 방향성을 조정할 때도 도움이 된다. 만약 프로그램에서 약간의 코드 수정이 있었다면 프로그래머는 아마 그 부분에 대해서 더 정밀한 테스팅을 원할 것이다. 이런 경우에 바뀐 코드와 관련있는 입력값들에 대한 probabilities가 더 테스팅을 효과적으로 해줄 것이다. probabilities를 표기하는 방법은 이전과 마찬가지로 annotation을 표기하는 방식으로 진행해보자. 아래는 EXPR_GRAMMAR의 일부 expansion에 probabilities를 부여한 것이다.  
 ~~~python
