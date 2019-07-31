@@ -97,3 +97,7 @@ Parser는 입력을 처리하는 프로그램이다 (general meaning) 이번 장
 마지막으로 ambiguity 문제가 있다. 예를 들어 1+2+3은 우리에게 직관적이지만 컴퓨터 입장에서 derivation tree를 만들 때 (1+2)+3인지, 1+(2+3)인지 분명히 구분해야 할 것이다.  
 
 ### PEG vs CFG  
+
+### The Packrat Parser for Predicate Expression Grammars  
+Short of hand rolling a parser, Packrat parsing is one of the simplest parsing techniques, and is one of the techniques for parsing PEGs. The Packrat parser is so named because it tries to cache all results from simpler problems in the hope that these solutions can be used to avoid re-computation later. We develop a minimal Packrat parser next.  
+
