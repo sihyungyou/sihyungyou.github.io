@@ -160,6 +160,14 @@ set_prob(probabilistic_ip_address_grammar, "<octet>", "127", 0.8)
 set_prob(probabilistic_ip_address_grammar, "<octet-1>", "127", 1.0)
 set_prob(probabilistic_ip_address_grammar, "<octet-2>", "0", 1.0)
 ~~~
+~~~
+['127.0.201.77',
+ '127.0.98.36',
+ '127.0.12.232',
+ '127.0.146.161',
+ '127.0.245.151']
+ ~~~
+여기서 octet-3, octet-4의 probability는 정의되지 않았으므로 랜덤한 수로 생성된다.  
 
 ### Learning Probabilities from Samples  
 Probabilities가 매번 메뉴얼하게 정해질 필요는 없다. 다른 소스로부터 학습할 수 도 있기 때문이다. 예를 들면 주어진 샘플 데이터에서 자주 나오는 것, 거의 나오지 않는 것, 혹은 일부를 발췌하여 probabilities를 정할 수도 있다.  
