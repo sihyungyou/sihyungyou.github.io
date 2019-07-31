@@ -135,10 +135,10 @@ ftps://user:password@cispa.saarland/def?def=52
 ftps://user:password@cispa.saarland/
 ~~~
 
-Note that even if we set the probability of an expansion to zero, we may still see the expansion taken. This can happen during the "closing" phase of our grammar fuzzer, when the expansion is closed at minimum cost. At this stage, even expansions with "zero" probability will be taken if this is necessary for closing the expansion.
+참고로 probability가 0인 expansion들도 여전히 프로그램이 돌아가면 expand 된다. 이런 일은 closing grammar fuzzer 단계에서 일어날 수 있다. probability가 0라도 closing expansion에 필수적이라면 프로그램이 take 하는 것이다.  
 
 ### Probabilities in Context  
-While specified probabilities give us a means to control which expansions are taken how often, this control by itself may not be enough. 
+specified probabilities가 우리에게 어떤 expansion을 얼마나 자주 할 지 control 측면에서 큰 도움이 되지만 충분치는 못하다.  
 ~~~python
 IP_ADDRESS_GRAMMAR = {
     "<start>": ["<address>"],
@@ -154,21 +154,21 @@ set_prob(probabilistic_ip_address_grammar, "<octet>", "127", 0.8)
 ~~~
 '127.127.127.127'
 ~~~
-If we want to assign different probabilities to each of the four octets, what do we do?
-The answer lies in the concept of context, which we already have seen while discussing coverage-driven fuzzers. As with coverage-driven fuzzing, the idea is to duplicate the element whose probability we want to set dependent on its context. In our case, this means to duplicate the octet element to four individual ones, each of which can then get an individual probability distribution. We can do this programmatically, using the duplicate_context() method:
+네 개의 octet에 각각 다른 probabilities을 주려면 어떻게 해야 할까? 이전 장에서 다뤘던 맥락(context) 개념을 생각해보면 각 요소를 duplicate 하는 것이다.  
 ~~~python
 set_prob(probabilistic_ip_address_grammar, "<octet-1>", "127", 1.0)
 set_prob(probabilistic_ip_address_grammar, "<octet-2>", "0", 1.0)
 ~~~
 
 ### Learning Probabilities from Samples  
-Probabilities need not be set manually all the time. They can also be learned from other sources, notably by counting how frequently individual expansions occur in a given set of inputs. This is useful in a number of situations, including:
+Probabilities가 매번 메뉴얼하게 정해질 필요는 없다. 다른 소스로부터 학습할 수 도 있기 때문이다. 예를 들면 주어진 샘플 데이터에서 자주 나오는 것, 거의 나오지 않는 것, 혹은 일부를 발췌하여 probabilities를 정할 수도 있다.  
 
 1. Test common features. The idea is that during testing, one may want to focus on frequently occurring (or frequently used) features first, to ensure correct functionality for the most common usages.  
 2. Test uncommon features. Here, the idea is to have test generation focus on features that are rarely seen (or not seen at all) in inputs. This is the same motivation as with grammar coverage, but from a probabilistic standpoint.  
 3. Focus on specific slices. One may have a set of inputs that is of particular interest (for instance, because they exercise a critical functionality, or recently have discovered bugs). Using this learned distribution for fuzzing allows us to focus on precisely these functionalities of interest.  
 
 ### Counting Expansions  
+
 We start with implementing a means to take a set of inputs and determine the number of expansions in that set. To this end, we need the parsers introduced in the previous chapter to transform a string input into a derivation tree. 
 
 In a tree such as this one, we can now count individual expansions. In the above tree, for instance, we have two expansions of octet into 0, one into 1, and one into 127. In other words, the expansion octet into 0 makes up 50% of all expansions seen; the expansions into 127 and 1 make up 25% each, and the other ones 0%. These are the probabilities we'd like to assign to our "learned" grammar.
