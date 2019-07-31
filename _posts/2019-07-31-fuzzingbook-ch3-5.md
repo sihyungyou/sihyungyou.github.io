@@ -175,12 +175,9 @@ Probabilities가 매번 메뉴얼하게 정해질 필요는 없다. 다른 소�
 위와 같이 tree 형태로 변환 하고 나서는 각각의 expansion을 셀 수 있다. 0은 2개, 1은 한개, 127도 한개이므로 0이 50%, 1과 127은 각각 25%의 portion을 차지한다. 나머지는 0%이다. 샘플 데이터로부터 얻은 이 수치가 우리가 grammar에 적용하고 싶은 probabilities가 되는 것이다.  
 
 ### Exploration vs. Exploitation  
+위의 예시와 달리 샘플 데이터의 일부(subset)을 가지고 probabilities 정보를 얻는 과정에서는 특정한 properties of subset에 대해 fuzzer를 specialize할 수 있다. 예를 들어 CGI Grammar의 경우 %문자와 valid한 16진수 문자를 포함하는 샘플에 대해서만 테스팅을 한다고 하자. 이렇게 context를 문법에 추가할 수록 specialization도 증가한다. 하지만 너무 많은 specialization은 possibilities가 버그를 찾는 여러 조합을 만들고 테스팅 해보는 데에(explore) 제약이 되기도 한다. 이런 tradeoff를 머신러닝에서는 explration vs. exploitation 라고 한다.  
 
-By learning (and re-learning) probabilities from a subset of sample inputs, we can specialize fuzzers towards the properties of that subset – in our case, inputs that contain percentage signs and valid hexadecimal letters. The degree to which we can specialize things is induced by the number of variables we can control – in our case, the probabilities for the individual rules. Adding more context to the grammar, as discussed above, will increase the number of variables, and thus the amount of specialization.
-
-A high degree of specialization, however, limits our possibilities to explore combinations that fall outside of the selected scope, and limit our possibilities to find bugs induced by these combinations. This tradeoff is known as exploration vs. exploitation in machine learning – shall one try to explore as many (possibly shallow) combinations as possible, or focus (exploit) specific areas? In the end, it all depends on where the bugs are, and where we are most likely to find them. Assigning and learning probabilities allows us to control the search strategies – from the common to the uncommon to specific subsets.  
-
-### Lessons Learned  
-By specifying probabilities, one can steer fuzzing towards input features of interest.
-Learning probabilities from samples allows one to focus on features that are common or uncommon in input samples.
-Learning probabilities from a subset of samples allows one to produce more similar inputs.
+### 배운 점  
+- probabilities를 통해 fuzzing을 더 효과적으로 원하는 방향의 테스팅으로 이끌어 갈 수 있다.  
+- 샘플 데이터로부터 probabilities를 학습할 수 있다.  
+- subset of sample로부터 probabilities를 학습할 경우 그와 비슷한 input을 생성한다.  
