@@ -68,3 +68,38 @@ A function defined using the post option is invoked after expansion of  s  into 
 
 1. It can serve as a constraint or filter on the expanded values, returning True if the expansion is valid, and False if not; if it returns False, another expansion is attempted.  
 2. It can also serve as a repair, returning a string value; like pre-expansion functions, the returned value replaces the expansion.  
+~~~python
+check_credit_card = valid_luhn_checksum
+fix_credit_card = fix_luhn_checksum
+
+fix_credit_card("1234567890123456")
+~~~
+~~~
+'1234567890123458'
+~~~
+
+### Generating Elements before Expansion  
+Our first task will be implementing the pre-expansion functions – that is, the function that would be invoked before expansion to replace the value to be expanded. To this end, we hook into the process_chosen_children() method, which gets the selected children before expansion. We set it up such that it invokes the given pre function and applies its result on the children, possibly replacing them.  
+~~~python
+charge_fuzzer = GeneratorGrammarFuzzer(CHARGE_GRAMMAR)
+charge_fuzzer.fuzz()
+~~~
+~~~
+'Charge $439383.87 to my credit card 2433506594138520'
+~~~
+~~~python
+amount_fuzzer = GeneratorGrammarFuzzer(
+    CHARGE_GRAMMAR, start_symbol="<amount>", log=True)
+amount_fuzzer.fuzz()
+~~~
+~~~
+Tree: <amount>
+Expanding <amount> randomly
+Tree: $<float>
+Expanding <float> randomly
+<function <lambda> at 0x10806e2f0>() = 382087.72
+Replacing <integer>.<digit><digit> by 382087.72
+Tree: $382087.72
+'$382087.72'
+'$382087.72'
+~~~
