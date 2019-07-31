@@ -86,7 +86,6 @@ AssertionError: <start>: sum of probabilities must be 1.0 (expected)
 ~~~
 
 ### Expanding by Probability  
-지금까지 어떻게 문법에 probabilities를 특정하는지 봤다. 이제 expansion을 할 때 child를 고르는 방법에서 probabilities를 기준으로 가중치를 두고 고른다.  
 ~~~python
 class ProbabilisticGrammarFuzzer(ProbabilisticGrammarFuzzer):
     def choose_node_expansion(self, node, possible_children):
@@ -109,13 +108,10 @@ class ProbabilisticGrammarFuzzer(ProbabilisticGrammarFuzzer):
         return random.choices(
             range(len(possible_children)), weights=weights)[0]
 ~~~
-
-Our probabilistic grammar fuzzer works just like the non-probabilistic grammar fuzzer, except that it actually respects probability annotations. Let us generate a couple of "natural" numbers that respect Benford's law:
-If we generate thousands of lead digits, their distribution should again follow Benford's law:
+현재 위 코드는 probabilistic grammar fuzzer 이지만 probability annotation을 표시하는 것 외에는 non-probabilistic grammar fuzzer 처럼 작동한다. 실제로 natural number를 생성시켜 보면 Benford's law에 따라 수가 분포될 것이다.  
 
 ### Directed Fuzzing  
-Assigning probabilities to individual expansions gives us great control over which inputs should be generated. By choosing probabilities wisely, we can direct fuzzing towards specific functions and features – for instance, towards functions that are particularly critical, prone to failures, or that have been recently changed.  
-
+지금까지 어떻게 문법에 probabilities를 특정하는지 봤다. 이제 expansion을 할 때 child를 고르는 방법에서 probabilities를 기준으로 가중치를 두고 고른다.  
 ~~~python
 probabilistic_url_grammar = extend_grammar(URL_GRAMMAR)
 set_prob(probabilistic_url_grammar, "<scheme>", "ftps", 0.8)
