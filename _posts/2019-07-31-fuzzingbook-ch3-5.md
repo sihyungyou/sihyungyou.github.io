@@ -13,7 +13,9 @@ comments: true
 먼저 probabilities의 필요성에 대해서 이야기해보자. 지금까지의 예시들을 보면 프로그램에 의해 생성된 입력값들이 자연적(natural)으로 생성되는, 혹은 일반적으로 실생활에서 쓰이는 값들과는 조금 다르다는 것을 알 수 있다. 이는 실생활에서 쓰이는 numerical data에는 특정 값이 자주 나오거나 별로 등장하지 않는 경우가 발생하기 때문이다. 실제로 평균적으로 leading digit으로써 1이 8이나 9보다 6배나 자주 쓰인다. (Benford's law) 실생활에서 쓰이는 데이터라 함은 거리 주소, 주식 가격, 부동산 가격, 인구, 사망률 등을 의미한다. 즉, 과학적 논문에 거짓된 데이터를 랜덤한 수를 생성해서 사용하게 되면 높은 확률로 Benford's law를 위배해서 적발된다는 말이다. 그렇다면 Benford's law에 고착하는 수를 우리가 만들고 싶다면 어떻게 해야 할까? 이번 장에서 다룰 probabilities를 grammar에 적용시키는 방법을 사용하면 된다.  
 
 leading digit을 d라고 할 때, probability P(d)는 다음의 공식을 통해 계산된다 :  
-P(d)=log10(d+1)−log10(d)  
+
+![Center example image](https://user-images.githubusercontent.com/35067611/62181568-a666e580-b38e-11e9-98a5-f32732b35389.png "Center"){: .center-image}  
+
 
 ### Specifying Probabilities  
 이번 장의 목표는 문법의 개별적 expansion에 probabilities를 부여해서 특정 expansion이 다른 것들 보다 더 favored 되도록 만드는 것이다. 이것은 natural-looking numbers를 찾는 데에 유용할 뿐 아니라 특정한 목표를 갖고 테스팅의 방향성을 조정할 때도 도움이 된다. 만약 프로그램에서 약간의 코드 수정이 있었다면 프로그래머는 아마 그 부분에 대해서 더 정밀한 테스팅을 원할 것이다. 이런 경우에 바뀐 코드와 관련있는 입력값들에 대한 probabilities가 더 테스팅을 효과적으로 해줄 것이다. probabilities를 표기하는 방법은 이전과 마찬가지로 annotation을 표기하는 방식으로 진행해보자. 아래는 EXPR_GRAMMAR의 일부 expansion에 probabilities를 부여한 것이다.  
