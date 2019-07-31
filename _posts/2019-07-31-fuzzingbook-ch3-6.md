@@ -103,3 +103,32 @@ Tree: $382087.72
 '$382087.72'
 '$382087.72'
 ~~~
+
+### Support for Python Generators  
+The Python language has its own concept of generator functions, which we of course want to support as well. A generator function in Python is a function that returns a so-called iterator object which we can iterate over, one value at a time.
+
+To create a generator function in Python, one defines a normal function, using the yield statement instead of a return statement. While a return statement terminates the function, a yield statement pauses its execution, saving all of its state, to be resumed later for the next successive calls.
+~~~python
+def iterate():
+    t = 0
+    while True:
+        t = t + 1
+        yield t
+~~~
+
+We can use iterate in a loop, just like the range() function (which also is a generator function):
+~~~python
+for i in iterate():
+    if i > 10:
+        break
+    print(i, end=" ")
+~~~
+~~~
+1 2 3 4 5 6 7 8 9 10 
+~~~
+
+We can also use iterate() as a pre-expansion generator function, ensuring it will create one successive integer after another:
+
+To support generators, our process_chosen_children() method, above, checks whether a function is a generator; if so, it invokes the run_generator() method. When run_generator() sees the function for the first time during a fuzz_tree() (or fuzz()) call, it invokes the function to create a generator object; this is saved in the generators attribute, and then called. Subsequent calls directly go to the generator, preserving state.
+
+### Checking and Repairing Elements after Expansion  
