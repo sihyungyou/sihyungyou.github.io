@@ -168,12 +168,14 @@ Probabilities가 매번 메뉴얼하게 정해질 필요는 없다. 다른 소�
 3. Focus on specific slices. One may have a set of inputs that is of particular interest (for instance, because they exercise a critical functionality, or recently have discovered bugs). Using this learned distribution for fuzzing allows us to focus on precisely these functionalities of interest.  
 
 ### Counting Expansions  
+그렇다면 주어진 입력값들 중에 어던 expansion이 자주 나오고, 거의 나오지 않는지 count 해야 할 것이다. 이를 위해서는 먼저 string input을 derivation tree로 변환해야 한다.  
 
-We start with implementing a means to take a set of inputs and determine the number of expansions in that set. To this end, we need the parsers introduced in the previous chapter to transform a string input into a derivation tree. 
+![Center example image](https://user-images.githubusercontent.com/35067611/62181010-d1503a00-b38c-11e9-988b-7ee4ee5dcaff.png "Center"){: .center-image}  
 
-In a tree such as this one, we can now count individual expansions. In the above tree, for instance, we have two expansions of octet into 0, one into 1, and one into 127. In other words, the expansion octet into 0 makes up 50% of all expansions seen; the expansions into 127 and 1 make up 25% each, and the other ones 0%. These are the probabilities we'd like to assign to our "learned" grammar.
+위와 같이 tree 형태로 변환 하고 나서는 각각의 expansion을 셀 수 있다. 0은 2개, 1은 한개, 127도 한개이므로 0이 50%, 1과 127은 각각 25%의 portion을 차지한다. 나머지는 0%이다. 샘플 데이터로부터 얻은 이 수치가 우리가 grammar에 적용하고 싶은 probabilities가 되는 것이다.  
 
 ### Exploration vs. Exploitation  
+
 By learning (and re-learning) probabilities from a subset of sample inputs, we can specialize fuzzers towards the properties of that subset – in our case, inputs that contain percentage signs and valid hexadecimal letters. The degree to which we can specialize things is induced by the number of variables we can control – in our case, the probabilities for the individual rules. Adding more context to the grammar, as discussed above, will increase the number of variables, and thus the amount of specialization.
 
 A high degree of specialization, however, limits our possibilities to explore combinations that fall outside of the selected scope, and limit our possibilities to find bugs induced by these combinations. This tradeoff is known as exploration vs. exploitation in machine learning – shall one try to explore as many (possibly shallow) combinations as possible, or focus (exploit) specific areas? In the end, it all depends on where the bugs are, and where we are most likely to find them. Assigning and learning probabilities allows us to control the search strategies – from the common to the uncommon to specific subsets.  
