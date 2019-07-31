@@ -183,8 +183,17 @@ Probabilities가 매번 메뉴얼하게 정해질 필요는 없다. 다른 소�
 
 위와 같이 tree 형태로 변환 하고 나서는 각각의 expansion을 셀 수 있다. 0은 2개, 1은 한개, 127도 한개이므로 0이 50%, 1과 127은 각각 25%의 portion을 차지한다. 나머지는 0%이다. 샘플 데이터로부터 얻은 이 수치가 우리가 grammar에 적용하고 싶은 probabilities가 되는 것이다.  
 
+### Testing Common Features  
+Testing common features는 주어진 context에서 자주 나오는 값들을 기반으로 probability를 계산한다. context가 주어지면 그 중에는 다른 값보다 많이 나오는 것, 적게 나오는 것이 있는데 probability distribution이 이것을 보여준다. 이런 방식으로 probability distribution을 학습하는 것은 valid input을 생성하는데 도움이 된다.  
+
+### Testing Uncommon Features  
+Testing uncommon features는 sample에서 거의 나오지 않는 값들에 관심을 가진다. (당연히 그 값들은 덜 exercised 될 것이다) 이런 방식은 보통 아직 발견되지 않은 버그를 찾고자 하는 보안 테스팅에서 자주 사용되는데 더 적은 사용은 더 적은 버그 리포트를 의미하기 때문이다. 실제로 적용하는 방법은 common features testing에서 얻은 probability distribution을 거꾸로 (가장 큰 값과 작은 값을 swap) 적용하는 것이다.  
+
+### Learning Probabilities from Input Slices  
+Input slice를 통해 probablities를 얻는 것은 위의 두 방법과 조금 다르다. 먼저 테스팅을 해보고 싶은 특정 코드나 프로그램의 위치에 상응하는 조건을 가진 데이터만 따로 subset으로 정의한다. 
+
 ### Exploration vs. Exploitation  
-위의 예시와 달리 샘플 데이터의 일부(subset)을 가지고 probabilities 정보를 얻는 과정에서는 특정한 properties of subset에 대해 fuzzer를 specialize할 수 있다. 예를 들어 CGI Grammar의 경우 %문자와 valid한 16진수 문자를 포함하는 샘플에 대해서만 테스팅을 한다고 하자. 이렇게 context를 문법에 추가할 수록 specialization도 증가한다. 하지만 너무 많은 specialization은 possibilities가 버그를 찾는 여러 조합을 만들고 테스팅 해보는 데에(explore) 제약이 되기도 한다. 이런 tradeoff를 머신러닝에서는 explration vs. exploitation 라고 한다.  
+샘플 데이터의 일부(subset)을 가지고 probabilities 정보를 얻는 과정에서는 특정한 properties of subset에 대해 fuzzer를 specialize할 수 있다. 예를 들어 CGI Grammar의 경우 %문자와 valid한 16진수 문자를 포함하는 샘플에 대해서만 테스팅을 한다고 하자. 이렇게 context를 문법에 추가할 수록 specialization도 증가한다. 하지만 너무 많은 specialization은 possibilities가 버그를 찾는 여러 조합을 만들고 테스팅 해보는 데에(explore) 제약이 되기도 한다. 이런 tradeoff를 머신러닝에서는 explration vs. exploitation 라고 한다.  
 
 ### 배운 점  
 - probabilities를 통해 fuzzing을 더 효과적으로 원하는 방향의 테스팅으로 이끌어 갈 수 있다.  
