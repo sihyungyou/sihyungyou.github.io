@@ -109,7 +109,7 @@ class ProbabilisticGrammarFuzzer(ProbabilisticGrammarFuzzer):
         return random.choices(
             range(len(possible_children)), weights=weights)[0]
 ~~~
-현재 위 코드는 probabilistic grammar fuzzer 이지만 probability annotation을 표시하는 것 외에는 non-probabilistic grammar fuzzer 처럼 작동한다. 실제로 natural number를 생성시켜 보면 Benford's law에 따라 수가 분포될 것이다.  
+현재 위 코드는 probability를 적용하는 것 외에는 non-probabilistic grammar fuzzer 처럼 작동한다. 실제로 natural number를 생성시켜 보면 Benford's law에 따라 수가 분포될 것이다.  
 
 ### Directed Fuzzing  
 지금까지 어떻게 문법에 probabilities를 특정하는지 봤다. 이제 expansion을 할 때 child를 고르는 방법에서 probabilities를 기준으로 가중치를 두고 고른다.  
