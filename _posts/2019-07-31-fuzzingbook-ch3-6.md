@@ -132,3 +132,4 @@ We can also use iterate() as a pre-expansion generator function, ensuring it wil
 To support generators, our process_chosen_children() method, above, checks whether a function is a generator; if so, it invokes the run_generator() method. When run_generator() sees the function for the first time during a fuzz_tree() (or fuzz()) call, it invokes the function to create a generator object; this is saved in the generators attribute, and then called. Subsequent calls directly go to the generator, preserving state.
 
 ### Checking and Repairing Elements after Expansion  
+Let us now turn to our second set of functions to be supported – namely, post-expansion functions. The simplest way of using them is to run them once the entire tree is generated, taking care of replacements as with pre functions. If one of them returns False, however, we start anew.  
