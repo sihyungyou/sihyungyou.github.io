@@ -10,38 +10,36 @@ comments: true
 이번 장에서는 syntactic fuzzing 기술에서의 두 가지 중요한 확장을 소개한다.  
 parsing과 fuzzing with grammars를 합치는 것을 먼저 보게 된다. 둘을 합침으로써 syntactical correctness를 보존하고, 이미 존재하는 input's fragments를 재사용 하면서 mutate 할 수 있게 된다. 실제로 JavaScript interpreter의 2600개 이상의 버그를 찾은 Langfuzz fuzzer가 이러한 방법으로 만들어졌다.  
 
-이전 장 까지는 black-box 방식으로 문법을 사용해왔다. 즉, 프로그램이 어떻게 테스팅 되는가 와는 무관하게 문법을 이용해 input generation을 했던 것이다. 이번 장에서는 mutational greybox fuzzing with grammars를 소개한다. 
-
-In the previous chapters, we have used grammars in a black-box manner – that is, we have used them to generate inputs regardless of the program being tested. In this chapter, we introduce mutational greybox fuzzing with grammars: Techniques that make use of feedback from the program under test to guide test generations towards specific goals. As in lexical greybox fuzzing, this feedback is mostly coverage, allowing us to direct grammar-based testing towards uncovered code parts.
+이전 장 까지는 black-box 방식으로 문법을 사용해왔다. 즉, 프로그램이 어떻게 테스팅 되는가 와는 무관하게 문법을 이용해 input generation을 했던 것이다. 이번 장에서는 mutational greybox fuzzing with grammars를 소개한다. 이 기술은 프로그램 테스팅의 피드백을 활용하여 특정한 목표로 나아가는 테스팅 생성을 가능케 한다. lexical greybox fuzzing에서 보았던 것 처럼 지금 말하는 피드백이란 coverage를 의미하고, 이는 지금까지 그랬듯, 아직 가보지 못한 코드부분까지 우리를 guide하되, grammar-based feature를 여전히 가지고 갈 것이다.  
 
 ### Background  
-First, we recall a few basic ingredients for mutational fuzzers.
+먼저 mutational fuzzer의 몇 가지 기본적인 성분들을 복습해보자  
 
-Seed. A seed is an input that is used by the fuzzer to generate new inputs by applying a sequence of mutations.
-Mutator. A mutator implements a set of mutation operators that applied to an input produce a slightly modified input.
-PowerSchedule. A power schedule assigns energy to a seed. A seed with higher energy is fuzzed more often throughout the fuzzing campaign.
-MutationFuzzer. Our mutational blackbox fuzzer generates inputs by mutating seeds in an initial population of inputs.
-GreyboxFuzzer. Our greybox fuzzer dynamically adds inputs to the population of seeds that increased coverage.
-FunctionCoverageRunner. Our function coverage runner collects coverage information for the execution of a given Python function.
+- Seed. A seed is an input that is used by the fuzzer to generate new inputs by applying a sequence of mutations.  
+- Mutator. A mutator implements a set of mutation operators that applied to an input produce a slightly modified input.  
+- PowerSchedule. A power schedule assigns energy to a seed. A seed with higher energy is fuzzed more often throughout the fuzzing campaign.  
+- MutationFuzzer. Our mutational blackbox fuzzer generates inputs by mutating seeds in an initial population of inputs.  
+- GreyboxFuzzer. Our greybox fuzzer dynamically adds inputs to the population of seeds that increased coverage.  
+- FunctionCoverageRunner. Our function coverage runner collects coverage information for the execution of a given Python function.  
 
 ### Building a Keyword Dictionary  
-To fuzz our HTML parser, it may be useful to inform a mutational fuzzer about important keywords in the input – that is, important HTML keywords. To this end, we extend our mutator to consider keywords from a dictionary.
+HTML parser을 fuzz하기 위해서는 mutational fuzzer에 중요한 html의 문법상 태그들을 넣어주는 것이 유용하다. 
 ~~~python
 dict_mutator = DictMutator(["<a>","</a>","<a/>", "='a'"])
 ~~~
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/62351047-70b52e80-b53f-11e9-9cc3-c32ac8a15e3c.png "Center"){: .center-image}  
 
-Informing the fuzzer about important keywords already goes a long way towards achieving lots of coverage quickly.
+이렇게 fuzzer에게 중요한 키워드를 알려주는 것은 많은 coverage를 빠르게 성취하는데 큰 도움이 된다.  
 
 ### Fuzzing with Input Fragments  
-While dictionaries are helpful to inject important keywords into seed inputs, they do not allow to maintain the structural integrity of the generated inputs. Instead, we need to make the fuzzer aware of the input structure. We can do this using grammars. Our first approach  
+dictionaries 자료구조가 주요 키워드를 fuzzer에 심는 데에 유용하지만 이것이 생성되는 입력들의 구조적(structural) integrity를 보장하지는 못한다. 대신 문법을 이용해서, 다음의 세 단계를 통해 이러한 input structure을 fuzzer에게 알려주어야 한다.
 
 1. parses the seed inputs,  
 2. disassembles them into input fragments, and  
 3. generates new files by reassembling these fragments according to the rules of the grammar.
 
-This combination of parsing and fuzzing can be very powerful, as we will see in an instant  
+이렇게 만들어지는 parsing과 fuzzing의 결합은 매우 강력하다.  
 
 ### Parsing and Recombining HTML  
 In this book, let us stay with HTML input for a while. To generate valid HTML inputs for our Python HTMLParser, we should first define a simple grammar. It allows to define HTML tags with attributes. Our context-free grammar does not require that opening and closing tags must match. However, we will see that such context-sensitive features can be maintained in the derived input fragments, and thus in the generated inputs.  
