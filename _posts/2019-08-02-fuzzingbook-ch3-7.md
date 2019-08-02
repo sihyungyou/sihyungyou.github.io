@@ -134,12 +134,10 @@ fragment pool for simple HTML seed input result :
 ### Fragment-Based Mutation  
 fragment pool에 있는 여러 fragments들을 새로운 input을 생성하는데 사용할 수 있다. 모든 seed는 fragment로 쪼개어지고, 저장된다(memoized)  
 
-swap_fragments() 함수는 첫번째 structural mutation 함수로써 주어진 seed에서 랜덤한 fragment를 골라서 pool에 있는 것과 랜덤하게 바꾼다. 물론 두 fragment의 start symbol이 같아야 한다. 예를 들어 닫는 tag를 seed에서 골랐다면 pool에서도 닫는 tag를 골라야 한다.  
+swap_fragments() 함수는 첫번째 structural mutation 함수로써 주어진 seed에서 랜덤한 fragment를 골라서 pool에 있는 것과 랜덤하게 바꾼다. 물론 두 fragment의 start symbol이 같아야 한다. 예를 들어 닫는 tag를 seed에서 골랐다면 pool에서도 닫는 tag를 골라야 한다. random fragment를 고르기 위해서 먼저 mutator는 총 몇 개의 fragment가 있는지 센다.  
 
-random fragment를 고르기 위해서 먼저 mutator는 총 몇 개의 fragment가 있는지 센다.  
+2 ~ total number of fragment 사이의 수 중 랜덤한 수를 structural mutator가 고른다. 그리고 재귀적으로 새로운 fragment를 만들어낸다. 이들은 새로운 seed로 반환된다. 이런 논리는 random fragment를 삭제할 때도 이용된다.  
 
-Our structural mutator chooses a random number between 2 (i.e., excluding the start symbol) and the total number of fragments (n_count) and uses the recursive swapping to generate the new fragment. The new fragment is serialized as string and returned as new seed.  
-(We can use a similar recursive traversal to remove a random fragment.)
 ~~~python
 class FragmentMutator(FragmentMutator):
     def recursive_swap(self, fragment):
@@ -178,7 +176,7 @@ class FragmentMutator(FragmentMutator):
         return seed
 ~~~
 
-Summary. We now have all ingredients for structure-aware fuzzing. Our mutator disassembles all seeds into fragments, which are then added to the fragment pool. Our mutator swaps random fragments in a given seed with fragments of the same type. And our mutator deletes random fragments in a given seed. This allows to maintain a high degree of validity for the generated inputs w.r.t. the given grammar.  
+이제 structure-aware fuzzing의 모든 준비물은 마련됐다. 현재 mutator는 모든 seed를 fragment로 쪼개고 pool에 넣는다. 그리고 같은 type을 가진 fragment끼리 swap하여 새로운 seed를 만들고, 주어졌던 seed에서는 랜덤한 fragment를 삭제한다. 이 과정은 높은 확률의 validity를 보장한다.  
 
 ### Integration with Greybox Fuzzing  
 Our fragment-level blackbox fuzzer (LangFuzzer) generates more valid inputs but achieves less code coverage than a fuzzer with our byte-level fuzzer. So, there is some value in generating inputs that do not stick to the provided grammar.
