@@ -42,7 +42,7 @@ dictionaries 자료구조가 주요 키워드를 fuzzer에 심는 데에 유용�
 이렇게 만들어지는 parsing과 fuzzing의 결합은 매우 강력하다.  
 
 ### Parsing and Recombining HTML  
-In this book, let us stay with HTML input for a while. To generate valid HTML inputs for our Python HTMLParser, we should first define a simple grammar. It allows to define HTML tags with attributes. Our context-free grammar does not require that opening and closing tags must match. However, we will see that such context-sensitive features can be maintained in the derived input fragments, and thus in the generated inputs.  
+HTML input 예제로 계속 이어가 보자. 유효한 HTML input을 만들기 위해서는 먼저 문법을 정의해줘야 한다. context-free grammar는 열고 닫는 tag를 필요로 하지 않지만 이런 context-sensitive feature가 input fragment에서 유지되는 것을 볼 수 있다.  
 
 ~~~python
 XML_TOKENS = {"<id>","<text>"}
@@ -65,11 +65,11 @@ XML_GRAMMAR = {
 ~~~
 
 ### Building the Fragment Pool  
-We are now ready to implement our first input-structure-aware mutator. Let's initialize the mutator with the dictionary fragments representing the empty fragment pool. It contains a key for each symbol in the grammar (and the empty set as value).  
+이제 input-structure-aware mutator을 만들 준비가 끝났다. 먼저 mutator를 비어있는 fragment pool로 초기화 시켜준다. 역시 dictionary 자료구조를 이용하기 때문에 문법에서 정의된 key와 symbol의 쌍으로 이루어진다.  
 
-The FragmentMutator adds fragments recursively. A fragment is a subtree in the parse tree and consists of the symbol of the current node and child nodes (i.e., descendant fragments). We can exclude fragments starting with symbols that are tokens, terminals, or not part of the grammar.  
+FragmentMutator는 fragment를 재귀적으로 추가한다. fragment는 parse tree의 subtree이며 현재 노드와 자식 노드의 symbol로 구성된다. token, terminals, 혹은 문법에 정의되지 않은 symbol 들로 시작하는 fragment들은 배제할 수 있다.  
 
-The function add_to_fragment_pool() parses a seed (no longer than 200ms) and adds all its fragments to the fragment pool. If the parsing the  seed was successful, the attribute seed.has_structure is set to True. Otherwise, it is set to False.  
+add_to_fragment_pool() 함수는 이름 그대로 모든 fragments를 pool에 추가한다. seed parsing이 성공적으로 끝난다면 seed.has_structure가 True로 세팅된다. parsing에 실패하면 False이다.  
 
 ~~~python
 class FragmentMutator(FragmentMutator):
@@ -128,16 +128,15 @@ fragment pool for simple HTML seed input result :
 <letter_space>
 ~~~
 
-For many symbols in the grammar, we have collected a number of fragments. There are several open and closing tags and several interesting fragments starting with the xml-tree symbol.
-
-Summary. For each interesting symbol in the grammar, the FragmentMutator has a set of fragments. These fragments are extracted by first parsing the inputs to be mutated.
+위의 결과를 보면 문법 속 symbol들로 부터 많은 fragment를 얻었다는 걸 알 수 있다.  
+문법의 각 symbol들을 FragmentMutator가 fragment로 세팅하고, 이들은 입력값을 mutate하기 위해 첫번째로 하는 parsing에 얻어진다.  
 
 ### Fragment-Based Mutation  
-We can use the fragments in the fragment pool to generate new inputs. Every seed that is being mutated is disassembled into fragments, and memoized – i.e., disassembled only the first time around.  
+fragment pool에 있는 여러 fragments들을 새로운 input을 생성하는데 사용할 수 있다. 모든 seed는 fragment로 쪼개어지고, 저장된다(memoized)  
 
-Our first structural mutation operator is swap_fragments(), which choses a random fragment in the given seed and substitutes it with a random fragment from the pool. We make sure that both fragments start with the same symbol. For instance, we may swap a closing tag in the seed HTML by another closing tag from the fragment pool.
+swap_fragments() 함수는 첫번째 structural mutation 함수로써 주어진 seed에서 랜덤한 fragment를 골라서 pool에 있는 것과 랜덤하게 바꾼다. 물론 두 fragment의 start symbol이 같아야 한다. 예를 들어 닫는 tag를 seed에서 골랐다면 pool에서도 닫는 tag를 골라야 한다.  
 
-In order to choose a random fragment, the mutator counts all fragments (n_count) below the root fragment associated with the start-symbol.
+random fragment를 고르기 위해서 먼저 mutator는 총 몇 개의 fragment가 있는지 센다.  
 
 Our structural mutator chooses a random number between 2 (i.e., excluding the start symbol) and the total number of fragments (n_count) and uses the recursive swapping to generate the new fragment. The new fragment is serialized as string and returned as new seed.  
 (We can use a similar recursive traversal to remove a random fragment.)
