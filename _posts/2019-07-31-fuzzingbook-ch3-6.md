@@ -7,14 +7,11 @@ comments: true
 
 > Fuzzing with Generators  
 
-In this chapter, we show how to extend grammars with functions – pieces of code that get executed during grammar expansion, and that can generate, check, or change elements produced. Adding functions to a grammar allows for very versatile test generation, bringing together the best of grammar generation and programming.
+이번 장에서는 문법을 확장시킬 때 함수를 적용하는 것에 대해 공부한다. 이 때 함수란 해당 문법이 실제로 확장 될 때 실행된다. 그 실행 결과로 새로운 input을 생성할 수도 있고 이미 생성된 값들에 대해 validity 체크도 할 수 있다. 또한 생성된 값의 일부를 바꿀 수도 있다. 이렇듯 문법에 함수를 추가하는 것은 다양한 테스팅을 가능토록 해준다.  
 
 ### Example: Test a Credit Card System  
-Suppose you work with a shopping system that – among several other features – allows customers to pay with a credit card. Your task is to test the payment functionality.
-
-To make things simple, we will assume that we need only two pieces of data – a 16-digit credit card number and an amount to be charged. Both pieces can be easily generated with grammars, as in the following:
+먼저 예제를 살펴보자. 흔히 사용하는 신용카드의 카드번호와 결제 금액 정보를 테스팅 값으로 생성시킨다고 해보자. 16자리 카드번호와 결제 금액, 두 가지 정보만 있으면 된다. 이 두 정보는 문법을 통해 쉽게 정의되고 생성될 수 있다.  
 ~~~python
-
 CHARGE_GRAMMAR = {
     "<start>": ["Charge <amount> to my credit card <credit-card-number>"],
     "<amount>": ["$<float>"],
@@ -37,23 +34,21 @@ assert is_valid_grammar(CHARGE_GRAMMAR)
  'Charge $8.90 to my credit card 2363769342732142']
  ~~~
 
-However, when actually testing our system with this data, we find two problems:
+하지만 실제로 위의 값들로 프로그램 테스팅을 할 때 다음의 두 가지 문제점이 생긴다:  
 
-1. We'd like to test specific amounts being charged – for instance, amounts that would excess the credit card limit.  
-2. We find that 9 out of 10 credit card numbers are rejected because of having an incorrect checksum. This is fine if we want to test rejection of credit card numbers – but if we want to test the actual functionality of processing a charge, we need valid numbers.  
+1. 신용카드의 한도초과 등의 specific한 결제금액을 테스트해볼 수 없다.  
+2. 10개 중 9개는 올바른 조합을 가지지 못한 카드번호의 나열로써 사실상 결제가 거부된다. 즉, validity check fail이다.  
 
-We could go and ignore these issues; after all, eventually, it is only a matter of time until large amounts and valid numbers are generated. As it comes to the first concern, we could also address it by changing the grammar appropriately – say, to only produce charges that have at least six leading digits. However, generalizing this to arbitrary ranges of values will be cumbersome.
-
-The second concern, the checksums of credit card numbers, however, runs deeper – at least as far as grammars are concerned, is that a complex arithmetic operation like a checksum cannot be expressed in a grammar alone – at least not in the context-free grammars we use here. (In principle, one could do this in a context–sensitive grammar, but specifying this would be no fun at all.) What we want is a mechanism that allows us to attach programmatic computations to our grammars, bringing together the best of both worlds.
+위의 문제들을 무시해도 괜찮다. 크고 valid한 수를 생성하는건 시간문제다. 첫 번째 문제점은 문법만 적절히 바꿔주면 해결될 것이다. 하지만 두 번째 문제는 조금 더 깊이 들어간다. 카드번호의 조합은 문법만으로 조합을 만들어 낼 수가 없기 때문이다. 이러한 상황을 해결하기 위해서는 grammar expansion에 함수를 더할 필요가 있다.  
 
 ### Attaching Functions to Expansions  
-The key idea of this chapter is to extend grammars such that one can attach Python functions to individual expansions. These functions can be executed
+이번 장의 핵심은 문법이 개별적으로 확장될 때 함수를 실행시키는 것이다. 함수가 실행되는 시점은 두 가지일 것이다.  
 
-1. before expansion, replacing the element to be expanded by a computed value  
+1. before expansion, replacing the element to be expanded by a computed value.  
 2. after expansion, checking generated elements, and possibly also replacing them.  
 
 ### Functions Called Before Expansion  
-A function defined using the pre option is invoked before expansion of  s  into  e . Its value replaces the expansion  e  to be produced. To generate a value for the credit card example, above, we could define a pre-expansion generator function
+pre option 으로 정의된 함수는 expansion 전에 실행된다. 그 실행 결과 값은 expansion 되기로 했던 값을 대체한다. 예를 들어 위의 신용카드 예제에 pre-expasion function을 다음과 같이 정의하고 문법에 attach할 수 있을 것이다.  
 ~~~python
 def high_charge():
     return random.randint(10000000, 90000000) / 100.0
@@ -64,10 +59,12 @@ CHARGE_GRAMMAR.update({
 ~~~
 
 ### Functions Called After Expansion  
-A function defined using the post option is invoked after expansion of  s  into  e , passing the expanded values of the symbols in  e  as arguments. A post-expansion function can serve in two ways:
+post option 으로 정의된 함수는 expansion 후에 실행된다. pre-expansion function과 달리 post-expansion function은 두 가지 역할로 구분하여 실행이 가능하다.  
 
 1. It can serve as a constraint or filter on the expanded values, returning True if the expansion is valid, and False if not; if it returns False, another expansion is attempted.  
 2. It can also serve as a repair, returning a string value; like pre-expansion functions, the returned value replaces the expansion.  
+
+즉, 이미 생성된 값에 대해 filter 역할을 하거나, input to be expanded를 repair하여 대체하는 역할을 할 수 있다.  
 ~~~python
 check_credit_card = valid_luhn_checksum
 fix_credit_card = fix_luhn_checksum
@@ -79,6 +76,7 @@ fix_credit_card("1234567890123456")
 ~~~
 
 ### Generating Elements before Expansion  
+
 Our first task will be implementing the pre-expansion functions – that is, the function that would be invoked before expansion to replace the value to be expanded. To this end, we hook into the process_chosen_children() method, which gets the selected children before expansion. We set it up such that it invokes the given pre function and applies its result on the children, possibly replacing them.  
 ~~~python
 charge_fuzzer = GeneratorGrammarFuzzer(CHARGE_GRAMMAR)
