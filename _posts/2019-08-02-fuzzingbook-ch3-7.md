@@ -260,8 +260,13 @@ class RegionMutator(RegionMutator):
             return super().delete_fragment(seed)
 ~~~
 
-parse table을 만들고 symbol들에 입력값의 region을 대입하는 데에는 Earley parser를 사용한다.
-We can use the Earley parser to generate a parse table and assign regions in the input to symbols in the grammar. Our region mutators can substitute these region with fragments from the fragment pool that start with the same symbol, or delete these regions entirely.
+parse table을 만들고 symbol들에 입력값의 region을 대입하는 데에는 Earley parser를 사용한다. region mutator는 이 region들을 pool로부터 가져온 fragment로 대체할 수 있다.  
 
-### Focusing on Valid Seeds  
-In the previous section, we have a problem: The low (degree of) validity. To address this problem, a validity-based power schedule assigns more energy to seeds that have a higher degree of validity. In other words, the fuzzer spends more time fuzzing seeds that are more valid.
+### Mining Seeds  
+지금까지의 과정을 통해 성공적인 fuzzing에 어떤 seed를 고르는지 매우 큰 영향을 준다는 것이 명확해졌다. "잘 고른다"라는 말에는 여러 aspect가 들어있을 것이다. 먼저 variability 측면에서 code coverage 증가를 위해 가능한 많고 다양한 feature를 커버해야 한다. 또 다른 측면은 에러를 유도하는 seed를 고르는 likelihood이다. 만약 이전에 프로그램 실패를 야기한 seed라면 이것의 mutation은 또 다른 프로그램 실패를 불러올 가능성이 높다. 그 이유는 과거의 실패를 고치는 과정이 같은 실패를 반복하지 않게 하는 점에서 성공적이지만 가끔은 그 원인이 되는 모든 것을 잡아내지는 않기 때문이다. 즉, 기존의 실패를 고쳤다 하더라도 original failure-inducing input의 likelihood of error는 여전히 다른 seeds의 그것보다 높다. 그러므로 이런 seed를 고르는 것도 다른 버그를 찾는 데에 유용할 것이다.  
+
+### 배운 점  
+- fragment-based mutation은 먼저 seed input을 fragment 단위로 쪼개고, 다시 합치는 방식으로 새로운 input을 생성한다.  
+- disassembled fragment들은 parse tree의 subtree이다.  
+- region-based mutation은 문법의 특정 symbol이 어떤 위치에 속하는지 마크해놓는다. fragment-based mutation과 달리 파싱에 실패해도 모든 seed에 대해 적용가능하다.  
+- input을 고르는 데에 validity, likelihood 등의 여러 요소를 고려해야 한다.  
