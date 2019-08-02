@@ -179,11 +179,9 @@ class FragmentMutator(FragmentMutator):
 이제 structure-aware fuzzing의 모든 준비물은 마련됐다. 현재 mutator는 모든 seed를 fragment로 쪼개고 pool에 넣는다. 그리고 같은 type을 가진 fragment끼리 swap하여 새로운 seed를 만들고, 주어졌던 seed에서는 랜덤한 fragment를 삭제한다. 이 과정은 높은 확률의 validity를 보장한다.  
 
 ### Integration with Greybox Fuzzing  
-Our fragment-level blackbox fuzzer (LangFuzzer) generates more valid inputs but achieves less code coverage than a fuzzer with our byte-level fuzzer. So, there is some value in generating inputs that do not stick to the provided grammar.
+fragment-level blackbox fuzzer (LangFuzzer)는 더 많은 valid input을 만들어 내지만 code coverage 측면에서는 byte-level fuzzer보다 효율이 떨어진다. 그래서 생성된 입력들 중 주어진 문법을 고수하지 않는 경우도 있다.  
 
-In the following we integrate fragment-level blackbox fuzzing (LangFuzz-style) with byte-level greybox fuzzing (AFL-style). The additional coverage-feedback might allow us to increase code coverage more quickly.
-
-A greybox fuzzer adds to the seed population all generated inputs which increase code coverage. Inputs are generated in two stages, stacking up to four structural mutations and up to 32 byte-level mutations.
+fragment-level balckbox fuzzing과 byte-level greybox fuzzing의 장점들을 취하기 위해 이 둘을 합치려 한다. 추가적인 coverage 피드백은 더 많은 coverage를 빠르게 얻을 수 있도록 도와줄 것이다. greybox fuzzer는 seed population에 code coverage를 증가시킬 모든 생성된 입력값을 추가한다. 
 
 ~~~python
 class GreyboxGrammarFuzzer(GreyboxFuzzer):
@@ -204,23 +202,22 @@ class GreyboxGrammarFuzzer(GreyboxFuzzer):
                 candidate = self.mutator.mutate(candidate)
         return candidate
 ~~~
-Our structural greybox fuzzer  
-1. runs faster than the fragment-based LangFuzzer,  
-2. achieves more coverage than both the fragment-based LangFuzzer and the vanilla blackbox mutational fuzzer, and  
-3. generates fewer valid inputs than even the vanilla blackbox mutational fuzzer.  
+
+structural greybox fuzzer은
+1. fragment-based LangFuzzer보다 빠르다.  
+2. fragment-based LangFuzzer, vanilla blackbox mutational fuzzer 보다 더 많은 code coverage를 얻을 수 있다.  
+3. vanilla blackbox mutational fuzzer 보다 더 적은 valid input을 만든다.  
 
 ### Mutating Invalid Seeds  
-In the previous section, we have seen that most inputs that are added as seeds are invalid w.r.t. our given grammar. Yet, in order to apply our fragment-based mutators, we need it to parse the seed successfully. Otherwise, the entire fragment-based approach becomes useless. The question arises: How can we derive structure from (invalid) seeds that cannot be parsed successfully?
+지금까지 생성한 input들은 대부분 fuzzer에게 주어진 문법에 위배되는 경우가 더 많았다. fragment-based mutator을 적용하기 위해서는 seed를 성공적으로 parse해야 한다. 그렇지 않으면 지금까지 만든 fragment-based approach가 무의미하기 때문이다. 그렇다면 어떻게 올바르게 parse될 수 없는 seed로부터 structure를 파생시킬 수 있을까?  
 
-To this end, we introduce the idea of region-based mutation, first explored with the AFLSmart structural greybox fuzzer [Van-Thuan Pham et al, 2018.]. AFLSmart implements byte-level, fragment-based, and region-based mutation as well as validity-based power schedules. We define region-based mutators, where a region is a consecutive sequence of bytes in the input that can be associated with a symbol in the grammar.
+이를 위해 region-based mutation이라는 아이디어를 가져온다. 먼저 AFLSmart structural greybox fuzzer를 통해 탐험(explore)한다. 이 fuzzer는 byte-level, fragment-based, region-based mutation, validity-based power schedule로 구현되어 있다. region은 grammar의 symbol과 매치되는 input의 byte의 연속적인 시퀀스를 의미한다.  
 
 ### Determining Symbol Regions  
-The function chart_parse of the Earley parser produces a parse table for a string. For each letter in the string, this table gives the potential symbol and a region of neighboring letters that might belong to the same symbol. Unlike input fragments, input regions can be derived even if the parser fails to generate the entire parse tree.
+방법은 이렇다 : 먼저 parse table을 만든다. 문자열의 각 문자는 potential symbol과 region of neighboring letter 정보를 줄 것이다. input fragment와는 다르게 input regions는 parser가 실패하더라도 전체 parse 트리를 만들 수 있다.  
 
 ### Region-based Mutation  
-To fuzz invalid seeds, the region-based mutator associates symbols from the grammar with regions (i.e., indexed substrings) in the seed. The overridden method add_to_fragment_pool() first tries to mine the fragments from the seed. If this fails, the region mutator uses Earley parser to derive the parse table. For each column (i.e., letter), it extracts the symbols and corresponding regions. This allows the mutator to store the set of regions with each symbol.
-
-Now that we know which regions in the seed belong to which symbol, we can define region-based swap and delete operators.
+invalid seed를 fuzz 하기 위해서는 region-based mutator가 seed에 있는 region의 문법들 속 symbol들과 연결된다. 앞에 나왔던 add_to_fragment_pool() 함수는 먼저 seed로부터 fragment 정보를 캔다. 만약 그것이 실패하면 region mutator가 parse table을 만들고 각 symbol과 그에 상응하는 region 정보를 가져온다. 이제 우리는 어떤 symbol이 어떤 region에 속하는지 알 수 있고 그걸 통해 region-based swap, delete 함수를 만든다.  
 
 ~~~python
 class RegionMutator(RegionMutator):
@@ -263,6 +260,7 @@ class RegionMutator(RegionMutator):
             return super().delete_fragment(seed)
 ~~~
 
+parse table을 만들고 symbol들에 입력값의 region을 대입하는 데에는 Earley parser를 사용한다.
 We can use the Earley parser to generate a parse table and assign regions in the input to symbols in the grammar. Our region mutators can substitute these region with fragments from the fragment pool that start with the same symbol, or delete these regions entirely.
 
 ### Focusing on Valid Seeds  
