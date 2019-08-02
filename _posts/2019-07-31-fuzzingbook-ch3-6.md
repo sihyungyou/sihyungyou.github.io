@@ -76,8 +76,42 @@ fix_credit_card("1234567890123456")
 ~~~
 
 ### Generating Elements before Expansion  
+먼저 pre-expansion function을 구현해야 한다. 기존의 문법에 따라 expansion 될 예정인 값을 함수의 결과값을 통해 대체하는 것이다. 그러기 위해서는 children을 고르는 process_chosen_children() 함수를 hook해야 한다. 그리고 선택된 children에 대해 미리 정의해 놓은 함수를 적용시키면 된다. apply result 함수가 pre-expansion function의 결과를 적용시키는 역할을 한다.  
+~~~python
+class GeneratorGrammarFuzzer(GeneratorGrammarFuzzer):
+    def apply_result(self, result, children):
+        if isinstance(result, str):
+            children = [(result, [])]
+        elif isinstance(result, list):
+            symbol_indexes = [i for i, c in enumerate(
+                children) if is_nonterminal(c[0])]
 
-Our first task will be implementing the pre-expansion functions – that is, the function that would be invoked before expansion to replace the value to be expanded. To this end, we hook into the process_chosen_children() method, which gets the selected children before expansion. We set it up such that it invokes the given pre function and applies its result on the children, possibly replacing them.  
+            for index, value in enumerate(result):
+                if value is not None:
+                    child_index = symbol_indexes[index]
+                    if not isinstance(value, str):
+                        value = repr(value)
+                    if self.log:
+                        print(
+                            "Replacing", all_terminals(
+                                children[child_index]), "by", value)
+
+                    # children[child_index] = (value, [])
+                    child_symbol, _ = children[child_index]
+                    children[child_index] = (child_symbol, [(value, [])])
+        elif result is None:
+            pass
+        elif isinstance(result, bool):
+            pass
+        else:
+            if self.log:
+                print("Replacing", "".join(
+                    [all_terminals(c) for c in children]), "by", result)
+
+            children = [(repr(result), [])]
+
+        return children
+~~~
 ~~~python
 charge_fuzzer = GeneratorGrammarFuzzer(CHARGE_GRAMMAR)
 charge_fuzzer.fuzz()
@@ -103,9 +137,7 @@ Tree: $382087.72
 ~~~
 
 ### Support for Python Generators  
-The Python language has its own concept of generator functions, which we of course want to support as well. A generator function in Python is a function that returns a so-called iterator object which we can iterate over, one value at a time.
-
-To create a generator function in Python, one defines a normal function, using the yield statement instead of a return statement. While a return statement terminates the function, a yield statement pauses its execution, saving all of its state, to be resumed later for the next successive calls.
+파이썬에서는 generator function 개념을 지원한다. generator function은 iterator object를 반환하여 매 반복이 끝날 때 마다 함수의 결과 값을 반환한다. 함수를 끝내는 return 대신에 현재 state를 저장하고 잠시 멈춘다. 다음 반복에서 함수 실행이 성공적으로 이루어지면 resume하여 반복을 계속한다.  
 ~~~python
 def iterate():
     t = 0
@@ -113,8 +145,7 @@ def iterate():
         t = t + 1
         yield t
 ~~~
-
-We can use iterate in a loop, just like the range() function (which also is a generator function):
+평소에 파이썬에서 range()를 사용하여 반복문을 작성한 것과 동일하게 작동한다.  
 ~~~python
 for i in iterate():
     if i > 10:
@@ -125,9 +156,47 @@ for i in iterate():
 1 2 3 4 5 6 7 8 9 10 
 ~~~
 
-We can also use iterate() as a pre-expansion generator function, ensuring it will create one successive integer after another:
-
-To support generators, our process_chosen_children() method, above, checks whether a function is a generator; if so, it invokes the run_generator() method. When run_generator() sees the function for the first time during a fuzz_tree() (or fuzz()) call, it invokes the function to create a generator object; this is saved in the generators attribute, and then called. Subsequent calls directly go to the generator, preserving state.
+이번 장에서 다루고 있는 pre-expansion function과 generator function은 무슨 관련이 있으며 어떤 효용이 있는 것일까? pre-expansion function을 반복시켜서 매번 성공적으로 valid하고 서로 다른 input 값을 생성할 수 있도록 할 수 있다. generator를 지원하기 위해서는 process_chosen_children() 함수가 함수가 generator인지 확인해야 한다. 만약 맞다면, run_generator()를 실행시킨다. 만약 run_generator() 함수가 fuzz하는 동안 처음 만난 함수라면 함수를 실행시키고 generator object를 생성, generators attribute에 저장하고 부른다. 물론 문법에 pre-expansion function이 옵션으로 표시되어있어야 한다. 
+~~~python
+def run_generator(self, expansion, function):
+    key = repr((expansion, function))
+    if key not in self.generators:
+        self.generators[key] = function()
+    generator = self.generators[key]
+    return next(generator)
+~~~
 
 ### Checking and Repairing Elements after Expansion  
-Let us now turn to our second set of functions to be supported – namely, post-expansion functions. The simplest way of using them is to run them once the entire tree is generated, taking care of replacements as with pre functions. If one of them returns False, however, we start anew.  
+이제 post-expnasion function의 경우를 이야기해보자. 가장 간단하게 사용하는 방법은 전체 트리가 만들어진 이후에 함수를 실행시켜서 pre function처럼 값들을 대체하도록 하는 것이다. 만약 validity를 체크하는 함수가 False를 반환한다면 새롭게 시작한다.  
+
+### Local Checking and Repairing  
+하지만 위와 같이 전체 트리에 대해서 post-expnasion function을 실행하고 틀린 값을 찾아냈을 때 새로운 matching input을 생성시키는 것은 매우 비효율적이다. final subtree가 아니라 partial subtree에 대해서 적용한다면 어떨까? partial subtree가 완성되는 즉시 post-expansion을 부르는 것이다.  
+
+이를 수행하기 위해서 핵심은 local level expansion에서 depth를 0으로 설정해주는 것에 있다. depth가 0이면 그 local subtree는 (잠시동안) 더 이상 expand되지 않을 것이고 post-expnasion function이 역할을 하기 시작한다.  
+
+### Definitions and Uses  
+지금까지 다룬 generator와 constraint를 이용해서 훨씬 복잡한 문제들도 해결할 수 있다. 이에 더하여 만약 사전에 정의된 identifier만 사용해서 fuzzing을 하고 싶다면 어떨까?  
+previously defined identifiers 정보를 가지고 있는 symbol table를 만든다. 그리고 이 table을 pre/post-expansion function이 매번 실행하기 전에 lookup 하는 방식으로 진행한다.  
+### Ordering Expansions  
+이제 fuzzing에 사용될 문자를 직접 정의하는 것 까지도 완성됐다. 하지만 여전히 만들어진 definitions에 대해서 order를 컨트롤할 수는 없다. 예를 들어 파이썬에서 ; 문자는 여러 다른 statement를 이어주는 역할을 한다. 그렇다면 ; 문자를 기준으로 앞의 문장이 먼저, 뒤의 문장은 나중에 실행되야 할 것이다. 이런 order 문제도 옵션으로 해결이 가능하다.  
+~~~python
+CONSTRAINED_VAR_GRAMMAR = extend_grammar(CONSTRAINED_VAR_GRAMMAR, {
+    "<statements>": [("<statement>;<statements>", opts(order=[1, 2])),
+                     "<statement>"]
+})
+~~~
+~~~python
+CONSTRAINED_VAR_GRAMMAR = extend_grammar(CONSTRAINED_VAR_GRAMMAR, {
+    "<assignment>": [("<identifier>=<expr>", opts(post=lambda id, expr: define_id(id),
+                                                  order=[2, 1]))],
+})
+~~~
+~~~python
+def exp_order(expansion):
+    """Return the specified expansion ordering, or None if unspecified"""
+    return exp_opt(expansion, 'order')
+~~~
+
+### 배운 점  
+- pre/post-expansion function을 문법에 적용하면 더 좋은 테스트케이스를 만들어 낼 수 있다.  
+- generator function을 사용하여 pre/post-expansion function의 효과를 향상시킬 수 있다.  
