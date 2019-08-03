@@ -172,10 +172,109 @@ tree를 이용한 simplify 두 번째 방법은 alternative expansion이다. 위
 <term> ::= <factor>
 ~~~
 
+derivation subtree를 더 작은 subtree로 치환하고 alternate expansion을 찾아서 다시 smaller subtree 정보를 안다면 (즉, 위의 두 방법을 합친다면) 더 효과적으로 문법이 복잡한 input을 축소시킬 수 있다. 이는 delta debuggin 보다 훨씬 빠르고 (당연히) valid input만을 생성할 것이다. 하지만 이 simplification rule을 언제 적용시켜야 할지 전략이 필요하다. 다음 섹션에서는 그 전략을 어떻게 발전시킬지 알아본다.  
 
-A second means to simplify this tree is to apply alternative expansions. That is, for a symbol, we check whether there is an alternative expansion with a smaller number of children. Then, we replace the symbol with the alternative expansion, filling in needed symbols from the tree.
+### Simplification Strategies  
+Finding Subtrees  
+대체할 subtree를 찾는 것은 간단하다. 먼저 주어진 symbol과 같은 root를 가지는 tree를 모두 반환한다.  
+~~~python
+def subtrees_with_symbol(self, tree, symbol, depth=-1, ignore_root=True):
+    # Find all subtrees in TREE whose root is SYMBOL.
+    # If IGNORE_ROOT is true, ignore the root note of TREE.
 
-If we replace derivation subtrees by (smaller) subtrees, and if we search for alternate expansions that again yield smaller subtrees, we can systematically simplify the input. This could be much faster than delta debugging, as our inputs would always be syntactically valid. However, we need a strategy for when to apply which simplification rule. This is what we develop in the remainder of this section.
+    ret = []
+    (child_symbol, children) = tree
+    if depth <= 0 and not ignore_root and child_symbol == symbol:
+        ret.append(tree)
 
-### A Class for Reducing with Grammars  
+    # Search across all children
+    if depth != 0 and children is not None:
+        for c in children:
+            ret += self.subtrees_with_symbol(c,
+                                                symbol,
+                                                depth=depth - 1,
+                                                ignore_root=False)
 
+    return ret
+~~~
+
+Alternate Expansions  
+이 알고리즘은 약간 더 복잡하다. 먼저 가능한 expansion을 모두 찾는다. 그리고 각 expansion에 대해서 위의 finding subtree를 이용하여 모든 가능한 value를 채워넣는다. 그리고 구 중 첫번재 가능한 조합을 반환한다.  
+~~~python
+def alternate_reductions(self, tree, symbol, depth=-1):
+    reductions = []
+
+    expansions = self.grammar.get(symbol, [])
+    expansions.sort(
+        key=lambda expansion: len(
+            expansion_to_children(expansion)))
+
+    for expansion in expansions:
+        expansion_children = expansion_to_children(expansion)
+
+        match = True
+        new_children_reductions = []
+        for (alt_symbol, _) in expansion_children:
+            child_reductions = self.subtrees_with_symbol(
+                tree, alt_symbol, depth=depth)
+            if len(child_reductions) == 0:
+                match = False   # Child not found; cannot apply rule
+                break
+
+            new_children_reductions.append(child_reductions)
+
+        if not match:
+            continue  # Try next alternative
+
+        # Use the first suitable combination
+        for new_children in possible_combinations(new_children_reductions):
+            new_tree = (symbol, new_children)
+            if number_of_nodes(new_tree) < number_of_nodes(tree):
+                reductions.append(new_tree)
+                if not self.try_all_combinations:
+                    break
+
+    # Sort by number of nodes
+    reductions.sort(key=number_of_nodes)
+
+    return reductions
+~~~
+
+Both Strategies Together  
+둘을 합쳐보자. 먼저 존재하는 subtree를 찾고, alternate expansion을 선택한다.  
+~~~python
+class GrammarReducer(GrammarReducer):
+    def symbol_reductions(self, tree, symbol, depth=-1):
+        """Find all expansion alternatives for the given symbol"""
+        reductions = (self.subtrees_with_symbol(tree, symbol, depth=depth)
+                      + self.alternate_reductions(tree, symbol, depth=depth))
+
+        # Filter duplicates
+        unique_reductions = []
+        for r in reductions:
+            if r not in unique_reductions:
+                unique_reductions.append(r)
+
+        return unique_reductions
+~~~
+
+### A Depth-Oriented Strategy  
+지금도 충분히 좋은 결과를 내는 알고리즘이지만 더 좋게 만들 수 있다. 대체할 때 subtree의 사이즈가 더 작으면 더 효율적으로 프로그램을 진행할 수 있지만 시간이 꽤 오래 걸릴 것이다. 그래서 처음에는 large subtree에 대해서만 고려해보자. 이를 위해 depth를 대체가능한 subtree를 찾을수 있는 정도 까지만 제한한다. 먼저 direct descendant를 보고, 그 다음에 더 아래에 있는 자녀들을 본다.  
+
+~~~python
+def reduce_tree(self, tree):
+    depth = 0
+    while depth < max_height(tree):
+        reduced = self.reduce_subtree(tree, tree, depth)
+        if reduced:
+            depth = 0    # Start with new tree
+        else:
+            depth += 1   # Extend search for subtrees
+    return tree 
+~~~
+depth를 0부터 시작해서 진행될 수록 증가시키는 것이 이 알고리즘의 핵심이다.  
+
+### 배운 점  
+- failure-inducing input을 reduce하는 것은 테스팅과 디버깅에 매우 효율적이다.  
+- delta debuggin은 간단하지만 좋은 알고리즘이다.  
+- 하지만 더 syntactically compelx inmput에 대해서는 grammar-based reduction이 더 효과적이다.  
