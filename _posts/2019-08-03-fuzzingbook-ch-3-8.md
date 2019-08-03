@@ -114,36 +114,65 @@ Test #29 ')' 1 PASS
 '()'
 ~~~
 
-Now we know why MysteryRunner fails – it suffices that the input contains two matching parentheses with a number between them. Delta Debugging determines this is 29 steps. Its result is 1-minimal, meaning that every character contained is required to produce the error; removing any (as seen in tests #27 and #29, above) no longer makes the test fail. This property is guaranteed by the delta debugging algorithm, which in its last stage always tries to delete characters one by one.
+input reducing 을 이용해서 나온 결과를 분석하면 어떤 경우에 실패했는지 알 수 있다. 숫자가 괄호로 둘러쌓인 입력에 대해서 FAIL을 보여주고 있다. delta debuggin은 29 단계를 거쳐 이를 판단했다.  
 
-Delta debugging의 장점은 다음과 같다 : 
-A reduced test case reduces the cognitive load of the programmer. The test case is shorter and focused, and thus does not burden the programmer with irrelevant details. A reduced input typically leads to shorter executions and smaller program states, both of which reduce the search space as it comes to understanding the bug. In our case, we have eliminated lots of irrelevant input – only the two characters the reduced input contains are relevant.
+reduced test case의 장점은 다음과 같다 :  
+1.프로그래머가 인지해야할 양도 축소시켜준다. 테스트 케이스가 더 짧고 집중될수록 버그와 상관없는 디테일에서 오는 스트레스를 받지 않아도 되는 것이다. 일반적으로 reduced input은 shorter executions, smaller program states를 야기하는데 이는 버그를 이해하는데 있어서 search space의 범위도 줄여주기에 매우 도움이 된다.  
 
-A reduced test case is easier to communicate. All one needs here is the summary: MysteryRunner fails on "()", which is much better than MysteryRunner fails on a 4100-character input (attached).
+2. 소통하기에 더 쉽다. 결국 위의 예제에서 fail에 필요한 것은 온갖 문자들의 나열이 아닌 '()' 괄호문자였다.  
 
-A reduced test case helps in identifying duplicates. If similar bugs have been reported already, and all of them have been reduced to the same cause (namely that the input contains matching parentheses), then it becomes obvious that all these bugs are different symptoms of the same underlying cause – and would all be resolved at once with one code fix.
+3. 중복을 찾는 데 용이하다. 만약 비슷한 버그가 이미 발견, 보고되었고 축소되었다면 찾아낸 여러 다른 버그들이더라도 하나의 같은 원인을 갖고 있을 것이다. 그러므로 하나의 코드만 고치면 한번에 해결 가능하다.  
 
 ### Grammar-Based Input Reduction  
-If the input language is syntactically complex, delta debugging may take several attempts at reduction, and may not be able to reduce inputs at all. In the second half of this chapter, we thus introduce an algorithm named Grammar-Based Reduction (or GRABR for short) that makes use of grammars to reduce syntactically complex inputs.
+만약 input language가 문법적으로 복잡하다면 delta debugging은 여러 시도를 해보다ㅏ 아예 reducing을 못 할 수도 있다. 그런 경우를 해결하기 위해 Grammar-Based Reduction(GRABR)을 소개한다. GRABR은 문법적으로 복잡한 입력을 reduce하기 위해서 grammar를 사용한다.  
 
 ### Lexical Reduction vs. Syntactic Rules  
-Despite its general robustness, there are situations in which delta debugging might be inefficient or outright fail. As an example, consider some expression input such as 1 + (2 * 3). Delta debugging requires a number of tests to simplify the failure-inducing input, but it eventually returns a minimal input
+그 견고함에도 불구하고 delta debugging이 비효율적이거나 아예 실패하는 상황이 있다. 예를 들어 1 + (2 * 3)이라는 arithmetic expression이 입력으로 들어왔다고 해보자.  
 
-Looking at the tests, above, though, only few of them actually represent syntactically valid arithmetic expressions. In a practical setting, we may want to test a program which actually parses such expressions, and which would reject all invalid inputs. We define a class EvalMysteryRunner which first parses the given input (according to the rules of our expression grammar), and only if it fits would it be passed to our original MysteryRunner. This simulates a setting in which we test an expression interpreter, and in which only valid inputs can trigger the bug.
+~~~
+Test #1 '1 + (2 * 3)' 11 FAIL
+Test #2 '2 * 3)' 6 PASS
+Test #3 '1 + (' 5 PASS
+Test #4 '+ (2 * 3)' 9 FAIL
+Test #5 '+ ( 3)' 6 FAIL
+Test #6 ' 3)' 3 PASS
+Test #7 '+ (' 3 PASS
+Test #8 ' ( 3)' 5 FAIL
+Test #9 '( 3)' 4 FAIL
+Test #10 '3)' 2 PASS
+Test #11 '( ' 2 PASS
+Test #12 '(3)' 3 FAIL
+Test #13 '()' 2 FAIL
+Test #14 ')' 1 PASS
+Test #15 '(' 1 PASS
+'()'
+~~~
 
-Under these circumstances, it turns out that delta debugging utterly fails. None of the reductions it applies yield a syntactically valid input, so the input as a whole remains as complex as it was before.
-
-This behavior is possible if the program under test has several constraints regarding input validity. Delta debugging is not aware of these constraints (nor of the input structure in general), so it might violate these constraints again and again.
+위의 결과를 보면 문법적으로 유효한 입력은 매우 소수이다. 실제로 이런 알고리즘을 적용하기 위해서는 먼저 expression이 파싱되어야 한다. 그래서 모든 invalid input을 없애고 그 후에야 위의 테스팅을 돌리는 것이 적절하다. 그렇지 않으면 delta debuggin은 완전히 실패이다. reduction중 어느것도 문법적으로 유효하지 않기 때문이며 결국 input은 복잡한 기존의 상태 그대로 남아있게 된다.  
+이렇게 하기 위해서는 프로그램 자체가 input validity를 고려한 상태로 돌아가야 한다. delta debuggin은 이런 제약조건들에 대해서 이해하고 있지 않기 때문에 계속해서 validity violation을 일으킬 것이다.  
 
 ### A Grammmar-Based Reduction Approach  
-To reduce inputs with high syntactical complexity, we use another approach: Rather than reducing the input string, we reduce the tree representing its structure. The general idea is to start with a derivation tree coming from parsing the input, and then substitute subtrees by smaller subtrees of the same type. These alternate subtrees can either come
-1. From the tree itself, or
-2. By applying an alternate grammar expansion using elements from the tree.
+문법적으로 복잡한 input을 reduce하기 위해서 string-based보다 tree로 자료구조를 바꾸어 생각해보자. 일반적인 아이디어는 input을 파싱하여 derivation tree로 만들고 시작하는 것이다. 그리고 subtree를 더 작은 subtree(same type)로 대체하는 것이다. 대안이 되는 더 작은 subtree는 다음의 둘 중 하나의 경우다.  
+1. From the tree itself, or  
+2. By applying an alternate grammar expansion using elements from the tree.  
 
 ### Simplifying by Replacing Subtrees  
-Replacing one subtree by another only works as long as individual elements such as expr occur multiple times in our tree. In the reduced new_derivation_tree, above, we could replace further expr trees only once more.
+subtree를 다른 것으로 치환하는 것은 문법의 개별적 요소가 tree에 여러번 나올 경우에만 가능하다. 아래의 예시에서는 가장 위에있는 expr를 right child expr로 대체한 경우다.  
+
+![Center example image](https://user-images.githubusercontent.com/35067611/62409288-b3463c00-b60f-11e9-85bc-1cd8aac672d1.png "Center"){: .center-image}  
+
+![Center example image](https://user-images.githubusercontent.com/35067611/62409288-b3463c00-b60f-11e9-85bc-1cd8aac672d1.png "Center"){: .center-image}  
 
 ### Simplifying by Alternative Expansions  
+tree를 이용한 simplify 두 번째 방법은 alternative expansion이다. 위의 replacing subtree 방법과는 다르게 문법 확장을 할 때 더 작은 수의 자식을 갖는 확장이 있는지 먼저 찾고 있다면 그것으로 대체한다. 예를 들어, 아래의 경우 factor하나로 expansion하는 것을 선택한다.  
+~~~
+<term> ::= <term> * <factor>
+~~~
+~~~
+<term> ::= <factor>
+~~~
+
+
 A second means to simplify this tree is to apply alternative expansions. That is, for a symbol, we check whether there is an alternative expansion with a smaller number of children. Then, we replace the symbol with the alternative expansion, filling in needed symbols from the tree.
 
 If we replace derivation subtrees by (smaller) subtrees, and if we search for alternate expansions that again yield smaller subtrees, we can systematically simplify the input. This could be much faster than delta debugging, as our inputs would always be syntactically valid. However, we need a strategy for when to apply which simplification rule. This is what we develop in the remainder of this section.
