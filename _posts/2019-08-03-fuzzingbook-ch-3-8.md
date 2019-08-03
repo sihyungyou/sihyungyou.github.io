@@ -277,4 +277,4 @@ depth를 0부터 시작해서 진행될 수록 증가시키는 것이 이 알고
 ### 배운 점  
 - failure-inducing input을 reduce하는 것은 테스팅과 디버깅에 매우 효율적이다.  
 - delta debuggin은 간단하지만 좋은 알고리즘이다.  
-- 하지만 더 syntactically compelx inmput에 대해서는 grammar-based reduction이 더 효과적이다.  
+- 하지만 syntactically compelx inmput에 대해서는 grammar-based reduction이 더 효과적이다.  
