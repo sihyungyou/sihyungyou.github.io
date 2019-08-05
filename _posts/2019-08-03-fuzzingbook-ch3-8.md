@@ -117,14 +117,14 @@ Test #29 ')' 1 PASS
 input reducing 을 이용해서 나온 결과를 분석하면 어떤 경우에 실패했는지 알 수 있다. 숫자가 괄호로 둘러쌓인 입력에 대해서 FAIL을 보여주고 있다. delta debuggin은 29 단계를 거쳐 이를 판단했다.  
 
 reduced test case의 장점은 다음과 같다 :  
-1.프로그래머가 인지해야할 양도 축소시켜준다. 테스트 케이스가 더 짧고 집중될수록 버그와 상관없는 디테일에서 오는 스트레스를 받지 않아도 되는 것이다. 일반적으로 reduced input은 shorter executions, smaller program states를 야기하는데 이는 버그를 이해하는데 있어서 search space의 범위도 줄여주기에 매우 도움이 된다.  
+1. 프로그래머가 인지해야할 양도 축소시켜준다. 테스트 케이스가 더 짧고 집중될수록 버그와 상관없는 디테일에서 오는 스트레스를 받지 않아도 되는 것이다. 일반적으로 reduced input은 shorter executions, smaller program states를 야기하는데 이는 버그를 이해하는데 있어서 search space의 범위도 줄여주기에 매우 도움이 된다.  
 
 2. 소통하기에 더 쉽다. 결국 위의 예제에서 fail에 필요한 것은 온갖 문자들의 나열이 아닌 '()' 괄호문자였다.  
 
 3. 중복을 찾는 데 용이하다. 만약 비슷한 버그가 이미 발견, 보고되었고 축소되었다면 찾아낸 여러 다른 버그들이더라도 하나의 같은 원인을 갖고 있을 것이다. 그러므로 하나의 코드만 고치면 한번에 해결 가능하다.  
 
 ### Grammar-Based Input Reduction  
-만약 input language가 문법적으로 복잡하다면 delta debugging은 여러 시도를 해보다ㅏ 아예 reducing을 못 할 수도 있다. 그런 경우를 해결하기 위해 Grammar-Based Reduction(GRABR)을 소개한다. GRABR은 문법적으로 복잡한 입력을 reduce하기 위해서 grammar를 사용한다.  
+만약 input language가 문법적으로 복잡하다면 delta debugging은 여러 시도를 해보다 아예 reducing을 못 할 수도 있다. 그런 경우를 해결하기 위해 Grammar-Based Reduction(GRABR)을 소개한다. GRABR은 문법적으로 복잡한 입력을 reduce하기 위해서 grammar를 사용한다.  
 
 ### Lexical Reduction vs. Syntactic Rules  
 그 견고함에도 불구하고 delta debugging이 비효율적이거나 아예 실패하는 상황이 있다. 예를 들어 1 + (2 * 3)이라는 arithmetic expression이 입력으로 들어왔다고 해보자.  
