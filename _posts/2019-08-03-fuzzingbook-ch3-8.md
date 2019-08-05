@@ -159,7 +159,7 @@ Test #15 '(' 1 PASS
 ### Simplifying by Replacing Subtrees  
 subtree를 다른 것으로 치환하는 것은 문법의 개별적 요소가 tree에 여러번 나올 경우에만 가능하다. 아래의 예시에서는 가장 위에있는 expr를 right child expr로 대체한 경우다.  
 
-![Center example image](https://user-images.githubusercontent.com/35067611/62409288-b3463c00-b60f-11e9-85bc-1cd8aac672d1.png "Center"){: .center-image}  
+![Center example image](https://user-images.githubusercontent.com/35067611/62441775-6b9aee00-b790-11e9-85a5-cb2c80e32e16.png "Center"){: .center-image}  
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/62409288-b3463c00-b60f-11e9-85bc-1cd8aac672d1.png "Center"){: .center-image}  
 
