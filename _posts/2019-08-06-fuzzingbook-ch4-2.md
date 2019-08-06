@@ -216,11 +216,52 @@ AssertionError (expected)
 thilo = tstr("High", taint='HIGH') + tstr("Low", taint='LOW')
 ~~~
 이런 방법도 문제를 근본적으로 해결하지는 못하는데, 뒤의 LOW taint가 무시되고 non-tainted string으로 남기 때문이다.  
+
 ### Tracking Individual Characters  
-대안으로 문자열 뿐만 아니라 모든 문자단위에 taint를 주는 것이다. 그러기 위해서 정보를 표시할 또 다른 bit가 필요한데 이를 origin이라고 하겠다. In this section, we carry character level origins. That is, given a fragment that resulted from a portion of the original origined string, one will be able to tell which portion of the input string the fragment was taken from. In essence, each input character index from a origined source gets its own color.
+대안으로 문자열 뿐만 아니라 모든 문자단위에 taint를 주는 것이다. 그러기 위해서 every bit (문자열에 포함되는 모든 문자)에 정보를 담는다. 그 character level을 origin이라고 한다. 이 정보를 통해 어떤 입력 문자열에서 나온 fragment인지 알 수 있고 위에서 언급된 문제를 해결할 수 있다.  
 
-More complex origining such as bitmap origins are possible where a single character may result from multiple origined character indexes (such as checksum operations on strings). We do not consider these in this chapter.
+### Checking Origins  
+tstr 처럼 origin을 위해 ostr 클래스를 구현한다. (구현과정은 생략) 이 클래스를 사용해서 각 문자의 origin을 확인할 수 있다.  
 
-### A Class for Tracking Character Origins  
-Let us introduce a class ostr which, like tstr, carries a taint for each string, and additionally an origin for each character that indicates its source. It is a consecutive number in a particular range (by default, starting with zero) indicating its position within a specific origin
+~~~python
+s = ostr("hello", origin=100)
+t = ostr("world", origin=200)
+u = s + t + "!"
+u.origin
+~~~
+~~~
+[100, 101, 102, 103, 104, 200, 201, 202, 203, 204, -1]
+~~~
 
+### Privacy Leaks Revisited  
+이제 정보 유출에 대해 heartbeat() 함수를 체크함으로써 만족할만한 결과를 얻을 수 있다.  
+
+~~~python
+SECRET_ORIGIN = 1000
+secret = ostr('<again, some super-secret input>', origin=SECRET_ORIGIN)
+~~~
+
+~~~python
+s = heartbeat('hello', 5, memory=secret)
+s
+~~~
+~~~
+'hello'
+~~~
+
+~~~python
+print(s.origin)
+~~~
+~~~
+[-1, -1, -1, -1, -1]
+~~~
+
+몇가지 assertion문을 통해 유출을 방지하는지 여부를 확인할 수 있다.  
+![Center example image](https://user-images.githubusercontent.com/35067611/62553038-9a58b780-b8a9-11e9-9e35-a2f6551a9611.png "Center"){: .center-image}  
+
+### Taint-Directed Fuzzing  
+지금까지의 taint aware fuzzing은 위험한 operation으로 향하는 특정 문법에 포커싱하지 못한다는 점이 있었다. taint directed fuzzing은 이런 점을 보완한다. 기본적인 아이디어는 eval 함수에 접근하는 모든 문자의 origin을 추적하는 것이다. 그리고 그것들을 생성한 grammar node들을 역추적해서 그 노드들의 probability를 증가시켜 다시 사용될 수 있도록 유도한다.  
+
+### 배운점  
+- string-based, character-based taint는 information flow를 동적으로 추적할 수 있다.  
+- taint를 체크함으로써 untrusted input과 information leak을 발견할 수 있다.  
