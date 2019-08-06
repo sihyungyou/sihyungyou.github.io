@@ -74,3 +74,96 @@ db.sql('select __import__("os").popen("pwd").read() from inventory')
 3. taint sanitizer functions  
 source function으로부터 나온 입력들은 절대 sanitization function을 거치지 않고서는 sink function로 갈 수 없다. 이런 방식의 분석은 단순히 crash check 뿐만 아니라 stronger oracle로 테스팅을 할 수 있도록 한다.  
 
+### Tracking String Taints  
+There are various levels of taint tracking that one can perform. The simplest is to track that a string fragment originated in a specific environment, and has not undergone a taint removal process. For this, we simply need to wrap the original string with an environment identifier (the taint) with tstr, and produce tstr instances on each operation that results in another string fragment. The attribute taint holds a label identifying the environment this instance was derived.  
+
+### A Class for Tainted Strings  
+For capturing information flows we need a new string class. The idea is to use the new tainted string class tstr as a wrapper on the original str class. However, str is an immutable class. Hence, it does not call its __init__() method after being constructed. This means that any subclasses of str also will not get the __init__() method called. If we want to get our initialization routine called, we need to hook into __new__() and return an instance of our own class. We combine this with our initialization code in __init__().
+
+For example, if we wrap "hello" in tstr, then we should be able to access its taint:
+~~~python
+thello = tstr('hello', taint='LOW')
+thello.taint
+~~~
+~~~
+'LOW'
+~~~
+
+By default, when we wrap a string, it is tainted. Hence we also need a way to clear the taint in the string. One way is to simply return a str instance as above. However, one may sometimes wish to remove the taint from an existing instance. This is accomplished with clear_taint(). During clear_taint(), we simply set the taint to None. This method comes with a pair method has_taint() which checks whether a tstr instance is currently origined.
+
+### String Operators  
+To propagate the taint, we have to extend string functions, such as operators. We can do so in one single big step, overloading all string methods and operators.
+~~~python
+(tstr('foo', taint='HIGH') + 'bar').taint
+('foo' + tstr('bar', taint='HIGH')).taint
+
+thello += ', world'
+thello.taint
+(thello * 5).taint
+~~~
+~~~
+'HIGH'
+'HIGH'
+'LOW'
+'LOW'
+~~~
+
+### Tracking Untrusted Input  
+So, what can one do with tainted strings? We reconsider the DB example. We define a "better" TrustedDB which only accepts strings tainted as "TRUSTED".  
+
+~~~python
+class TrustedDB(DB):
+    def sql(self, s):
+        assert isinstance(s, tstr), "Need a tainted string"
+        assert s.taint == 'TRUSTED', "Need a string with trusted taint"
+        return super().sql(s)
+~~~
+
+밑의 예제는 taint가 UNTRUSTED로 표시되었을 경우다. 마찬가지로 결과는 fail일 것이다.  
+
+~~~python
+bad_user_input = tstr('__import__("os").popen("ls").read()', taint='UNTRUSTED')
+with ExpectError():
+    bdb.sql(bad_user_input)
+~~~
+~~~
+Traceback (most recent call last):
+  File "<ipython-input-80-82c5b2d628ed>", line 3, in <module>
+    bdb.sql(bad_user_input)
+  File "<ipython-input-76-53a654b6cc10>", line 4, in sql
+    assert s.taint == 'TRUSTED', "Need a string with trusted taint"
+AssertionError: Need a string with trusted taint (expected)
+~~~
+
+그러므로 untrusted를 trusted로 바꿀 수도 있어야 한다. 이 과정이 바로 sanitization이다. 간단한 sanitization 함수는 특정 조건 하에서 trusted taint로 바꿔주는 역할을 수행할 것이다. 조건에 만족하지 못한다면 걸러야 할 입력값을 empty string으로 만든다. 아래의 예시를 보면 쉽게 이해가 될 것이다.  
+
+~~~python
+def sanitize(user_input):
+    assert isinstance(user_input, tstr)
+    if re.match(
+            r'^select +[-a-zA-Z0-9_, ()]+ from +[-a-zA-Z0-9_, ()]+$', user_input):
+        return tstr(user_input, taint='TRUSTED')
+    else:
+        return tstr('', taint='UNTRUSTED')
+
+good_user_input = tstr("select year,model from inventory", taint='UNTRUSTED')
+sanitized_input = sanitize(good_user_input)
+sanitized_input
+~~~
+~~~
+'select year,model from inventory'
+~~~
+
+~~~python
+sanitized_input.taint
+~~~
+~~~
+'TRUSTED'
+~~~
+
+~~~python
+bdb.sql(sanitized_input)
+~~~
+~~~
+[(1998, 'E350'), (2000, 'Cougar'), (1999, 'Venture')]
+~~~
