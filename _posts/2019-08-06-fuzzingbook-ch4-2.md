@@ -257,6 +257,7 @@ print(s.origin)
 ~~~
 
 몇가지 assertion문을 통해 유출을 방지하는지 여부를 확인할 수 있다.  
+
 ![Center example image](https://user-images.githubusercontent.com/35067611/62553038-9a58b780-b8a9-11e9-9e35-a2f6551a9611.png "Center"){: .center-image}  
 
 ### Taint-Directed Fuzzing  
