@@ -184,3 +184,43 @@ sanitized_input.taint
 ~~~
 
 ### Taint Aware Fuzzing  
+tainting은 위험한 입력을 생성시키는 문법으로 fuzzing을 유도할 수도 있다. 즉, untrusted execution을 야기하는 fuzzer의 생성 입력들을 찾는 것이다. 그러기 위해서는 먼저 tainted value가 위험한 operation에 접근할 때 exception을 일으키도록 정의해야 한다.  
+
+### TaintedDB  
+위에서 my_eval()함수가 가장 위엄한 함수였으므로 TRUSTED가 아닌 경우에는 exception을 일으키도록 내용을 추가해준다. 그리고 fuzzing을 한다. 이렇게 보호를 해줌으로써 우리가 원하는 특정 input에 대해서만 이 함수가 작동하도록 할 수 있다.  
+
+### Preventing Privacy Leaks  
+taints를 통해 정보유출을 막을 수도 있다. 지금까지는 TRUSTED, UNTRUSTED만 taint로 정의했으나, SECRET이라는 taint를 붙여놓는 것이다. 그리고 기밀로 설정된 문자열에 대해서는 반환하지 않는다.  
+~~~python
+def send_back(s):
+    assert not isinstance(s, tstr) and not s.taint == 'SECRET'
+    ...
+~~~
+~~~python
+with ExpectError():
+    send_back(reply)
+~~~
+~~~
+Traceback (most recent call last):
+  File "<ipython-input-103-e02d8e55c3ba>", line 2, in <module>
+    send_back(reply)
+  File "<ipython-input-102-a105f7cd1cab>", line 2, in send_back
+    assert not isinstance(s, tstr) and not s.taint == 'SECRET'
+AssertionError (expected)
+~~~
+
+### Tracking Character Origins  
+하지만 SECRET taint를 가진다 해도 챕터 2-1에서 다루었던 heartbeat() 문제는 여전히 남아있다. 이번엔 정보가 유출되는 문제가 아니라 어떤 reply든 SECRET으로 표시된다는 것이다. 그 이유는 heartbeat()의 구현이 non-secret reply 부터 secret memory까지 하나의 긴 문자열로 이루어져있기 때문에 그렇다. 즉, non-secret부분 조차 whole memory의 부분으로써 SECRET으로 간주되는 것이다. 이를 해결하기 위해서 문자열을 부분적으로 나누어서 taint하면 어떨까?  
+
+~~~python
+thilo = tstr("High", taint='HIGH') + tstr("Low", taint='LOW')
+~~~
+이런 방법도 문제를 근본적으로 해결하지는 못하는데, 뒤의 LOW taint가 무시되고 non-tainted string으로 남기 때문이다.  
+### Tracking Individual Characters  
+대안으로 문자열 뿐만 아니라 모든 문자단위에 taint를 주는 것이다. 그러기 위해서 정보를 표시할 또 다른 bit가 필요한데 이를 origin이라고 하겠다. In this section, we carry character level origins. That is, given a fragment that resulted from a portion of the original origined string, one will be able to tell which portion of the input string the fragment was taken from. In essence, each input character index from a origined source gets its own color.
+
+More complex origining such as bitmap origins are possible where a single character may result from multiple origined character indexes (such as checksum operations on strings). We do not consider these in this chapter.
+
+### A Class for Tracking Character Origins  
+Let us introduce a class ostr which, like tstr, carries a taint for each string, and additionally an origin for each character that indicates its source. It is a consecutive number in a particular range (by default, starting with zero) indicating its position within a specific origin
+
