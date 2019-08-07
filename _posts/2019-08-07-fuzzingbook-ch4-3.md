@@ -18,7 +18,7 @@ Concolic execution으로 execution path가 만나는 constraint들을 모두 수
 이번 장에서는 어떻게 Python function을 어떻게 concolically 실행시키는지, 그리고 concolic execution을 어떻게 fuzzing에 접목시키는지 공부한다.  
 
 ### Tracking Constraints  
-[chapter on information flow](https://sihyungyou.github.io/fuzzingbook-ch4-2/) 에서 어떻게 dynamic taints가 입력으로 인해 닿는 프로그램의 지점들을 이용해서 fuzzing을 유도하는지 배웠다. 하지만 dynamic taint tracking은 그것이 전달할 수 있는 정보에 갇혀있다. 팩토리얼 함수로 예를 들어 보자.  
+[Chapter on information flow](https://sihyungyou.github.io/fuzzingbook-ch4-2/) 에서 어떻게 dynamic taints가 입력으로 인해 닿는 프로그램의 지점들을 이용해서 fuzzing을 유도하는지 배웠다. 하지만 dynamic taint tracking은 그것이 전달할 수 있는 정보에 갇혀있다. 팩토리얼 함수로 예를 들어 보자.  
 
 ~~~python
 def factorial(n):
