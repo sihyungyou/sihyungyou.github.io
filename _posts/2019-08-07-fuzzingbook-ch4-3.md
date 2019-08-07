@@ -40,3 +40,44 @@ def factorial(n):
 path [1, 2, 4, 6, 8, 9, 11, 12]는 커버되었지만 [2, 3], [4, 5], [6, 7] 같은 sub-path들은 그렇지 않은 것을 볼 수 있다. 그림에서 보면 2번 조건에서 True로 갈 수 있는 경우의 input을 생성할 필요가 있는 것이다. 그걸 어떻게 할 수 있을까?  
 
 ### Concolic Execution  
+간단하게 생각해보자. taken path정보를 보고 그 길을 가는 동안 만난 constraint 정보를 모은다. 그리고 non=traversed path로 갈 수 있는 input을 만든다. 예를 들어 위의 그림처럼 특정 branch에서 true 혹은 false (우리가 원하는) 값을 가질 수 있도록 하는 것이다.  
+그러기 위한 한 가지 방법이 symbolic variable을 사용하는 것이다. 이는 input을 나타내고, constraint를 암호화하며 SMT solver를 이용해 constraint의 negation을 푼다. 이런 과정에서 만들어질 input이 어떤 조건에 대해 obey해야 하는지 정의하고 그런 조건들을 만족하는 input을 생성하는 것이다.  
+
+### SMT Solvers  
+constraint를 풀기 위해서 Satisfiability Modulo Theories (SMT) solver를 사용한다. SMT solver는 SATISFIABILITY (SAT) solver를 기반으로 만들어졌다. SAT solver는 boolean formula를 체크하는데 사용된다. 예를 들어 (a | b ) & (~a | ~b) 는 a = true, b = false 일 때 어떤 경우에도 만족한다. SMT solver는 이런 SAT solver를 확장시켜 string, integer theories를 이해하는 solver로 만들어졌다. 예를 들어 h + t == 'hello,world' 라는 constraint의 경우 SMT solver는 h = 'hello,', t = 'world' 라는 답을 내놓을 수 있다는 것이다.  
+
+위의 팩토리얼 함수에서 n을 입력으로 받았다. 이것을 이용해서 SMT solver가 constraint를 어떻게 해결하는지 예시를 보며 이해해보자.  
+~~~python
+zn = z3.Int('n')
+
+zn < 0
+z3.Not(zn < 0)
+z3.solve(z3.Not(zn < 0))
+~~~
+~~~
+n < 0
+Not(n < 0)
+[n = 0]
+~~~
+
+~~~python
+x = z3.Real('x')
+eqn = (2 * x**2 - 11 * x + 5 == 0)
+z3.solve(eqn)
+~~~
+~~~
+[x = 5]
+~~~
+물론 위의 SMT solver의 답은 여러 답 중 하나이다.  
+
+~~~python
+z3.solve(zn < 0)
+~~~
+~~~
+[n = -1]
+~~~
+이렇듯 SMT solver의 답(-1)을 팩토리얼 함수에 적용시켜보면 실제로 더 많은 coverage를 얻는다.  
+zn < 0 뿐만 아니라 다른 uncovered path를 커버하기 위한 여러 constraint에 대해서도 SMT solver에 조건을 넣고 여러 concrete value로 함수를 테스팅해볼 수 있다. concrete value를 사용하면서 동시에 constraint를 저장하기 위해 symbolic shadow variabe를 유지하는 것이다.  
+
+### A Concolic Tracer  
+실제 실행된 프로그램의 symbolic context가 있다고 가정하자. 

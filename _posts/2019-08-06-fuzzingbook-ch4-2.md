@@ -71,7 +71,8 @@ db.sql('select __import__("os").popen("pwd").read() from inventory')
 물론 그 full power를 이용하는 것이 목적이다. 단, 믿을 수 없는 유저나 다른 third party는 그래서느 안된다. 그러므로 믿을 수 있는 input과 그렇지 않은 input을 구분할 수 있어야 한다. 그러기 위해서 취할 수 있는 한 가지 방법은 dynamic taint analysis 이다. 이것은 user input 받아들이는 함수들을 identify 하는 것이다.  
 1. source functions : those accept user input and taint any string that comes in through them  
 2. sink functions : those perform dangerous operations as sinks  
-3. taint sanitizer functions  
+3. taint sanitizer functions : change untrusted to trusted under certain (defined) condition  
+
 source function으로부터 나온 입력들은 절대 sanitization function을 거치지 않고서는 sink function로 갈 수 없다. 이런 방식의 분석은 단순히 crash check 뿐만 아니라 stronger oracle로 테스팅을 할 수 있도록 한다.  
 
 ### Tracking String Taints  
