@@ -78,6 +78,3 @@ z3.solve(zn < 0)
 ~~~
 이렇듯 SMT solver의 답(-1)을 팩토리얼 함수에 적용시켜보면 실제로 더 많은 coverage를 얻는다.  
 zn < 0 뿐만 아니라 다른 uncovered path를 커버하기 위한 여러 constraint에 대해서도 SMT solver에 조건을 넣고 여러 concrete value로 함수를 테스팅해볼 수 있다. concrete value를 사용하면서 동시에 constraint를 저장하기 위해 symbolic shadow variabe를 유지하는 것이다.  
-
-### A Concolic Tracer  
-실제 실행된 프로그램의 symbolic context가 있다고 가정하자. 
