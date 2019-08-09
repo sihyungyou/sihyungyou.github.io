@@ -48,7 +48,7 @@ def factorial(n):
 path [1, 2, 4, 6, 8, 9, 11, 12]는 커버되었지만 [2, 3], [4, 5], [6, 7] 같은 sub-path들은 그렇지 않은 것을 볼 수 있다. 그림에서 보면 2번 조건에서 True로 갈 수 있는 경우의 input을 생성할 필요가 있는 것이다. 그걸 어떻게 할 수 있을까?  
 
 ### Concolic Execution  
-간단하게 생각해보자. taken path정보를 보고 그 길을 가는 동안 만난 constraint 정보를 모은다. 그리고 non=traversed path로 갈 수 있는 input을 만든다. 예를 들어 위의 그림처럼 특정 branch에서 true 혹은 false (우리가 원하는) 값을 가질 수 있도록 하는 것이다.  
+간단하게 생각해보자. taken path정보를 보고 그 길을 가는 동안 만난 constraint 정보를 모은다. 그리고 non-traversed path로 갈 수 있는 input을 만든다. 예를 들어 위의 그림처럼 특정 branch에서 true 혹은 false (우리가 원하는) 값을 가질 수 있도록 하는 것이다.  
 그러기 위한 한 가지 방법이 symbolic variable을 사용하는 것이다. 이는 input을 나타내고, constraint를 암호화하며 SMT solver를 이용해 constraint의 negation을 푼다. 이런 과정에서 만들어질 input이 어떤 조건에 대해 obey해야 하는지 정의하고 그런 조건들을 만족하는 input을 생성하는 것이다.  
 
 ### SMT Solvers  
