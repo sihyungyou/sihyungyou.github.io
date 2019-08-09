@@ -7,6 +7,14 @@ comments: true
 
 > Concolic Fuzzing  
 
+Concolic(CONCrete + SymbOLIC) : symbolic한 실행과 concrete 실행을 함께 사용하는 기술. 주어진 소스코드를 기반으로 높은 커버리지를 달성하는 테스트 케이스를 자동으로 생성하는 테스팅 기법이다. 그렇다면 concrete, symbolic execution은 각각 무엇을 의미할까?  
+
+- Concrete execution 
+실제 값을 대입해 프로그램을 실행 -> 일상적으로 프로그램을 실행하는 것. 구체적인 입력 값이 있음  
+
+- Symbolic  execution
+프로그램 변수가 특정한 값을 가지지 않고 x, y, z와 같은 미지수(symbol)로 프로그램을 실행 -> symbolic 한 결과를 가지고 concrete 한 입력값을 생성함  
+
 이전 장에서 단순히 program crash에만 의존하는 것이 아닌 dynamic taint를 통해 더 좋은(intelligent) 테스트 케이스를 만들어 내는 과정을 보았다. 또한, taint를 이용해 어떻게 문법을 업데이트하고 위험한 함수(method)에 더 집중할 수 있는지도 공부했다.  
 
 이렇듯 taint는 유용하지만 uninterpreted string은 노출될 수 있는 여러 위험요소 중 하나일 뿐이다. 함수가 정확한 길이의 buffer를 항상 인자로 전달받는 것을 확신할 수도 없다. Concolic execution은 이런 문제를 해결해준다.  
