@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Network : Intro"
+title: "Network : Intro 01"
 tags: [한동대, 공부]
 comments: true
 ---
@@ -30,4 +30,13 @@ packet을 전달한다. 스위치는 생소할 수 있는데, N명이 있고 그
 
 `Internetwork (internet)`  
 network of networks : 독립적인 각각의 네트워크들을 연결시킨 것  
-그러나 여러 네트워크들을 단순히 선으로 연결만 시킨다고 통신이 되는 것은 아니다. 각 네트워크들이 쓰는 방법들이 모두 다를 수 있기 때문이다. 이 때 필요한 것이 Router 혹은 Gateway 이다. 또한 인터넷에 대한 표준을 정의해야 한다. 그것을 Protocol이라고 하는데 수 많은 프로토콜이 있고 가장 대표적으로 TCP/IP가 있다. 
+그러나 여러 네트워크들을 단순히 선으로 연결만 시킨다고 통신이 되는 것은 아니다. 각 네트워크들이 쓰는 방법들이 모두 다를 수 있기 때문이다. 이 때 필요한 것이 Router 혹은 Gateway 이다. 또한 인터넷에 대한 표준을 정의해야 한다. 그것을 Protocol이라고 하는데 수 많은 프로토콜이 있고 가장 대표적으로 TCP/IP가 있다. IP는 전쟁에서 길이 하나라도 있을 때 망끼리 통신할 수 있도록 하기 위한 배경에서 나온 임의의 네트워크를 연결하는 프로토콜이다.  
+
+### The Internet Cannot Support Guaranted Service  
+인터넷은 보장된 서비스를 지원하지 않는다. 보장된 서비스란 두 가지 측면에서 이해할 수 있는데 첫째 delay(time) 이다. packet을 보내면 언제 도착한다는 보장이 없다. 어떨 때는 delay가 있고, 어떨 때는 없다. 이 두 경우가 계속해서 interaction 한다는 것이 문제다! 두번째 측면은 bandwidth(throughput) 즉, 초당 data 전송량을 보장할 수 없다. 여기서 unreliable(data lost가 있을 수 있음), relialbe(connection이 끊어지지 않는 이상 safe. data lost의 경우 TCP 스스로 recover함)로 나뉘는데 TCP와 UDP를 예를들어 설명하도록 한다.  
+
+IP외에 또 다른 유명한 프로토콜로는 TCP와 UDP가 있다. 둘의 차이점은 UDP의 경우 편지를 부친다고 생각하면 된다. 즉 상대방과의 연결을 요구하지 않고 (connectionless unreliable) 일방적으로 붙인다. 반면 TCP는 정보를 보내기 전에 사전초지가 필요하다. 즉, 상대방과 연결되어있음을 확인한 후에(connection-oriented reliable) 정보를 주고받는 전화통화 같은 과정이라고 이해하면 된다.  
+
+### What is a protocol?  
+A protocol is the set of rules and procedures to which the information exchange between two or more entities should adhere.  
+말이 어렵지만 한 마디로 네트워크끼리 연결될 때 지켜져야 할 약속과 절차의 집합이라고 생각하면 되겠다. TCP에서 유명한 three way handshake라는 말이 있는데 처음에 connection을 만들 때 packet 세 개가 왔다갔다 해야 한다는 뜻이다. request, acknowledge, request back이 그 세 가지이다.  
