@@ -5,7 +5,7 @@ tags: [한동대, 공부]
 comments: true
 ---
 
-> 1.1 What is the Internet? ~ 1.2 Network edge 
+> 1.1 What is the Internet?, 1.2 Network edge 
 
 ### What are networks?  
 the interconnection of a set of devices capable to carry information  
