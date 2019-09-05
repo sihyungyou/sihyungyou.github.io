@@ -38,7 +38,7 @@ Circuit Switching의 장점은 delay가 거의 없다는 점이다. 물론 아�
 TDM은 digital multiplexing technique으로써 천천히 오는 것들을 시간을 기준으로 나누어 빠르게 보낸다.  
 ![Center example image](https://user-images.githubusercontent.com/35067611/64088163-28c23b00-cd7b-11e9-8f0a-2ecdc2f4ecb2.png "Center"){: .center-image}  
 
-위 그림과 같이 들어오는 신호들의 각각 일부를 읽어서 전달하고 후에는 demux 한다. 이렇게 전달해도 data lost는 발생하지 않는다.  
+위 그림과 같이 들어오는 신호들의 각각 일부를 읽어서 전달하고 후에는 demux 한다. 이렇게 전달해도 data loss는 발생하지 않는다.  
 
 ### Circuit Switching advantages and disadvantages  
 장점  
@@ -49,3 +49,15 @@ TDM은 digital multiplexing technique으로써 천천히 오는 것들을 시간
 - circuit establishment delay : call setup 시간이 필요하다.  
 
 ### Packet Switching  
+Packet Switching은 Circuit Switching 방식과 다르게 resource를 공유한다. 단, 동시에 여러 패킷이 하나의 link를 공유하는 개념이 아니라 시간에 따라 패킷들이 각각 link를 타고 전달되는 것이다. 즉 각 패킷은 full link bandwith를 사용한다. 예를 들어 고속도로가 있고 한 번에 차 한 대가 지나간다고 생각하면 된다. 수 많은 차들이 고속도로라는 자원은 공유하지만 동시에 사용하지는 않는다.  
+
+이런 메커니즘의 약점은 congestion이다. router가 handle할 수 있는 양보다 더 많은 패킷 오면 다 보내지 못하므로 output buffer(혹은 queue)에 담아둔다. 이 때 이미 delay가 발생한다. 더하여 output buffer마저 꽉 차버리면 그 뒤에 도착하는 패킷들은 손실된다. 이 문제를 해결하기 위해서 bandwidth를 높이고, output buffer도 더 크게 잡아두면 되지 않겠냐고 하지만 근본적으로 문제를 해결하지는 못한다. 지금으로써는 결국 처리할 수 있는 것 보다 많은 양을 보내면 1) congestion이 일어났다는 것을 recognize시키고, 2) 적게 보내라고 하는 방법 뿐이다.  
+
+- routing : determines source destination route taken by packets (routing algorithms)  
+- forwarding : move packets from router's input to appropriate router output  
+Packet Switching은 router를 거치면서 가는 path를 routing table (forwarding table)을 보고 판단한다. 이 look-up table이 작을수록 waiting time(processing time)이 줄어든다.  
+
+### Statistical Multiplexing  
+Packet Switching 또한 하나의 resource를 여러 패킷이 사용하기 때문에 multiplexing이 필요하다. 이 스케줄링은 on demand basis다. Packet Switching에서는 패킷들이 들어오는 sequence의 패턴 정해져있지 않기 때문에 통계학적으로 계산하여 스케줄링 하는데 이것이 queueing theory이다. (도착하는 packet traffic에서 우선순위를 정해 link를 배정하는 것도 물론 가능하다)  
+
+### Packet Switching advantages and disadvantages  
