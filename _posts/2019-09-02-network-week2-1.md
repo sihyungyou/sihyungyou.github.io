@@ -47,3 +47,5 @@ TDM은 digital multiplexing technique으로써 천천히 오는 것들을 시간
 단점  
 - inefficient use of resources : channel capacity is dedicated even if no data is being transferred. 즉, constant bit rate으로 계속 data를 전송하면 효율이 100%겠지만 bursty한 transmit이라면 비효율적일 것이다.  
 - circuit establishment delay : call setup 시간이 필요하다.  
+
+### Packet Switching  
