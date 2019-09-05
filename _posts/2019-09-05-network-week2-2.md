@@ -21,3 +21,9 @@ Packet Switching과 Circuit Switching의 특성을 섞어놓은 듯한 방식이
 Connection setup에는 signaling protocol이 사용되는데 이것 없이 장기적(일정시간)으로 쓸 bandwidth를 만들어달라고 전화국(?)에 요청하면 manually 만들어주기도 한다. 이를 PVC(permanent VC)라고 한다.  
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/64340709-c3dc3e80-d021-11e9-85a8-cab5cbb9f0e7.png "Center"){: .center-image}  
+
+Virtual Circuit Networks의 구조. 각 data header에 있는 VCI는 가변적이다. 이렇게 변하는 이유는 small look-up table을 유지하기 위함이다. (fast packet switching) 물론 이런 노력이 하드웨어딴에서 searching 하는 방식으로 매우 빨라진 요즘은 무색해지고 있다.  
+
+Virtual Circuit Networks의 장점은 possibility to support QoS이다. Resource가 call setup 동안 할당되기 때문이다. 또한 패킷의 경로가 모두 table에 의해 정해져있으므로 In-order packet delivery가 가능하다.  
+
+단점으로는 당연히 call setup procedure가 필요하다는 것이다. 또한 State-info를 저장하고 있는 stateful 방식이라는 점이다.  
