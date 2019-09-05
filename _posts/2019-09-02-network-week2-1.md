@@ -61,3 +61,9 @@ Packet Switching은 router를 거치면서 가는 path를 routing table (forward
 Packet Switching 또한 하나의 resource를 여러 패킷이 사용하기 때문에 multiplexing이 필요하다. 이 스케줄링은 on demand basis다. Packet Switching에서는 패킷들이 들어오는 sequence의 패턴 정해져있지 않기 때문에 통계학적으로 계산하여 스케줄링 하는데 이것이 queueing theory이다. (도착하는 packet traffic에서 우선순위를 정해 link를 배정하는 것도 물론 가능하다)  
 
 ### Packet Switching advantages and disadvantages  
+장점  
+- efficient for bursty data  
+
+단점  
+- not guarantee quality of service : variable packet delay and loss  
+- congestion control  
