@@ -12,8 +12,8 @@ comments: true
 
 ### Four sources of Packet delay  
 #### Processing delay  
-- checking bit errors : 에러가 발생하는지 체크한다.  
-- determine output link : forwarding table에서 찾아서 결정한다.  
+checking bit errors : 에러가 발생하는지 체크한다.  
+determine output link : forwarding table에서 찾아서 결정한다.  
 위의 두 경우는 전자는 H/W에서, 후자는 small table안에서 이루어지기 때문에 무시해도 될 정도로 빠르다.  
 
 #### Queueing delay  
