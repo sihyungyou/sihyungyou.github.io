@@ -21,3 +21,8 @@ Waiting time in a queue for transmission.
 Queueing delay는 variation이 매우 크다. 이는 router의 congestion level에 따라 달라지기 때문이다. 이러한 delay variation을 "jitter"라고 한다.  
 Output buffer (queue)의 딜레마는 버퍼의 사이즈가 너무 작으면 data loss가 커지고 그렇다고 너무 크면 delay가 높아지기 때문에 적절한 size를 찾는 것이다.  
 
+#### Transmission delay  
+Packet을 전송할 때 걸리는 시간으로 보통 R = link bandwidth(bps), L = packet length(bits) 라고 할 때 transmission delay는 L/R이다.  
+
+#### Propagation delay  
+bit이 source로부터 destination까지 전달되는 데에 걸리는 시간으로 d = length of physical link (실제 물리적 거리), s = propagation speed in medium (보통 자유 공간에서 빛의 속도이지만 광섬유 같은 매체를 통해서 가는 속도) 라고 할 때 propagation delay는 d/s이다.  
