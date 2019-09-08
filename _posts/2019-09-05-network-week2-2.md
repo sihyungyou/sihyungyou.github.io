@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Network : Intro 03"
-tags: [한동대, 공부]
+tags: [한동대, 공부, 네트워크]
 comments: true
 ---
 
