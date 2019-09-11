@@ -33,4 +33,8 @@ indication : an entity is to be informed about an event
 response : an entity wants to respond to an event  
 confirm : the response to an earlier request has come back  
 
-위의 타입들을 실제로 사용할 때 PD-DATA.request, PD-DATA.confirm, .. 이런식으로 쓴다. 이 때 PD-DATA라는 service에 대해서 request, confirm 등을 하겠다는 의미이다. 
+위의 타입들을 실제로 사용할 때 PD-DATA.request, PD-DATA.confirm, .. 이런식으로 쓴다. 이 때 PD-DATA라는 service에 대해서 request, confirm 등을 하겠다는 의미이다.  
+
+### OSI reference Model  
+International Standards Organization(ISO)에서 만든 reference model로써 seven layer 구조이다.  
+![Center example image](https://user-images.githubusercontent.com/35067611/64670975-ecd95500-d4a1-11e9-888c-0141383fbbab.png "Center"){: .center-image}  
