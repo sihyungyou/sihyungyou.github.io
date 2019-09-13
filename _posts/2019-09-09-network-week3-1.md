@@ -39,10 +39,10 @@ Confirm : the response to an earlier request has come back
 International Standards Organization(ISO)에서 만든 reference model로써 seven layer 구조이다.  
 ![Center example image](https://user-images.githubusercontent.com/35067611/64670975-ecd95500-d4a1-11e9-888c-0141383fbbab.png "Center"){: .center-image}  
 
-Pysical layer : responsible for movements of individual bits from one hop(node) to the next  
-Data link layer : reponsible for moving frames(link layer의 PDU) from one hop(node) to the next  
-Network layer : responsible for the delivery of individual packets from the source host(컴퓨터) to the destination host  
-Transport layer : responsible for the delivery of a message from one process(컴퓨터 안에 여러 프로세스) to another  
-Session layer : responsible for dialog control(서로 언제 보내고, 받는지) and synchronization(file이 너무 크거나 길면 전송 중에 down되는 경우 있음. 이럴 때 중간부터 이어받는 mark point를 두고 일종의 동기화를 하는 것)  
-Presentation layer : responsible for translation, compression, and encryption  
-Application layer : responsible for providing services to the user  
+1. Pysical layer : responsible for movements of individual bits from one hop(node) to the next  
+2. Data link layer : reponsible for moving frames(link layer의 PDU) from one hop(node) to the next  
+3. Network layer : responsible for the delivery of individual packets from the source host(컴퓨터) to the destination host  
+4. Transport layer : responsible for the delivery of a message from one process(컴퓨터 안에 여러 프로세스) to another  
+5. Session layer : responsible for dialog control(서로 언제 보내고, 받는지) and synchronization(file이 너무 크거나 길면 전송 중에 down되는 경우 있음. 이럴 때 중간부터 이어받는 mark point를 두고 일종의 동기화를 하는 것)  
+6. Presentation layer : responsible for translation, compression, and encryption  
+7. Application layer : responsible for providing services to the user  
