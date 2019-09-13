@@ -61,7 +61,7 @@ prop delay per hop : 1 ms
 
 ### Real Internet Delays  
 linux 명령어 중 traceroute 라는 것이 있다. 이는 유저가 주는 destination 까지의 delay를 계산하여 로그를 찍어준다.  
-이것이 작동하는 방식은 TTL(time to live, 생명이 남은 시간)을 초기에 설정한 후 router를 지날 떄 마다 1씩 감소시키고 만약 destination에 도착하지 못했는데 TTL = 0 이면 그 path에는 문제가 있으므로 source에게 notice하고, packet을 버리는 방식이다. 이런 방식을 이용해 router 갯수를 고려한 TTL이 설정된 probe를 보내 source에게 도착했다고 notice되는 데 까지 걸리는 시간을 delay로 간주하여 계산하는 것이다.  
+이것이 작동하는 방식은 TTL(time to live, 생명이 남은 시간)을 초기에 설정한 후 router를 지날 떄 마다 1씩 감소시키고 만약 destination에 도착하지 못했는데 TTL = 0 이면 그 path에는 문제가 있으므로 source에게 notice하고, packet을 버리는 방식이다. 이런 방식을 이용해 router 갯수를 고려한 TTL이 설정된 probe를 보내 source에게 도착했다고 notice되는 데 까지 걸리는 시간을 delay로 간주하여 계산하는 것이다. destination router에 패킷이 도착하면 router name, address를 기록한 메세지를 source host에게 다시 보내고 그것을 출력한 로그를 확인할 수 있다.  
 ![Center example image](https://user-images.githubusercontent.com/35067611/64606982-818c7600-d402-11e9-8978-cff1e36bfc62.png "Center"){: .center-image}  
 
 ### Throughput  
