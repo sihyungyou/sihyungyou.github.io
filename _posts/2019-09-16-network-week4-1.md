@@ -111,8 +111,8 @@ TCP (Transmission Control Protocol)
 - Connection-oriented : client-server process 사이에 full-duplex connection을 셋업한다.  
 
 UDP (User Datagram Protocol)  
-최선을 다하지만 error가 나면 나는거지 (??????????)  
-Unreliable data transfer, no flow control, no congestion control, no timing, no bandwidth guarantee, no connection setup  
+- 최선을 다하지만 error가 나면 나는거지 (??????????)  
+- Unreliable data transfer, no flow control, no congestion control, no timing, no bandwidth guarantee, no connection setup  
 
 날로 먹는 것 같지만 UDP가 필요할 때도 있다.  
 
