@@ -72,3 +72,55 @@ Well-known port number : 유명한 service를 제공하는 port는 컨벤션으�
 하나의 socket에 하나의 port number가 assign되어있다. 
 IP address의 header에 transport protocol이 기록되어있다. 그것을 가지고 TCP/UDP 등 protocol을 결정하여 정보를 보낸다. 만약 TCP를 선택했다고 하면 TCP를 쓰는 여러 process가 있을 것이다. 그 여러 process 중 port number로 하나를 결정하여 socket을 통해 데이터를 전달한다. 위와 같은 결정요인들을 demultiplexing key라고 한다 (port #, ip address, transport protocol ..) "분산"시킬 때 어디로 보낼지 결정하기에 demux key 이며 encapsulation 할 때 header에 추가된다.  
 
+### App-layer protocol  
+application protocol은 단순하다. 예를 들어 HTTP도 매우 단순하다. 하지만 header 쪽의 정보가 어마어마하게 복잡하다.  
+
+Types of messages exchanged : 1) request, 2) response 교환되는 메세지의 타입은 딱 두 가지뿐이다.  
+
+Syntax of message : 데이터의 각 bit 자리들은 특정한 field로 나누어져 있다. 어떤 field들이 있고, 어떻게 
+describe/delinate 되는지 나타낸 것이 syntax다.  
+
+Semantics of the fields : 위에서 말한 field들이 특정 값을 가질 떄 무엇을 의미하는지에 대한 정보  
+
+Rules for when/how processes send & response to messages  
+
+### Transport service that App needs  
+1. Data integrity (무결성, error X!)  
+어떤 application은 data integrity (100% reliable data transfer)를 요구하지만 어느정도의 data loss를 tolerate하는 application도 있을 수 있다. 예를 들어 file transfer, email 등은 데이터가 사라지면 안 될 것이다. 반면 real-time audio/video, stored autio/video 등 사람이 데이터를 직접 받는 application의 경우 loss-tolerant 하다.  
+
+2. Throughput (bandwidth)  
+"effective"하기 위해 요구하는 최소한의 bandwidth가 있는 application과 탄성적으로 (elastic) 이용 가능한 bandwidth가 있으면 최대로 이용해도 괜찮은 application이 있다. 위에서 언급한 file transfer, e-mail의 경우 빠른 throughput을 요하지는 않는다. 데이터가 잘 전송되기만 하면 된다. 반대로 real-time service는 그렇지 않다.  
+
+3. Timing (delay)  
+어느 application든 delay가 적기를 원하지만 사실 internet에서 delay 통제는 거의 불가하다 (시간은 이미 지나갔다..)  
+
+4. Security  
+
+위의 것들을 transport service 해주지 않으면 application 레벨에서 자기가 알아서 갖춰야 한다!  
+
+### Internet Transport Protocols Services  
+TCP (Transmission Control Protocol)  
+- Reliable transport between sending/receiving process : TCP로 보낸 정보는 error 없다! 물론 error가 너무 많은 data라면 연결 자체가 끊어질 수는 있다.  
+
+- Flow control : sender won't overwhelm "receiver"! 받는 사람의 남은 buffer size notice해주어 그 이상 보내지 않는다.  
+
+- Congestion control : network에서 제어 가능한 양보다 많은 traffic이 congestion이다. network overloaded 상황에서 "sender"를 throttle(kill?) 한다.  
+
+- doesn't provide timing, minimum bandwidth guarantees : 이 서비스들은 IP에서 한다. IP에서 보장 해주지 않으면 답이 없다.  
+
+- Connection-oriented : client-server process 사이에 full-duplex connection을 셋업한다.  
+
+UDP (User Datagram Protocol)  
+최선을 다하지만 error가 나면 나는거지 (??????????)  
+Unreliable data transfer, no flow control, no congestion control, no timing, no bandwidth guarantee, no connection setup  
+
+날로 먹는 것 같지만 UDP가 필요할 때도 있다.  
+
+### Securint TCP  
+네트워크 초기에는 모두가 선하다고 생각하여 security 문제가 크게 이슈가 아니었다.  
+
+초기 보안은 SSL(Secure Socket Layer) 라고 불렸다. 이는 TCP layer와 APP layer 사이에 위치하며 표준화되면서 이름이 TLS(Transport Layer Security)로 바뀌었다. OSI 7 layer 기준으로 보자면 presentation layer에 속할 것이다.  
+
+TLS는 encrypted TCP coneection을 제공한다 : data/message confidentiality, message authentication  
+
+UDP를 위한 security layer는 DTLS(Datagram TLS)라고 불리며 더 복잡하다.  
