@@ -116,7 +116,7 @@ UDP (User Datagram Protocol)
 
 날로 먹는 것 같지만 UDP가 필요할 때도 있다.  
 
-### Securint TCP  
+### Securing TCP  
 네트워크 초기에는 모두가 선하다고 생각하여 security 문제가 크게 이슈가 아니었다.  
 
 초기 보안은 SSL(Secure Socket Layer) 라고 불렸다. 이는 TCP layer와 APP layer 사이에 위치하며 표준화되면서 이름이 TLS(Transport Layer Security)로 바뀌었다. OSI 7 layer 기준으로 보자면 presentation layer에 속할 것이다.  
