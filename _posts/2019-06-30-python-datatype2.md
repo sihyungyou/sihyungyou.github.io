@@ -46,8 +46,8 @@ dict.clear() : 모두 지우기
 dict.get(key) == dict[key] : 해당 key의 value return  
 
 ### Set  
-* 중복을 허용하지 않는다.  
-* 순서가 없다.  
+- 중복을 허용하지 않는다.  
+- 순서가 없다.  
 
 유용한 함수들  
 s1 & s2 or s1.intersection(s2) : 교집합  
