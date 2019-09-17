@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "파이썬 시작하기 - 자료형2"
+title: "파이썬 : 자료형2"
 tags: [파이썬, 언어, 공부]
 comments: true
 ---
