@@ -55,7 +55,7 @@ White-Box Testing은 implementation에 대해 테스팅하는 개념이다. 구�
 - Statement coverage : each statement in the code must be executed by at least one test input.  
 - Branch coverage : each branch in the code must be taken by at least one test input. (This translates to each if and while decision once being true, and once being false.)  
 
-White-Box Testing의 장점은 implemented behavior에서 에러를 찾을 수 있다는 것이다. 또한 test case가 specification에 대한 충분한 디테일이 주어지지 않았더라도 시행될 수 있다.
+White-Box Testing의 장점은 implemented behavior에서 에러를 찾을 수 있다는 것이다. 또한 test case가 specification에 대한 충분한 디테일이 주어지지 않았더라도 시행될 수 있다. 다만 non-implemented behavior에 대해서는 놓칠 수 있다. 예를 들어 몇몇 specified functionality가 빠졌다면 white-box testing은 그것에 대한 에러를 검출해내지 못할 것이다.  
 
 ### Tracing Executions  
 White-box testing의 장점중 하나는 프로그램의 어떤 부분이 cover 되었는지 자동적으로 판단할 수 있다는 것이다. 이를 위해서는 각 executed/not executed codes의 정보를 프로그래머에게 전달해줘야 한다. 그 정보를 모으는 것이 tracing이라고 할 수 있다. 테스트 하려는 함수이름을 주면 몇 번째 line에서 실행되었는지 반환하거나, 프로그램의 입력값에 대해 그것을 처리하기 위해서 어떤 함수들이 실행되었는지 line no를 반환하기도 한다. 적절하게 tracing 함수를 adjust 함으로써 coverage 끼리 비교하는 것도 가능하다. 예를 들면 두 다른 문자열에 대해 coverage를 기록하고 차집합을 출력하면 한 문자열에서만 실행된 코드 라인을 알아낼 수 있다. 혹은 모든 경우에 대해 기록한 coverage에서 특정 문자열의 coverage를 빼면 실행되지 않은 함수를 알아낼 수도 있다.  
@@ -99,6 +99,28 @@ class Coverage(object):
 ~~~
 
 코드 자체는 어렵지 않은 알고리즘이다. Coverage 클래스는 실행된 코드에 대해서 line number, function name 모두를 기록한다.  
+
+### Coverage of Basic Fuzzing  
+~~~python
+sample = fuzzer()
+
+with Coverage() as cov_fuzz:
+    try:
+        cgi_decode(sample)
+    except:
+        pass
+cov_fuzz.coverage()
+~~~
+~~~python
+cov_max.coverage() - cov_fuzz.coverage()
+~~~
+~~~
+{('cgi_decode', 20),
+ ('cgi_decode', 25),
+ ('cgi_decode', 26),
+ ('cgi_decode', 32)}
+ ~~~
+위의 예에서는 sample input을 fuzzer로 만들고, 생성된 입력문자열에 대해 coverage를 알아본다. 이 때, 아직 fuzzer가 완전 랜덤한 문들의 조합이기 때문에 값의 오류 exception은 pass하도록 처리해준다. 여기서 주목할 점은 coverage line no 정보를 set의 차집합 연산처럼 사용하여 아직 커버되지 않은 line을 알아낼 수 있다는 점이다. 이런 응용을 통해 두 다른 test case에 대해서 한 쪽에서만 커버된 정보를 알 수 있기도 하다.  
 
 ### Finding Errors with Basic Fuzzing  
 위의 tracing 과정에서 fuzzing의 개념을 추가하면 random, massive한 입력값에 대해 coverage를 기록하면서 버그를 검출하는 것으로 개념을 확장시킬 수 있다. 예를 들면 문자열의 끝에 %가 오는 경우는 뒤에 두 자릿수 숫자 대신 널 문자가 자리한다. digit high, low를 검사하는데 문자열의 범위를 벗어난 memory를 접근하게 되는 것이다. 이와 같이 fuzzing을 통해 error finding의 가능성을 높일 수 있다.  
