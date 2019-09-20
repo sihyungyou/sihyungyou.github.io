@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fuzzingbook Exercises CH 1-1"
+title: "Fuzzingbook Exercises CH 2-1"
 tags: [Software Testing, Fuzzing, 공부, 한동대, 공프기]
 comments: true
 ---
@@ -80,3 +80,15 @@ for i in range(trials):
     random_fuzzer.run(troff_runner)
 ~~~
 들어올 각각의 input 마다 어떤 종류의 failure 인지 count하기 위해 변수를 선언한다. 그리고 위에서 정의한 함수들을 각 input에 대해 실행시켜보고 에러가 검출돌 경우 counting variable를 올린다.  
+
+### Exercise 3: Run Real Troff  
+Using `BinaryProgramRunner`, apply the fuzzer you configured on the real `troff` program.  Check if you can 
+produce any run whose output code is non-zero, indicating a failure or a crash.  
+
+~~~python
+real_troff_runner = BinaryProgramRunner("troff")
+for i in range(100):
+    result, outcome = random_fuzzer.run(real_troff_runner)
+    if outcome == Runner.FAIL:
+        print(result)
+~~~
