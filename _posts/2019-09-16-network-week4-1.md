@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Network : Ch2-1"
+title: "Network : CH 2-1"
 tags: [한동대, 공부, 네트워크]
 comments: true
 ---
