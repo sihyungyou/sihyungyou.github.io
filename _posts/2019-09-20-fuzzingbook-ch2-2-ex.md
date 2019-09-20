@@ -32,12 +32,10 @@ c == '%'의 경우 단순히 현재 가리키는 문자 뿐만 아니라 앞으�
 ### Exercise 2 - Part 1: Compute branch coverage  
 Define a function `branch_coverage()` that takes a trace and returns the set of pairs of subsequent lines in a trace – in the above example, this would be  
 
-```python
+~~~python
 set(
 (('cgi_decode', 9), ('cgi_decode', 10)),
 (('cgi_decode', 10), ('cgi_decode', 11)),
 # more_pairs
 )
-```
-
-Bonus for advanced Python programmers: Define `BranchCoverage` as a subclass of `Coverage` and make `branch_coverage()` as above a `coverage()` method of `BranchCoverage`.
+~~~

@@ -30,8 +30,8 @@ one connection, multiple objects 이다. 위의 non-persistent HTTP와는 다르
 
 Persistent HTTP 방식에는 pipelining이라는 기술을 사용하기도 하는데, 이는 응답이 올 때 까지 기다리지 않고 request 전송이 끝났으면 바로 다음 request를 계속해서 보내는 것이다. 물론 효율이 더 좋아 HTTP/1.1 에서는 default이지만 거의 쓰지 않는다. 그 이유는 매우 복잡하고 request는 계속해서 연속적으로 보내지만 response를 보낼 때는 하나가 늦어지면 그 뒤의 정보가 준비되어있어도 늦어지는 문제가 있다. pipelining을 사용하지 않으면 RTT(round-trip time)당 한 object response를 받고 request를 한다.  
 
-
 ![Center example image](https://user-images.githubusercontent.com/35067611/65246627-edb95900-db29-11e9-8c6c-4e47760124c3.png "Center"){: .center-image}  
+
 ### HTTP Request Message  
 HTTP Request Message는 ASCII로 human-readable format이다. 아래는 예시 사진이다.  
 ![Center example image](https://user-images.githubusercontent.com/35067611/65246627-edb95900-db29-11e9-8c6c-4e47760124c3.png "Center"){: .center-image}  
