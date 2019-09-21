@@ -43,9 +43,12 @@ SOLVED
 ~~~
 
 maze string의 각 문자는 tile이고 그 의미는 다음과 같다.  
-- If the current tile is "benign" (), the tile-function corresponding to the next input character (D, U, L, R) is called. Unexpected input characters are ignored. If no more input characters are left, it returns "VALID" and the current maze state.  
-- If the current tile is a "trap" (+,|,-), it returns "INVALID" and the current maze state.  
-- If the current tile is the "target" (#), it returns "SOLVED" and the current maze state.  
+
+"benign" () : the tile-function corresponding to the next input character (D, U, L, R) is called. Unexpected input characters are ignored. If no more input characters are left, it returns "VALID" and the current maze state.  
+
+"trap" (+,|,-) : it returns "INVALID" and the current maze state.  
+
+"target" (#) : it returns "SOLVED" and the current maze state.  
 
 ### 접근  
 아직 fuzzing과 미로가 무슨관련인가 싶다. 그 접근을 천천히 살펴보자. DictMutator class는 문자열을 주어진 dictionary에서 keyword를 뽑아 삽입하는 방식으로 mutate하는 class다. 미로를 fuzz 하기 위해서 이 클래스를 keyword를 seed의 끝에 append하고 seed의 마지막 문자를 삭제하는 방식으로 확장시킨다.  
