@@ -39,3 +39,31 @@ set(
 # more_pairs
 )
 ~~~
+
+~~~
+1. create empty set of string pair  
+2. check from the top to bottom of trace and compare line number  
+3. if i, i+1 trace info have subsequent line numbers, add to set  
+4. return the set  
+~~~
+my first pseudo code (python이 익숙치 않아서..): subsequent가 consecutive line number 인 것으로 착각했다.
+
+~~~python
+def branch_coverage(trace):
+    coverage = set()
+    past_line = None
+    for line in trace:
+        if past_line is not None:
+            coverage.add((past_line, line))
+        past_line = line
+
+    return coverage
+~~~
+Solution : 알고보니 그냥 input trace 모두에 대해서 두 line information을 subsequent pair로 묶어서 return 하는 것이었다..!  
+
+#### Part 2: Comparing statement coverage and branch coverage  
+Use `branch_coverage()` to repeat the experiments in this chapter with branch coverage rather than statement coverage.  Do the manually written test cases cover all branches?  
+
+
+#### Part 3: Average coverage  
+Again, repeat the above experiments with branch coverage.  Does `fuzzer()` cover all branches, and if so, how many tests does it take on average?  
