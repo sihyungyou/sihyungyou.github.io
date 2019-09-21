@@ -62,7 +62,7 @@ def branch_coverage(trace):
 ~~~
 Solution : 알고보니 그냥 input trace 모두에 대해서 두 line information을 subsequent pair로 묶어서 return 하는 것이었다..!  
 
-#### Part 2: Comparing statement coverage and branch coverage  
+### Part 2: Comparing statement coverage and branch coverage  
 Use `branch_coverage()` to repeat the experiments in this chapter with branch coverage rather than statement coverage.  Do the manually written test cases cover all branches?  
 
 

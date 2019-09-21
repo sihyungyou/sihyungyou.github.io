@@ -10,7 +10,7 @@ comments: true
 ### Exercise 2: Fuzzing bc with Mutations  
 Apply the above mutation-based fuzzing technique on `bc`, as in the chapter ["Introduction to Fuzzing"](Fuzzer.ipynb).  
 
-#### Part 1: Non-Guided Mutations  
+### Part 1: Non-Guided Mutations  
 Start with non-guided mutations.  How many of the inputs are valid?  
 ~~~python
 from Fuzzer import ProgramRunner
