@@ -40,6 +40,7 @@ set(
 )
 ~~~
 
+처음 접근 (파이썬 코드가 익숙치 않아서 pseudo code로...)  
 ~~~
 1. create empty set of string pair  
 2. check from the top to bottom of trace and compare line number  
@@ -64,6 +65,13 @@ Solution : 알고보니 그냥 input trace 모두에 대해서 두 line informat
 #### Part 2: Comparing statement coverage and branch coverage  
 Use `branch_coverage()` to repeat the experiments in this chapter with branch coverage rather than statement coverage.  Do the manually written test cases cover all branches?  
 
+
+~~~python
+with BranchCoverage() as cov:
+    cgi_decode("a+b")
+~~~
+
+no it doesn't cover all branches  
 
 #### Part 3: Average coverage  
 Again, repeat the above experiments with branch coverage.  Does `fuzzer()` cover all branches, and if so, how many tests does it take on average?  
