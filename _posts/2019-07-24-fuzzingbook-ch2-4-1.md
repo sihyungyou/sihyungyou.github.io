@@ -15,11 +15,13 @@ comments: true
 
 AFL은 mutation-based fuzzer이다. 즉, seed input을 조금씩 바꾸거나 두 개의 다른 input을 합쳐서 새로운 문자열을 만든다는 뜻이다. AFL은 또한 greybox fuzzer 인데 coverage-feedback을 통해 프로그램에 어떻게 더 깊이 reach 할 지 배우기 때문이다. AFL은 완전한 black-box도, white-box도 아니다. 전자가 아닌 이유는 프로그램 분석을 조금이라도 이용하기 때문이다. 후자의 경우는 AFL이 심도있는 프로그램 분석을 기반으로 작동하지 않기 때문이다. 대신 generated input의 coverage information을 주워모으는 가벼운 방식으로 작동한다. 만약 생성된 입력값이 coverage를 증가시킨다면 그것은 후의 fuzzing을 위해서 seed corpus에 추가된다.  
 
+AFL은 매 conditional jump instruction 바로 뒤에 코드를 주입한다. 그 브랜치가 실행이되면 이 코드는 그 브랜치에게 unique identifier를 부여하고 해당 브랜치의 counter variable를 증가시킨다. 효율을 위해서 모든 브랜치는 아니고 굵직한 것들만 카운터를 트래킹한다. 즉, fuzzer는 각 input에 대해 어떤 브랜치가 몇번 실행되었는지 정보를 알 수 있다는 것을 의미한다. 이 instrumentation 과정은 컴파일 타임에 일어나는데 파이썬은 이런 과정 없이 coverage information을 수집할 수 있다.  
+
 ### Mutator and Seed  
 mutator class implementation는 insert, delete, flip 세 가지 경우의 mutation 방식 함수를 포함하고 있다. 어떤 방법으로 mutate 할 건지도 랜덤으로 선택된다.  
 
 ### Power Schedules  
-Power schedule은 fuzzing time을 seeds 사이에 균등하게 배분하는 개념이다. 그러기 위해서 seeds에서 input을 선택해서 가져올 때 seed’s energy 값에 의존한다. fuzzing이 진행되는 동안 우리는 더 가능성이 있는 (더 짧은 문자열, 더 빠른 실행속도, coverage를 더 자주 증가시키는) seed에 높은 우선순위를 두고 선택한다. 그러므로 seed는 data 뿐만 아니라 energy 값도 가진다.  
+Power schedule은 fuzzing time을 seeds 사이에 균등하게 배분하는 개념이다. 그러기 위해서 seeds에서 input을 선택해서 가져올 때 seed’s energy 값에 의존한다. fuzzing이 진행되는 동안 우리는 더 가능성이 있는 (더 짧은 문자열, 더 빠른 실행속도, coverage를 더 자주 증가시키는) seed에 높은 우선순위를 두고 선택한다. 그러므로 seed는 data 뿐만 아니라 energy 값도 가진다. 아래는 먼저 모든 seed에게 같은 에너지 값을 주는 경우다.  
 
 ~~~python
 class PowerSchedule(object):    

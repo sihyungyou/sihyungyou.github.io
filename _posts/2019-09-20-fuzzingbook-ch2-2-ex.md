@@ -72,6 +72,3 @@ with BranchCoverage() as cov:
 ~~~
 
 no it doesn't cover all branches  
-
-#### Part 3: Average coverage  
-Again, repeat the above experiments with branch coverage.  Does `fuzzer()` cover all branches, and if so, how many tests does it take on average?  
