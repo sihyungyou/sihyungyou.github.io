@@ -8,7 +8,7 @@ comments: true
 > Mutation-Based Fuzzing  
 
 ### Exercise 2: Fuzzing bc with Mutations  
-Apply the above mutation-based fuzzing technique on `bc`, as in the chapter ["Introduction to Fuzzing"](Fuzzer.ipynb).  
+Apply the above mutation-based fuzzing technique on `bc`, as in the chapter ["Introduction to Fuzzing"](https://www.fuzzingbook.org/html/Fuzzer.html).  
 
 ### Part 1: Non-Guided Mutations  
 Start with non-guided mutations.  How many of the inputs are valid?  
