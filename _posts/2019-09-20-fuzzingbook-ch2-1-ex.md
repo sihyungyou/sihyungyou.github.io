@@ -13,16 +13,19 @@ For each of the above, write a Python function `f(s)` that fails if `s` fulfills
 ~~~python
 import string
 
-def noabc(inp):
-    pattern = "abc"
+def no_backslash_d(inp):
+    pattern = "\\D"
     index = inp.find(pattern)
-    assert index < 0 or index + len(pattern) > len(inp), "err message"
+    if index < 0 or index + len(pattern) >= len(inp):
+        return True
+    c = inp[index + len(pattern)]
+    assert c in string.printable
 ~~~
 ~~~python
 with ExpectError():
     noabc("abcde")
 ~~~
-패턴을 찾지 못하거나 (index == -1), 패턴이 시작하는 index로부터 길이를 더한 값이 len를 넘어가면 입력 문자열에 패턴이 없는 것으로 판단하므로 return True. 하지만 위의 조건을 만족하지 않는다면 에러 메시지를 출력한다.  
+패턴을 찾지 못하거나 (index == -1), 패턴이 시작하는 index로부터 길이를 더한 값이 input 길이와 같거나 크다면 입력 문자열에 패턴이 없는 것으로 판단하므로 return True. 즉, `\D` 문자 이후에 오는 문자가 non printable 한지를 보고 싶은 것이므로 input length와 같은 조건도 True를 반환한다. 하지만 위의 조건을 만족하지 않는다면 에러 메시지를 출력한다.  
 
 ~~~python
 def no_8bit(inp):
@@ -34,7 +37,7 @@ def no_8bit(inp):
 with ExpectError():
     no_8bit("ä\n")
 ~~~
-입력 문자열의 마지막 전 문자까지 검사하여 ASCII 코드 127번까지로 표현할 수 없다면 에러 메시지 출력.  
+입력 문자열의 마지막 전 문자까지 검사하여 ASCII 코드 127번까지로 표현할 수 없고 바로 뒤에 newline이 오는 경우 에러 메시지를 출력해야 한다. 즉, assert문은 그 조건의 negation이므로 127로 표현할 수 있거나 바로 뒤에 newline이 오지 않는 경우이다.  
 
 ~~~python
 def no_dot(inp):
