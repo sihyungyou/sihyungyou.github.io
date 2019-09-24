@@ -23,7 +23,7 @@ HTTP는 transport layer protocol로 TCP를 사용하며 well-known port number�
 - Non-persistent HTTP  
 간단히 줄이면 one connection, one object 라고 할 수 있다. 하나의 object는 "at most one object"를 의미한다. 하지만 한 번에 하나의 object를 보내는 connection이라도 여러개가 동시에 parallel하게 만들어지면 persistent connection 보다 response를 더 빨리 받을 수 있다. 단, 서버의 용량이 훨씬 많이 요구되고 무리가 간다.  
 
-먼저 TCP 3-way handshaking 방식으로 세 개의 패킷이 왔다갔다 하면 connection이 만들어진다. 이는 두 방향으로 가는 독립적인 두 길이다. 그리고 하나의 object를 보낸 후에는 연결을 끊고, 다시 set up한다.  
+먼저 TCP 3-way handshaking 방식으로 세 개의 패킷이 왔다갔다 하면 connection이 만들어진다. 이는 두 방향으로 가는 독립적인 두 길이다 (request, response 길이 각각 따로있다?). 그리고 하나의 object를 보낸 후에는 연결을 끊고, 다시 set up한다.  
 
 - Persistent HTTP  
 one connection, multiple objects 이다. 위의 non-persistent HTTP와는 다르게 한번 connection을 만들고 한 번 request를 하고 object를 보낼 때 연결을 끊고 다시 만들지 않는다. 물론 connection이 만들어지는 과정은 3-way handshaking 으로 같다.  
