@@ -15,7 +15,7 @@ while i < len(s):
     c = s[i]
     if c == '+':
         t += ' '
-    elif c == '%' and(i+2 < len(s): # fixed here!
+    elif c == '%' and i+2 < len(s): # fixed here!
         digit_high, digit_low = s[i + 1], s[i + 2]
         i += 2
         if digit_high in hex_values and digit_low in hex_values:
