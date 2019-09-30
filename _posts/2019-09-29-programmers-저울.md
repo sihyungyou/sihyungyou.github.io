@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "프로그래머스 고득점 kit : 저울"
-tags: [알고리즘, 백준, Greedy]
+tags: [알고리즘, 프로그래머스, Greedy]
 comments: true
 ---
 
