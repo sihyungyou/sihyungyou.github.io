@@ -1,3 +1,12 @@
+---
+layout: post
+title: "프로그래머스 고득점 kit : 조이스틱"
+tags: [알고리즘, 프로그래머스, Greedy]
+comments: true
+---
+
+> Programmers  
+
 ### 문제설명  
 조이스틱으로 알파벳 이름을 완성하세요. 맨 처음엔 A로만 이루어져 있습니다.  
 ex) 완성해야 하는 이름이 세 글자면 AAA, 네 글자면 AAAA  
