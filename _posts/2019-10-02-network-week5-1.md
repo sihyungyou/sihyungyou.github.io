@@ -1,0 +1,35 @@
+---
+layout: post
+title: "Network : CH 2-3"
+tags: [한동대, 공부, 네트워크]
+comments: true
+---
+
+> 2.3 Electronic Mail (SMTP, POP3, IMAP)  
+
+### SMTP (Simple Mail Transfer Protocol)  
+SMTP는 이름에서 알 수 있듯 메일을 주고받는데 쓰이는 프로토콜이다. 메일의 가장 중요한 feature를 생각해보면 reliability일 것이다. 메일을 보냈는데 사라지면 안될테니 중간에 data loss가 생겼을 때 recovery가 가능해야 한다. 그래서 SMTP는 TCP를 사용한다. TCP는 이전 포스팅에서 정리했듯이 세 단계로 이루어진다 : handshaking, transfer message, closure  
+또 SMTP는 persistent connection을 사용하며 message는 7-bit ASCII data 여야 한다.  
+
+### Email scenario & Comparison with HTTP  
+![Center example image](https://user-images.githubusercontent.com/35067611/66013996-25e87080-e508-11e9-88f0-74b3a005d4fe.png "Center"){: .center-image}  
+
+위 그림에서 볼 수 Mail server가 internet을 통해서 Bob's mailbox로 message를 보내는 것을 볼 수 있다. 이 과정에 주목해야하는데 그 이유는 "요청을 하지 않아도 보내기 때문"이다. 이를 push protocol이라하는데 HTTP와 비교하며 알아보자.  
+
+위에서 언급했듯, HTTP와 SMTP 둘 다 persistent connection을 사용한다. 또한 두 프로토콜 모두 ASCII로 command/response data를 표현한다 (물론 요즘 HTTP/2의 경우 효율을 위해 binary로 표현하기도 한다)  
+
+차이점이라면 HTTP는 pull protocol(요청이 있어야 응답을 함)이지만 SMTP는 push protocol(요청이 없어도 보냄)이다. 
+HTTP의 경우 one object - one response 이다. 반면 STMP는 multiple objects sent in multipart messages 이다.  
+
+### Mail Message Format  
+message는 7-bit ASCII여야 한다. 하지만 이전과 다르게 요즘은 메일에 사진, 영상등을 첨부한다. 이런 데이터는 ASCII만으로는 표현이 불가하다 (물론 여전히 ASCII가 필요한 것은 변하지 않는다) 이런 non-ASCII data를 표현하기 위해 MIME extension(Multi-purpose Internet Mail Extension)을 사용한다.  
+
+![Center example image](https://user-images.githubusercontent.com/35067611/66014269-25040e80-e509-11e9-916c-de96ed7d366a.png "Center"){: .center-image}  
+
+위 사진은 message format인데 content-transfer-encoding : base64 라는 부분이 binary를 ASCII로 어떻게 convert할 지, 즉 encoding 방식을 나타낸다. 그리고 변환시켜서 아래 encoded data 부분에 집어넣어 보내게 된다.  
+
+![Center example image](https://user-images.githubusercontent.com/35067611/66014330-76140280-e509-11e9-969d-e33f2850253e.png "Center"){: .center-image}  
+
+Mixed ASCII and non-ASCII data에는 ASCII로 표현 가능한것과 아닌 것이 섞여있다. 이것의 변환과정을 나타내는 것인데 기본적으로 표현가능한 것들은 그냥 보내고 non-ASCII 부분은 반으로 나누고 그 앞에 delimiter `=`문자를 두어 그 뒤는 변환된 것이라고 표시를 해준다.  
+
+하지만 이와 같은 방식은 한계가 있는데 실제로 `=` 문자가 데이터로 들어오는 경우이다. 그럴 때를 대비하여 `=` 문자 또한 둘로 나눈다. (응? 여기는 이해를 못했다 더 공부해봐야겠다..)  
