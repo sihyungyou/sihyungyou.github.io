@@ -25,3 +25,11 @@ inverse domain이란 name -> IP address가 아니라 IP addresss -> name을 찾�
 ### Local Name Server (default name server)  
 Local name server는 계층트리에 직접적으로 속하지는 않는다. host가 DNS 쿼리를 보내면 그 쿼리는 local DNS server로 전송된다. 즉 local name server는 쿼리를 계층으로 forward해주는데 마치 proxy가 작동하는 방식과 비슷하다.  
 
+쿼리는 iteration, recursion 두 방식으로 서버에 전송된다.  
+
+[Iteration Queries]
+![Center example image](https://user-images.githubusercontent.com/35067611/66015380-4535cc80-e50d-11e9-8221-71710257bc39.png "Center"){: .center-image}  
+
+[Recursive Queries]
+![Center example image](https://user-images.githubusercontent.com/35067611/66015404-639bc800-e50d-11e9-8b54-ac0340fb9d0f.png "Center"){: .center-image}  
+
