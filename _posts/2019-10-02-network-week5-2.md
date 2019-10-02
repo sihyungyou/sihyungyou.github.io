@@ -38,3 +38,12 @@ recursive query는 root DNS server에 상당한 부담이 간다 (heavy load at 
 ### DNS Caching and Update Recoreds  
 그런데 위에서 어떤 방식을 택하든 매번 이렇게 물어보면 Root DNS는 너무 피곤할 것이다. 중복된 것에 대해서는 물어보는 것을 생략하기 위해서 caching을 한다.  
 
+어떤 name server든 mapping하는 것을 배우면(학습하면?) 그 서버는 mapping 을 cache한다.  
+cache entries는 일정시간(TTL : time to leave)이 지난 후에는 사라진다. TLD 서버는 local name server에 캐시되어있는것이 일반적인데 이는 root name server가 자주 방문되지 않도록 하기 위함이다.  
+
+또한 cache entries는 outdated될 수 있는데 이러 update문제는 TTL을 걸어두고 그 시간이 지나면 날려버리는 방식으로 방지한다. 그러나 이 방식으로도 여전히 완벽하진 않은데 TTL이 다 지나기전에 update되면 cache 되어있는 서버는 outdated 일 것이기 때문이다. 그래서 server update가 있다면 알려주는 기능까지 추가하여 사용한다.  
+
+### Services Provided by DNS  
+DNS는 well-known port 53번을 이용해 UDP나 TCP를 쓸 수 있다. 하지만 주로 UDP를 사용한다. 중간에 에러가 나면 안되는데 왜 UDP를 쓸까?  
+
+TCP는 connection oriented protocol이다. connection을 만들 때, release할 때 three hand shake 과정이 필요하다. 그런데 DNS service는 주로 request-response가 거의 한 번 뿐이다. 이런 서비스에 패킷을 세개씩이나 쓰는 것은 overhead이다. 그래서 UDP를 사용하고 에러 발생 시 또 보내는 방식을 주로 택한다.  
