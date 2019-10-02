@@ -29,7 +29,11 @@ Local name server는 계층트리에 직접적으로 속하지는 않는다. hos
 
 [Iteration Queries]
 ![Center example image](https://user-images.githubusercontent.com/35067611/66015380-4535cc80-e50d-11e9-8221-71710257bc39.png "Center"){: .center-image}  
+iterative query는 "나는 너가 찾는 IP주소를 모르겠으니 얘한테 물어봐" 느낌으로 작동한다. 주로 iterative를 많이 쓴다.  
 
 [Recursive Queries]
 ![Center example image](https://user-images.githubusercontent.com/35067611/66015404-639bc800-e50d-11e9-8b54-ac0340fb9d0f.png "Center"){: .center-image}  
+recursive query는 root DNS server에 상당한 부담이 간다 (heavy load at upper levels of hierarchy)  
 
+### DNS Caching and Update Recoreds  
+그런데 위에서 어떤 방식을 택하든 매번 이렇게 물어보면 Root DNS는 너무 피곤할 것이다. 중복된 것에 대해서는 물어보는 것을 생략하기 위해서 caching을 한다. 
