@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Klaytn 정복기 : Intro"
+title: "Klaytn 정복기 01 : Intro"
 tags: [해커톤, 블록체인, Klaytn]
 comments: true
 ---
