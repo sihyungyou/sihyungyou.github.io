@@ -27,7 +27,7 @@ location은 0 이상 (현재 대기목록에 있는 작업 수 - 1) 이하의 �
 
 입출력 예  
 ~~~
-priorities	        location    return
+priorities          location    return
 [2, 1, 3, 2]        2           1
 [1, 1, 9, 1, 1, 1]  0           5
 ~~~
