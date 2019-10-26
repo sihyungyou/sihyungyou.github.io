@@ -26,7 +26,6 @@ int solution(vector<vector<int>> triangle) {
     long long answer = -1;
     int i, j, len;
     len = triangle.size();
-    int dp[500][500];
     
     for (i = 1; i < len; i++) {
         for (j = 0; j <= i; j++) {
