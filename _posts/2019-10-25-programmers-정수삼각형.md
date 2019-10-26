@@ -29,9 +29,7 @@ int solution(vector<vector<int>> triangle) {
     int dp[500][500];
     
     for (i = 1; i < len; i++) {
-        // printf("log1\n");
         for (j = 0; j <= i; j++) {
-            // printf("log2\n");
             if (j == 0) triangle[i][j] += triangle[i-1][j];
             else if (j == i) triangle[i][j] += triangle[i-1][j-1];
             else triangle[i][j] = get_max(triangle[i][j] + triangle[i-1][j-1], triangle[i][j] + triangle[i-1][j]);
