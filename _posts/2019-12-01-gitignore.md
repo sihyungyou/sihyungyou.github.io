@@ -27,6 +27,11 @@ a.out*
 git rm --cached .vscode/settings.json
 ~~~
 
+혹은 폴더 내에 여러 경로가 더 있고 다른 파일들이 있을 경우엔 -r 옵션을 추가해주면 된다. 아래는 내 블로그 레포지토리에 있는 폴더를 예시로 들어보았다.  
+~~~
+git rm -r --cached .sass-cache/
+~~~
+
 이렇게 이미 캐시되어있는 커밋사항(?)을 삭제하고 다시 .gitignore 파일을 푸시하면  
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/69910060-571de800-1448-11ea-8cb0-dc4a14591673.png "Center"){: .center-image}  
