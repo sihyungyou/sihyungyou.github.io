@@ -28,5 +28,6 @@ git rm --cached .vscode/settings.json
 ~~~
 
 이렇게 이미 캐시되어있는 커밋사항(?)을 삭제하고 다시 .gitignore 파일을 푸시하면  
+
 ![Center example image](https://user-images.githubusercontent.com/35067611/69910060-571de800-1448-11ea-8cb0-dc4a14591673.png "Center"){: .center-image}  
 이렇게 이쁘게 사라진 모습을 볼 수 있다!  
