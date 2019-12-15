@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "191214 코드포스 A번 : Happy Birthday, Polycarp!"
+title: "Codeforces Round #606 A번 : Happy Birthday, Polycarp!"
 tags: [알고리즘, 대회, 구현]
 comments: true
 ---
