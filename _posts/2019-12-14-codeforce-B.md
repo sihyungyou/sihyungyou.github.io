@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Codeforces Round #606 B번 : Make Them Odd"
-tags: [알고리즘, 대회, Greedy]
+tags: [알고리즘, 대회, 코드포스, Greedy]
 comments: true
 ---
 
