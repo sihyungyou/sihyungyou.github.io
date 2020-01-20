@@ -7,7 +7,7 @@ comments: true
 
 > Angora 익히기  
 
-## build libxml  
+## build  
 먼저 target program libxml의 configuration status를 Angora와 맞춰주어야 한다.  
 ~~~
 CC=/home/ysh/Angora/bin/angora-clang CXX=/home/ysh/Angora/bin/angora-clang++ LD=/home/ysh/Angora/bin/angora-clang ./configure --disable-shared
