@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Fuzzing Jzon with Angora"
+title: "[오픈소스테스팅 with Angora] Jzon"
 tags: [Fuzzing]
 comments: true
 ---
 
-> Angora 익히기  
+> 앙고라로 뻐징하기  
 
 [Jzon](https://github.com/Zguy/Jzon.git)은 json parser로 뻐징해보기 좋은 타겟프로그램이다.  
 

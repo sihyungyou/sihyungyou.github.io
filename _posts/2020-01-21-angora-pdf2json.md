@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Fuzzing pdf2json with Angora"
+title: "[오픈소스테스팅 with Angora] pdf2json"
 tags: [Fuzzing]
 comments: true
 ---
 
-> Angora 익히기  
+> 앙고라로 뻐징하기  
 
 ## 문제점과 해결방법  
 [pdf2json](https://github.com/flexpaper/pdf2json)은 이름에서 알 수 있듯 pdf 파일을 json 형태로 바꾸는 conversion program이다. pdf도 하나의 binary 형태를 가진 파일이므로 입력으로 주었을 때 변환 과정에서 crash가 나기를 기대할 수 있다. 그런데 AFL로 fuzzing 할 때와 다르게 Angora는 "Seed discarded, too long" 이라는 메세지를 출력하면서 fuzzing 진행을 하지 못했다. input pdf들은 커봤자 1MB 정도였다.  

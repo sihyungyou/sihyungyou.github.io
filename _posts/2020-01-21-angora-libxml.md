@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Fuzzing libxml with Angora"
+title: "[오픈소스테스팅 with Angora] libxml Automata"
 tags: [Fuzzing]
 comments: true
 ---
 
-> Angora 익히기  
+> 앙고라로 뻐징하기  
 
 ## build  
 먼저 target program libxml의 configuration status를 Angora와 맞춰주어야 한다.  
