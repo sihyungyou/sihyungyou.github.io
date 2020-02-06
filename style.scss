@@ -303,6 +303,15 @@ img {
   text-align: right
 }
 
+.left {
+  text-align: left;
+
+  &-image {
+    margin: 0 auto;
+    display: block;
+  }
+}
+
 /*********************/
 /* LAYOUT / SECTIONS */
 /*********************/
