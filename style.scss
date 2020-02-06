@@ -240,7 +240,7 @@ a.footnote {
     border: 1px solid $footnote-link-border-color;
     border-radius: 2px;
     -webkit-text-stroke: 0.25px;
-    -webkit-transition: 0.2s ease-out all;
+    // -webkit-transition: 0.2s ease-out all;
     text-decoration: none;
 
     &:hover {
