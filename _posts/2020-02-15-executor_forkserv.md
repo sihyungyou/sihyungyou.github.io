@@ -20,9 +20,10 @@ comments: true
 
 즉, 일단 fuzz_main에서 id 0으로 하나가 생성되고 angora_fuzzer를 실행시킬 때 option으로 주는 num jobs의 개수만큼 소켓이 추가로 더 생성된다. num_jobs == 4라면 (id 0인 메인스레드를 제외하고) 네 개의 스레드가 생성되고 각각이 free cpu core와 bind된다. 그리고 fuzz_loop() 단계로 넘어가면서 executor가 생성되고 이전과 같이 소켓을 만드는 과정이 반복된다. 이 소켓들도 모두 각각 child process를 spawn하여 target program execution이 이루어진다. 실제로 서로 다른 pid를 가진 프로세스들이 실행되는 모습을 확인할 수 있었다. 다음은 libxml Automata 프로그램을 네 개의 프로세스로 나누어 각자 다른 input으로 fuzzing하도록 한 것이다.  
 
-![Center example image](https://user-images.githubusercontent.com/35067611/74587593-17729f80-5038-11ea-9629-2dd573940007.png "Center"){: width="400" height="400"}  
+![Center example image](https://user-images.githubusercontent.com/35067611/74587593-17729f80-5038-11ea-9629-2dd573940007.png "Center"){: .center-image}  
 
 Concurrency란 싱글코어에서 멀티스레딩이 이루어지는 것을 의미하고 Parallelism은 멀티코어에서 각각 멀티스레딩이 진행되는 것이다. 앙고라는 num jobs만큼 스레드를 생성하고 free cpu core와 bind한다. 그 부분이 의아했다. 왜냐하면 멀티스레딩을 할거면 새로운 코어가 아니라 지금 쓰고있는 코어에서 돌려도 충분하기 때문이다. 그런데 오늘 child process가 여러개 생기면서 target binary에 대해 뻐징을 진행한다는 것을 알고나니 왜 스레드를 cpu core에 붙여주는지 조금이나마 이해가 됐다. CPU는 한 순간에 하나의 프로세스만 처리할 수 있으므로 여러 프로세스를 관리하기위해서는 코어가 더 필요했던 것 같다(?)  
 
 ## 더 생각해볼 점  
 client가 없으면 socket이 accept를 하지 않는데 여기서 client가 들어온다는게 무슨 의미일까ㅏ  
+하나의 스레드가 하나의 코어와 bind되어 fuzzing을 진행하는데 그러면 가장 최초로 실행되는 angora fuzzer 프로세스만 멀티스레딩을 
