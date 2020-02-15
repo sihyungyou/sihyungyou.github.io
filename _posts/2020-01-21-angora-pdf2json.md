@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[오픈소스테스팅 with Angora] pdf2json"
-tags: [Fuzzing]
+tags: [Fuzzing, Angora]
 comments: true
 ---
 

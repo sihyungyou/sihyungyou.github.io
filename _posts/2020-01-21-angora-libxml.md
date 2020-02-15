@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[오픈소스테스팅 with Angora] libxml Automata"
-tags: [Fuzzing]
+tags: [Fuzzing, Angora]
 comments: true
 ---
 
