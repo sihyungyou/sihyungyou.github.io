@@ -26,5 +26,7 @@ Concurrency란 싱글코어에서 멀티스레딩이 이루어지는 것을 의�
 
 ## 더 생각해볼 점  
 client가 없으면 socket이 accept를 하지 않는데 여기서 client가 들어온다는게 무슨 의미일까ㅏ  
+
 하나의 스레드가 하나의 코어와 bind되어 fuzzing을 진행하는데 그러면 가장 최초로 실행되는 angora fuzzer 프로세스만 멀티스레딩을 하고 spawn된 여러 스레드들은 각자 하나의 코어에서 돌고있는 걸까?  
+
 (만약)그렇다면 multi core, single thread로 구현되어 있는 것인데 Angora fuzzer의 parallelism (multi core, multi threading)을 구현하기 위해서는 어떻게 해야 할까?  
