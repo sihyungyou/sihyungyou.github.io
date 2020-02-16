@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Angora Fuzzer : Executor의 역할 이해하기"
-tags: [Fuzzing, Angora]
+tags: [Fuzzing, Angora, 캡스톤]
 comments: true
 ---
 

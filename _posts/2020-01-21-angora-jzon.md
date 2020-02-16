@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "[오픈소스테스팅 with Angora] Jzon"
-tags: [Fuzzing, Angora]
+tags: [Fuzzing, Angora, 캡스톤]
 comments: true
 ---
 
