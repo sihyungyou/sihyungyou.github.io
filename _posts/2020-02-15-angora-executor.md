@@ -22,6 +22,10 @@ comments: true
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/74587593-17729f80-5038-11ea-9629-2dd573940007.png "Center"){: .center-image}  
 
+![Center example image](https://user-images.githubusercontent.com/35067611/74603028-4d745a00-50f2-11ea-8210-3a281c546470.png "Center"){: .center-image}  
+
+두번째 사진을 보면 실제로 fast target program을 돌리고 있는 프로세스들은 모두 부모 프로세스의 pid 9402를 동일하게 갖고있으나 각자의 pid는 모두 다르다. 그리고 최초의 angora_fuzzer 실행 프로세스의 pid는 9402이다.  
+
 Concurrency란 싱글코어에서 멀티스레딩이 이루어지는 것을 의미하고 Parallelism은 멀티코어에서 각각 멀티스레딩이 진행되는 것이다. 앙고라는 num jobs만큼 스레드를 생성하고 free cpu core와 bind한다. 그 부분이 의아했다. 왜냐하면 멀티스레딩을 할거면 새로운 코어가 아니라 지금 쓰고있는 코어에서 돌려도 충분하기 때문이다. 그런데 오늘 child process가 여러개 생기면서 target binary에 대해 뻐징을 진행한다는 것을 알고나니 왜 스레드를 cpu core에 붙여주는지 조금이나마 이해가 됐다. CPU는 한 순간에 하나의 프로세스만 처리할 수 있으므로 여러 프로세스를 관리하기위해서는 코어가 더 필요했던 것 같다(?)  
 
 ## 더 생각해볼 점  
@@ -30,3 +34,5 @@ client가 없으면 socket이 accept를 하지 않는데 여기서 client가 들
 하나의 스레드가 하나의 코어와 bind되어 fuzzing을 진행하는데 그러면 가장 최초로 실행되는 angora fuzzer 프로세스만 멀티스레딩을 하고 spawn된 여러 스레드들은 각자 하나의 코어에서 돌고있는 걸까?  
 
 (만약)그렇다면 multi core, single thread로 구현되어 있는 것인데 Angora fuzzer의 parallelism (multi core, multi threading)을 구현하기 위해서는 어떻게 해야 할까?  
+
+여러 프로세스들의 뻐징 결과를 sync 할 때 기존의 forksrv를 지우고 새로운 것을 생성하는 rebind_forksrv()함수가 불리는데 왜 이런 과정이 필요한걸까?  
