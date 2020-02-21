@@ -11,4 +11,5 @@ Fuzzing tool을 돌리는 것은 컴퓨팅 파워가 소모되는 작업이다. 
 
 전자는 쉽게 생각하면 여러 TCP Connection이 이루어져서 target program과 seed 등 fuzzing에 필요한 파일들을 넘기는 FTP 작업이다. 후자는 fuzzer의 internal state에 대한 정의가 확실하게 내려지고 그것들을 어떻게 주고받을 것인지, seed 배분은 어떻게 할 것인지 등 논의할 사항이 많아 아직 개선하는 과정에 있다.  
 
+Master에서 세 Slave에게 fuzzing job을 주고 terminate 시키는 과정  
 ![Center example image](https://user-images.githubusercontent.com/35067611/75041542-1d68f480-5500-11ea-9d77-822b90cb71fe.gif "Center"){: .center-image}  
