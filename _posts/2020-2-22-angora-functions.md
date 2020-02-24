@@ -43,7 +43,7 @@ status에 따라 normal / timeout / crash로 save_input 한다. save_input은 �
 free cpu 개수 파악, 만약 num_jobs가 그것보다 많다면 어떤 스레드도 cpu core와 bind되지 않음(아마 OS에서 임의로 스레드들을 적절히 스케줄링할 듯) free cpu core가 충분하다면 앙고라 실행 시 num_jobs 옵션만큼 스레드를 spawn 해서 core 하나씩과 bind시킨다. 그리고 각각의 코어에서 실제 fuzzing 시작.  
 
 ### fuzz_loop  
-executor 생성. 이는 fuzz_main에서의 executor와 별개로 child process를 spawn하여 target program을 돌린다. 그리고 running.load일 동안 다음을 수행한다. 
+executor 생성. 이는 fuzz_main에서의 executor와 별개로 child process를 spawn하여 target program을 돌린다.  
 
 ### main_thread_sync_and_log  
   
