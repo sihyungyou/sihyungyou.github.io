@@ -45,6 +45,6 @@ free cpu 개수 파악, 만약 num_jobs가 그것보다 많다면 어떤 스레�
 ### fuzz_loop  
 executor 생성. 이는 fuzz_main에서의 그것과 별개의 executor로 child process를 spawn하여 target program을 돌린다. 그리고 running.load가 true일 동안(유저가 ctrl + c를 누르지 않을 동안) 다음의 과정을 실행한다.  
 
+depot.get_entry()를 실행하여 queue에서 (이 때 queue는 뻐징 과정에서 생성되는 새로운 입력들이 저장되는 디렉토리의 이름이 아니라 실제 Priority Queue 데이터 스트럭쳐이다) 하나의 CondStmt, Priority 쌍을 가져온다. 그리고 belong input을 읽어 fuzztype, search method에 따라 fuzzing을 진행한다.  
 
 ### main_thread_sync_and_log  
-  
