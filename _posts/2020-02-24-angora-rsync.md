@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "분산된 Slave 서버간의 Sync를 어떻게 맞춰야 할 것인가?"
+title: "분산된 Slave 서버간의 Sync 맞추기"
 tags: [Fuzzing, Angora, 캡스톤]
 comments: true
 ---
