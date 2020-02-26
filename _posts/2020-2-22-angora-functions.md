@@ -48,4 +48,4 @@ executor 생성. 이는 fuzz_main에서의 그것과 별개의 executor로 child
 depot.get_entry()를 실행하여 queue에서 (이 때 queue는 뻐징 과정에서 생성되는 새로운 입력들이 저장되는 디렉토리의 이름이 아니라 실제 Priority Queue 데이터 스트럭쳐이다) 하나의 CondStmt, Priority 쌍을 가져온다. 그리고 belong input을 읽어 fuzztype, search method에 따라 fuzzing을 진행한다.  
 
 ### main_thread_sync_and_log  
-show stats 함수를 불러 global stats을 화면에 5초마다 출력한다. 단, 만약 child count == 1이고 current explore number == 0일 경우 none constraint 상황으로 반복문을 탈출한다. 혹은 child count는 1이 아니지만 last explore number == cur explore num의 경우 solve all constraint로 간주하여 반복을 마친다. (실제로 파일이나 로그의 싱크가 일어나는 것 같지는 않다..)  
+show stats 함수를 불러 global stats을 화면에 5초마다 출력한다. 단, 만약 child count가 1이고 current explore number가 0일 경우 none constraint 상황으로 반복문을 탈출한다. 혹은 child count는 1이 아니지만 last explore number가 cur explore num과 같을 경우 solve all constraint로 간주하여 반복을 마친다. (실제로 파일이나 로그의 싱크가 일어나는 것 같지는 않다..)  
