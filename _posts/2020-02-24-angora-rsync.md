@@ -13,8 +13,6 @@ Master fuzzer에서 Slave fuzzer들에게 일을 나누어 주는 것은 어려�
 ## Single CPU에서는..  
 한 컴퓨터에서 여러 스레드로 fuzzing을 하면 메인 스레드와 자식 스레드가 각자 별개로 돌아간다. 자식 스레드들은 각각 executor 객체를 생성하여 알맞는 fuzz type에 따라서 fuzzing을 진행하고 그 과정에서 생기는 새로운 input 파일을 queue 디렉토리에 저장한다. 그런데 sync를 맞춘다고 했다. 여러 스레드들이 동시에 한 디렉토리에 접근해서 각자가 찾은 새로운 입력파일들을 id:0000n의 형태로 저장하려다보면 파일명이 겹치지 않을까? 앙고라에서는 이를 id 변수를 AtomicSize type으로 선언해서 방지한다. 그래서 사실 여러 스레드들이 가진 파일끼리 비교해서 "싱크를 맞춘다"라기 보다는 애초에 저장할 때 충돌이 없도록 방지하는 것이다.  
 
-![Center example image](https://user-images.githubusercontent.com/35067611/75319744-92497f00-58b0-11ea-96fc-05f0276dfc04.gif "Center"){: .center-image}  
-
 ## Distributed Environment 에서는 어떻게 해야할까..  
 Angora는 새로운 input을 생성하면 queue 디렉토리에 id:00001과 같은 형태의 파일로 저장한다. 먼저 각 slave에서 새로운 정보를 찾아낼 때 마다 slave의 queue 디렉토리와 master의 queue 디렉토리의 sync를 맞춰주고 거기서 적절하게 다른 slave들에게 input을 배분할 수 있다. sync를 맞추는 건 rsync를 사용하면 매우 쉽다. 다만, 중복되는 정보와 정보의 배분이 문제다.  
 
