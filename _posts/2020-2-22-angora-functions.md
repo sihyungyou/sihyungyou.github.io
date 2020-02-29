@@ -31,7 +31,7 @@ write_buf, cmd가 stdin이라면 rewind. write_buf는 파일에 buf를 쓰고 �
 흠.. 여긴 잘 모르겠다  
 
 ### do_if_has_new (&mut self, buf: &Vec<u8>, status: StatusType, _explored: bool, cmpid: u32)  
-branches.has_new를 통해 has_new_path, has_new_edge, edge_num의 값을 설정. 만약 new path가 있다면 local_stats에서 find_new, depot에서 save. (추후 보충)  
+branches.has_new를 통해 has_new_path, has_new_edge, edge_num의 값을 설정. 만약 new path가 있다면 local_stats에서 find_new, depot에서 save. 결국 새로운 정보를 찾았다면 (예를들어 input이라고 하자) queue 디렉토리에 저장한다. 저장하는 과정은 depot의 save, save_input 함수에서 일어나며 id:00001과 같은 형태로 저장되는데 여러 스레드들이 동시에 돌아가기때문에 뒤에 붙는 숫자는 AtomicUsize 타입으로 충돌을 방지한다.  
 
 ### has_new (&mut self, status: StatusType) -> (bool, bool, usize) 
 num_new_edge가 0보다 크면 has_new_edge도 true로 설정. to_write이 empty거나 status type이 virgin / timeout / crash 중 어느것도 아니라면 has_new_path와 함께 false로 return. (추후 보충)  
@@ -46,6 +46,8 @@ free cpu 개수 파악, 만약 num_jobs가 그것보다 많다면 어떤 스레�
 executor 생성. 이는 fuzz_main에서의 그것과 별개의 executor로 child process를 spawn하여 target program을 돌린다. 그리고 running.load가 true일 동안(유저가 ctrl + c를 누르지 않을 동안) 다음의 과정을 실행한다.  
 
 depot.get_entry()를 실행하여 queue에서 (이 때 queue는 뻐징 과정에서 생성되는 새로운 입력들이 저장되는 디렉토리의 이름이 아니라 실제 Priority Queue 데이터 스트럭쳐이다) 하나의 CondStmt, Priority 쌍을 가져온다. 그리고 belong input을 읽어 fuzztype, search method에 따라 fuzzing을 진행한다.  
+
+그리고 timeout이 아니라면 fuzzing된 입력으로 target program을 run한다. 이 때 run은 fuzz main에서 depot.run_sync을 실행했을 때 도달하는 executor.run()과 같다.  
 
 ### main_thread_sync_and_log  
 show stats 함수를 불러 global stats을 화면에 5초마다 출력한다. 단, 만약 child count가 1이고 current explore number가 0일 경우 none constraint 상황으로 반복문을 탈출한다. 혹은 child count는 1이 아니지만 last explore number가 cur explore num과 같을 경우 solve all constraint로 간주하여 반복을 마친다. (실제로 파일이나 로그의 싱크가 일어나는 것 같지는 않다..)  
