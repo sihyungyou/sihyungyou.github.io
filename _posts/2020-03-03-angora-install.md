@@ -31,3 +31,13 @@ export LD_LIBRARY_PATH=/path-to-clang/lib:$LD_LIBRARY_PATH
 $ ./build/build.sh
 ~~~
 
+## Test  
+정상적으로 설치되었는지 확인하기 위해 앙고라에서 제공하는 테스트 프로그램을 돌려보자!  
+~~~bash
+$ cd /path-to-angora/tests
+$ ./test.sh mini
+~~~
+
+![Center example image](https://user-images.githubusercontent.com/35067611/75654519-424d2c80-5ca3-11ea-92a9-7f316c5d304c.png "Center"){: .center-image}  
+위와 같은 결과가 나오면 설치에 성공한 것이고 fuzzing을 할 준비가 된 것이다!  
+
