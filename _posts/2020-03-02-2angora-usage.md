@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Angora Fuzzer 사용기"
-tags: [실프2]
+tags: [실프2, Angora]
 comments: true
 ---
 
