@@ -10,7 +10,7 @@ comments: true
 ## Fuzzer  
 앙고라에 대해 소개하기 전에 먼저 `fuzzing`이 무엇인지부터 말해야한다. 앙고라가 fuzzing tool, fuzzer의 한 종류이기 때문이다. fuzzing의 정의는 다음과 같다.  
 
-> invalid, unexpected, random data를 입력으로 받아 버그 테스팅을 하는 기술  
+> automated software testing technique that involves providing invalid, unexpected, or random data as inputs to a computer program  
 
 즉 `software testing`을 하는 기술이다. 사람이 만든 많은 소프트웨어는 문제가 없어 보이지만 완전무결할 수 없다. 더 문제인 것은 눈에 보이지 않는 버그가 존재할 수 있다는 가능성을 알면서도 그 버그를 trigger할 입력을 만들어내는 것이 매우 어렵다는 것이다. 그래서 위에서 언급했듯 invalid, unexpected, random 데이터를 넣는 것이다. 그러나 여기서 random이 완전 무작위로 입력을 넣는다는 것을 의미하지는 않는다. 그럴 경우 의미있는 테스팅을 하기도 전에 프로그램이 에러처리를 해버리는 경우가 있기 때문이다.  
 
