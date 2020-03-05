@@ -17,3 +17,6 @@ Master fuzzer에서 Slave fuzzer들에게 일을 나누어 주는 것은 어려�
 Angora는 새로운 input을 생성하면 queue 디렉토리에 id:00001과 같은 형태의 파일로 저장한다. 먼저 각 slave에서 새로운 정보를 찾아낼 때 마다 slave의 queue 디렉토리와 master의 queue 디렉토리의 sync를 맞춰주고 거기서 적절하게 다른 slave들에게 input을 배분할 수 있다. sync를 맞추는 건 rsync를 사용하면 매우 쉽다. 다만, 중복되는 정보와 정보의 배분이 문제다.  
 
 예를 들어 slave1에서 id:00020을 찾아서 master에게 복사해줬다고 하자. 먼저 이 파일과 같은 파일이 master에 있는지 검사해야한다. 더하여, 이 시드를 다른 slave들에게 나누어주기 전에 확인할 것이 있는데 다른 slave가 이미 그 input을 가지고 있는지 여부다. 즉 겹치는 시드를 줘봤자 같은 내용의 파일을 다른 이름으로 뻐징하는 것 밖에 되지 않으므로 전혀 쓸모가 없는 것이다. rsync 커맨드는 파일내용이 같아도 (diff로 검사해서 차이가 없어도) 파일이름이 다르면 전송하기 때문에 이와같은 검사절차가 필요하다.  
+
+(2020.03.05 추가)  
+slave fuzzer들은 동시에 새로운 internal state를 각자 발견하고 fuzzing을 진행하기 때문에 master로 new status를 전송했을 때 그 정보들이 atomic 하게 관리, 저장되어야 한다. (위에서 언급한 중복된 파일에 대해서는 일단 생각하지 않기로 한다) 그리고 분배는 new status를 발견하면 master로부터 atomic한 id번호를 부여받은 후 모든 slave에게 전부 뿌려준다.  
