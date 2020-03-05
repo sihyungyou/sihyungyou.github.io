@@ -19,3 +19,10 @@ comments: true
 $ ./angora_fuzzer -i ~/libxml2-2.9.2_fast/test/automata -o output -t ~/libxml2-2.9.2_taint/testAutomata -- ~/libxml2-2.9.2_fast/testAutomata @@
 ~~~
 위의 커맨드는 libxml의 automata 프로그램을 fuzzing하는 것이다. AFL과 다르게 Angora는 하나의 타겟 프로그램을 taint, fast 두 버전으로 나누어 컴파일 시킨 후에 fuzzing을 진행한다. taint는 taing tracking이 적용된 채 컴파일 된 것이다.  
+
+## 결과  
+위의 커맨드로 직접 실행한 fuzzing 진행상황  
+![Center example image](https://user-images.githubusercontent.com/35067611/75859293-182f7200-5e3d-11ea-8c1a-d60a0041cac1.png "Center"){: .center-image}  
+
+crash 결과확인과 target program에 crash낸 input을 넣었을 때, Seg fault 확인  
+![Center example image](https://user-images.githubusercontent.com/35067611/75859390-41e89900-5e3d-11ea-8c2b-8f6bfd09250f.png "Center"){: .center-image}  
