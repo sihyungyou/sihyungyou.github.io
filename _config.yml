@@ -14,7 +14,8 @@ description: 꾸준함, 반복
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 # avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/jekyll-logo.png
-avatar: https://user-images.githubusercontent.com/35067611/60385470-662cf280-9ac4-11e9-8dc4-f9ed73cd671a.jpeg
+# avatar: https://user-images.githubusercontent.com/35067611/60385470-662cf280-9ac4-11e9-8dc4-f9ed73cd671a.jpeg
+avatar : https://user-images.githubusercontent.com/35067611/76836979-115d2200-6875-11ea-99ce-f60ce8891151.JPG
 
 
 # Tabs in header. There are 'Blog', 'About', 'Archive', 'Tags'
