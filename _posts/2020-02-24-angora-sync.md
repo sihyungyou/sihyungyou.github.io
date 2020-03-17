@@ -20,3 +20,6 @@ Angora는 새로운 input을 생성하면 queue 디렉토리에 id:00001과 같�
 
 (2020.03.05 추가)  
 slave fuzzer들은 동시에 새로운 internal state를 각자 발견하고 fuzzing을 진행하기 때문에 master로 new status를 전송했을 때 그 정보들이 atomic 하게 관리, 저장되어야 한다. (위에서 언급한 중복된 파일에 대해서는 일단 생각하지 않기로 한다) 그리고 분배는 new status를 발견하면 master로부터 atomic한 id번호를 부여받은 후 모든 slave에게 전부 뿌려준다.  
+
+(2020.03.17 추가)  
+일단 우리 팀원들이 동의한 internal state 정의는 다음의 네 정보들이다 : queue, depot(hang, crash, input), stats, branches. 분산환경에서 이 네가지를 master, slave 모두 동일하게 갖고있어야 sync를 맞췄다고 할 수 있다. 그런데 여기서 의문점이 하나 있다. 동일한 input을 가지고 fuzzing을 하는 것이라면 performance 면에서 single fuzzer와 차이가 있을까? 같은 input을 가지고도 여러 random mutation을 통해서라면 다른 결과를 낼 가능성이 높은건가?  
