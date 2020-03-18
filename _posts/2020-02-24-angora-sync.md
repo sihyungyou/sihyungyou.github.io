@@ -23,3 +23,6 @@ slave fuzzer들은 동시에 새로운 internal state를 각자 발견하고 fuz
 
 (2020.03.17 추가)  
 일단 우리 팀원들이 동의한 internal state 정의는 다음의 네 정보들이다 : queue, depot(hang, crash, input), stats, branches. 분산환경에서 이 네가지를 master, slave 모두 동일하게 갖고있어야 sync를 맞췄다고 할 수 있다. 그런데 여기서 의문점이 하나 있다. 동일한 input을 가지고 fuzzing을 하는 것이라면 performance 면에서 single fuzzer와 차이가 있을까? 같은 input을 가지고도 여러 random mutation을 통해서라면 다른 결과를 낼 가능성이 높은건가?  
+
+(2020.03.18 추가)  
+Internal state 중, slave의 local stat을 master에게 보내주는 것은 성공했다. Angora에 이미 sync_from_local 함수가 구현되어있어서 master의 global stat에 반영하는 것도 가능하다. 하지만 문제는 이렇게 반영하는 것은 단순한 숫자를 전송하는 것에 다름이 없다는 점이다. 실제로 어떤 path를 찾앗는지, context는 어떤 것들이 고려되었는지, 어떤 branch를 깼는지는 전혀 master가 알 수 없다. 이 부분에 대해서 더 고민해보자.  
