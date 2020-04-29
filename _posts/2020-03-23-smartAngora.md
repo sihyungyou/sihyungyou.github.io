@@ -99,6 +99,3 @@ OneByteFuzz::new(handler).run();
 // line 15 : if input' explored new branches
 // Executor::do_if_has_new -> GlobalBranches::has_new 과정을 거치며 update entry, fuzz loop 진행
 ~~~
-
-## Smart Branch Selection?  
-
