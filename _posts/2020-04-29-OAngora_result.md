@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "실험결과 정리"
+title: "Angora baseline 실험결과 정리"
 tags: [Fuzzing, Angora, 캡스톤]
 comments: true
 ---
