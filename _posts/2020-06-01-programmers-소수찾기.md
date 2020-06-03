@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "프로그래머스 고득점 kit : 소수찾기"
-tags: [알고리즘, 프로그래머스, 완전탐색]
+tags: [알고리즘, 프로그래머스, Brute-force]
 comments: true
 ---
 
