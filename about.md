@@ -11,5 +11,5 @@ permalink: /about/
 #### 2018.May - 2018.Dec | President  
 
 ### CRA👨‍💻   
-#### 2017.Dec - 2018.Feb | Project Manager  
 #### 2019.Mar - 2019.Jun | Vice President  
+#### 2017.Dec - 2018.Feb | Project Manager  
