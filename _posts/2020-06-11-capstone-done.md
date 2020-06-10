@@ -27,7 +27,7 @@ comments: true
 
 정말 감사하게도 수많은 지인들이 축하해주고 별과 댓글을 남겨주셨다. 그 중에서도 주접댓글들은 혼자보기 아까워서 아래처럼 스크랩을 해놓았다 ㅋㅋㅋ  
 
-![Center example image](https://user-images.githubusercontent.com/35067611/84308043-d418df80-ab98-11ea-8973-f98efac95975.png "Center" width="100" height="150"){: .center-image width="300" height="100"}  
+![Center example image](https://user-images.githubusercontent.com/35067611/84308043-d418df80-ab98-11ea-8973-f98efac95975.png "Center" width="100" height="150"){: .center-image width="600" height="400"}  
 
 잘생겼단 말은 빈말이겠지만 이렇게 관심가져주는 것만으로도 힘이났다. 다들 감사드립니다!!
 
