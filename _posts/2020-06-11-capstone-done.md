@@ -20,13 +20,12 @@ comments: true
 <iframe src="https://www.youtube.com/watch?v=ryoi_M4a4SA"></iframe>
 
 캡스톤 전시회를 온라인으로 하게 되면서 별과 댓글로 인기투표를 했는데 전체 2등을 했다. 솔직히 감사하고 기쁜일이지만 너무 아쉽다. 애초에 상위권이 아니었더라면 신경도 안썼을 인기상이지만 시작하자마자 우린 압도적 1위였다. 그리고 온라인 전시회가 진행되는 3일간 1, 2, 3등이 역전에 재역전을 거듭했기에 전시 홈페이지 새로고침을 할 때마다 천국과 지옥을 오갔다. 1등 할 수 있었는데!! 아래는 우리 팀사진.  
-![Center example image](https://user-images.githubusercontent.com/35067611/84307330-b72fdc80-ab97-11ea-9b83-b91b0ba2595f.png "Center"){: .center-image}  
+![Center example image](https://user-images.githubusercontent.com/35067611/84307330-b72fdc80-ab97-11ea-9b83-b91b0ba2595f.png "Center"){: .center-image width="100" height="150"}  
 
 정말 감사하게도 수많은 지인들이 축하해주고 별과 댓글을 남겨주셨다. 그 중에서도 주접댓글들은 혼자보기 아까워서 아래처럼 스크랩을 해놓았다 ㅋㅋㅋ  
-![Center example image](https://user-images.githubusercontent.com/35067611/84307788-6ec4ee80-ab98-11ea-9292-ec243f0bb7ec.png "Center"){: .center-image}  
+![Center example image](https://user-images.githubusercontent.com/35067611/84308043-d418df80-ab98-11ea-8973-f98efac95975.png "Center"){: .center-image width="300" height="100"}  
 
-잘생겼단 말은 정말 빈말이겠지만 이렇게 관심가져주는 것만으로도 힘이났다. 다들 감사드립니다!!
-
+잘생겼단 말은 빈말이겠지만 이렇게 관심가져주는 것만으로도 힘이났다. 다들 감사드립니다!!
 
 ### 졸업에 가까워질수록  
 이제 이번학기를 마치면 다음학기가 정말 막학기다. 내가 너무너무 사랑하는 한동에서의 시간이 얼마 남지 않았다. 하루하루가 소중한데 코로나 때문에 정작 등교도 못하고 있으니 아쉬움이 이만저만이 아니다.
