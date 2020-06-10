@@ -17,12 +17,16 @@ comments: true
 
 ### 온라인 전시회  
 일단 우리팀 디자이너가 멋지게 만들어준 UCC 홍보영상부터 감상하고 가시겠다. fuzzing이 무엇인지, 어떤 문제를 어떻게 해결했는지, 그리고 결과까지 보여줌으로써 우리 캡스톤의 기승전결을 잘 설명하고있다. 장담하는데 홍보영상은 우리팀이 최고로 잘 만들었다.  
-<iframe src="https://www.youtube.com/watch?v=ryoi_M4a4SA"></iframe>
+{% include capstone.html id="ryoi_M4a4SA" %}  
+
+
 
 캡스톤 전시회를 온라인으로 하게 되면서 별과 댓글로 인기투표를 했는데 전체 2등을 했다. 솔직히 감사하고 기쁜일이지만 너무 아쉽다. 애초에 상위권이 아니었더라면 신경도 안썼을 인기상이지만 시작하자마자 우린 압도적 1위였다. 그리고 온라인 전시회가 진행되는 3일간 1, 2, 3등이 역전에 재역전을 거듭했기에 전시 홈페이지 새로고침을 할 때마다 천국과 지옥을 오갔다. 1등 할 수 있었는데!! 아래는 우리 팀사진.  
+
 ![Center example image](https://user-images.githubusercontent.com/35067611/84307330-b72fdc80-ab97-11ea-9b83-b91b0ba2595f.png "Center" width="100" height="150"){: .center-image }  
 
 정말 감사하게도 수많은 지인들이 축하해주고 별과 댓글을 남겨주셨다. 그 중에서도 주접댓글들은 혼자보기 아까워서 아래처럼 스크랩을 해놓았다 ㅋㅋㅋ  
+
 ![Center example image](https://user-images.githubusercontent.com/35067611/84308043-d418df80-ab98-11ea-8973-f98efac95975.png "Center" width="100" height="150"){: .center-image width="300" height="100"}  
 
 잘생겼단 말은 빈말이겠지만 이렇게 관심가져주는 것만으로도 힘이났다. 다들 감사드립니다!!
