@@ -16,14 +16,15 @@ comments: true
 
 
 ## 온라인 전시회 🥈등  
-![Center example image](https://user-images.githubusercontent.com/35067611/84589564-70c5d080-ae6a-11ea-9a15-99106dadda66.jpg "Center" width="280" height="40"){: .center-image }  
-![Center example image](https://user-images.githubusercontent.com/35067611/84589564-70c5d080-ae6a-11ea-9a15-99106dadda66.jpg "Center" width="280" height="40"){: .center-image }  
+![Center example image](https://user-images.githubusercontent.com/35067611/84589564-70c5d080-ae6a-11ea-9a15-99106dadda66.jpg "Center" width="140" height="20"){: .center-image }  
+![Center example image](https://user-images.githubusercontent.com/35067611/84589564-70c5d080-ae6a-11ea-9a15-99106dadda66.jpg "Center" width="140" height="20"){: .center-image }  
+1등 할 수 있었는데.. 2등도 잘한거니까ㅠㅠ  
 
 일단 우리팀 디자이너가 멋지게 만들어준 UCC 홍보영상부터 감상하고 가시겠다. fuzzing이 무엇인지, 어떤 문제를 어떻게 해결했는지, 그리고 결과까지 보여줌으로써 우리 캡스톤의 기승전결을 잘 설명하고있다. 장담하건데 홍보영상은 우리팀이 최고로 잘 만들었다.  
 {% include capstone.html %}  
 
 
-캡스톤 전시회를 온라인으로 하게 되면서 별과 댓글로 인기투표를 했는데 전체 2등을 했다. 감사하고 기쁜일이지만 솔직히 너무 아쉽다. 애초에 상위권이 아니었더라면 신경도 안썼을 인기상이지만 시작하자마자 우린 압도적 1위였다. 그리고 온라인 전시회가 진행되는 3일간 1, 2, 3등이 역전에 재역전을 거듭했기에 전시 홈페이지 새로고침을 할 때마다 천국과 지옥을 오갔다. 1등 할 수 있었는데.. 2등도 잘한거니까ㅠㅠ 투표해주신 분들께 정말 감사드린다! 아래는 우리 팀 최종판넬  
+캡스톤 전시회를 온라인으로 하게 되면서 별과 댓글로 인기투표를 했는데 전체 2등을 했다. 감사하고 기쁜일이지만 솔직히 너무 아쉽다. 애초에 상위권이 아니었더라면 신경도 안썼을 인기상이지만 시작하자마자 우린 압도적 1위였다. 그리고 온라인 전시회가 진행되는 3일간 1, 2, 3등이 역전에 재역전을 거듭했기에 전시 홈페이지 새로고침을 할 때마다 천국과 지옥을 오갔다. 투표해주신 분들께 정말 감사드린다! 아래는 우리 팀 최종판넬  
 
 ![Center example image](https://user-images.githubusercontent.com/35067611/84309156-b187c600-ab9a-11ea-8d0d-fa1a925c1444.png "Center"){: .center-image }  
 
