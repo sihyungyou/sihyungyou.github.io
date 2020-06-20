@@ -262,6 +262,12 @@ img {
   border-radius: 5px;
 }
 
+// Image align
+img.alignleft{float:left}
+img.alignright{float:right}
+img.aligncenter{display:block;margin:0 auto}
+
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
