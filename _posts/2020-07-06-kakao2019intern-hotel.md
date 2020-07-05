@@ -7,7 +7,7 @@ comments: true
 
 > 2019 카카오 개발자 겨울 인턴십  
 
-### [문제](https://programmers.co.kr/learn/courses/30/lessons/64063#)  
+[호텔 방 배정](https://programmers.co.kr/learn/courses/30/lessons/64063#)  
 
 ### 접근  
 초기접근은 배열을 사용한 union-find 알고리즘의 사용이었다. 하지만 배열을 사용하면 메모리 부족으로 효율성 테스트를 통과할 수 없다. k가 10^12인데 배열을 k개만큼 선언해야 하기 때문이다. 배열 대신 map을 사용하면 k개가 아니라 room_number의 크기만큼의 (이 문제에서는 최대 200000) 방 정보만 관리하여 문제를 풀 수 있다. 즉 포인트는 호텔이 보유한 방의 개수는 k개인데 실제로 투숙객은 room_number.size() 밖에 안된다는 것이다.  
