@@ -5,7 +5,7 @@ tags: [알고리즘, 프로그래머스, Disjoint-set]
 comments: true
 ---
 
-> 2019 카카오 개발자 겨울 인턴십  
+> 2019 카카오 개발자 겨울 인턴십 문제  
 
 [호텔 방 배정](https://programmers.co.kr/learn/courses/30/lessons/64063#)  
 
