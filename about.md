@@ -21,7 +21,7 @@ permalink: /about/
 
 * 2019.11 [ACM-ICPC 예선 교내 3위, 본선 진출](https://sihyungyou.github.io/acmicpc2019/)  
 
-* 2019.11 한동대학교 SW Festival 스마트 애플리케이션 부문 우수상 (한입만)  
+* 2019.11 <a href='#onebite'>한동대학교 SW Festival 스마트 애플리케이션 부문 우수상 (한입만)</a>  
 
 * 2019.08 - 2019.12 소프트웨어 입문 TA  
 
@@ -51,3 +51,5 @@ permalink: /about/
   <span class="one"></span>
   <span class="two"></span>
 </span>
+
+<h3 id='onebite'> 한입만 with 갓진혁</h3>  
