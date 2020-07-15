@@ -10,13 +10,15 @@ permalink: /about/
 - - -  
 
 ## 나의 타임라인!  
+* 2019.09 - 2020.06 <a href='#capstone'>캡스톤 프로젝트</a>  
+
 * 2019.11 [대경권 프로그래밍 경시대회 본선 진출](https://sihyungyou.github.io/%EB%8C%80%EA%B2%BD%EA%B6%8C%EB%B3%B8%EC%84%A0/)  
 
 * 2019.11 [ACM-ICPC 예선 교내 3위, 본선 진출](https://sihyungyou.github.io/acmicpc2019/)  
 
 * 2019.11 한동대학교 SW Festival 스마트 애플리케이션 부문 우수상 (한입만)  
 
-* 2019.08 - 2019.12 소프트웨어 입문 TA  
+* 2019.09 - 2019.12 소프트웨어 입문 TA  
 
 * 2019.06 [오픈핵 참가](https://sihyungyou.github.io/openhack-2019/)  
 
@@ -38,7 +40,7 @@ permalink: /about/
 
 * 2017.12 - 2018.02 배달애플리케이션 iHungry 개발  
 
-* 2017.08 - 현재 전산동아리 CRA (Computer Research Association)  
+* 2017.09 - 현재 전산동아리 CRA (Computer Research Association)  
 
 * 2016.01 - 2017.10 카투사로 복무  
 
@@ -53,6 +55,29 @@ permalink: /about/
 - - -  
 
 ## 나의 기록들  
+
+<h3 id='capstone'> 캡스톤 프로젝트</h3>  
+
+- 팀원 : 김승우, 박지현, 유시형, 조정인  
+- 지도 : 홍 신 교수님  
+- 도구 : Angora Fuzzer  
+- 주제 : Security Bug 검출을 위한 Greybox Fuzz Testing 기술 및 도구 개발  
+- 역할 : 선행 기술 조사 및 알고리즘 구현  
+- 기능 : 기존 Angora Fuzzer의 퍼징 알고리즘을 고려 및 개선하여 분산환경에서 더 나은 성능의 퍼징 수행  
+
+### 배운점  
+- 의사소통의 중요성  
+- 용어 통일의 중요성  
+- Fuzzing 기술에 대한 이해  
+- Angora Fuzzer 알고리즘에 대한 이해  
+- Software Testing 분야 맛보기  
+- KCC2020 학부생 논문 ACCEPT!  
+
+### 느낀점  
+느낀점은 글 [캡스톤을 마치며](https://sihyungyou.github.io/capstone-done/)에 정리해 놓았다.  
+
+- - -  
+
 <h3 id='onebite'> 한입만 with 갓진혁</h3>  
 
 <img src="https://user-images.githubusercontent.com/35067611/87327376-f5d9fd80-c56e-11ea-95b0-f87a51209b63.jpg">
