@@ -74,7 +74,7 @@ permalink: /about/
 - KCC2020 학부생 논문 ACCEPT!  
 
 ### 느낀점  
-느낀점은 글 [캡스톤을 마치며](https://sihyungyou.github.io/capstone-done/)에 정리해 놓았다.  
+느낀점과 캡스톤 내용에 대한 설명이 되어있는 판넬을 글 [캡스톤을 마치며](https://sihyungyou.github.io/capstone-done/)에 정리해 놓았다.  
 
 - - -  
 
