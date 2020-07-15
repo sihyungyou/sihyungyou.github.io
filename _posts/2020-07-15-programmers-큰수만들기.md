@@ -7,7 +7,7 @@ comments: true
 
 > Programmers  
 
-[큰 수 만들기](https://programmers.co.kr/learn/courses/30/lessons/42746)  
+[큰 수 만들기](https://programmers.co.kr/learn/courses/30/lessons/42883)  
 
 ### 접근  
 이 풀이는 내 힘으로 풀지 못하고 [hyeon_Hwang님의 블로그](https://medium.com/hyeon-hwang/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-%ED%81%B0-%EC%88%98-%EB%A7%8C%EB%93%A4%EA%B8%B0-lv-1-42883-%EC%88%AB%EC%9E%90-%EB%AC%B8%EC%A0%9C-%EA%B7%B8%EB%A6%AC%EB%94%94-585ce3b8c604)를 참고했다.  
