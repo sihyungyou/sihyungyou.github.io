@@ -14,7 +14,7 @@ comments: true
 
 모든 전화번호들의 모든 substring을 map에 넣는다. 예를 들어 12345라는 전화번호가 있다면 ```1```, ```12```, ```123```, ```1234```을 해시테이블에 넣는 것이다. 해시테이블을 만드는 작업이 모두 끝나면 다시 처음부터 모든 전화번호들을 탐색하며 해당 전화번호가 map에 있는지 (즉 다른 전화번호의 substring인지) 여부를 판단한다.  
 
-### O(N^2) 코드 (정확성 100%, 효율성 실패)  
+### O(N^2) 코드  
 ~~~c++
 #include <string>
 #include <vector>
@@ -41,7 +41,7 @@ bool solution(vector<string> phone_book) {
 }
 ~~~
 
-### O(N) 코드 (정확성 100%, 효율성 100%)  
+### O(N) 코드  
 ~~~c++
 #include <string>
 #include <vector>
