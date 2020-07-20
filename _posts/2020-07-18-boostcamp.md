@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "2020 부스트캠프 지원 및 코딩테스트 후기"
-tags: [부스트캠프]
+tags: [부스트캠프, 일상]
 comments: true
 ---
 
