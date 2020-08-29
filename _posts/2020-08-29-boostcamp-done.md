@@ -26,6 +26,7 @@ comments: true
 이번 챌린지 과정에서 힘들면서도 너무 좋았던 것이 팀이었다. zoom을 통해 온라인으로 6시간 이상 씩 이야기를 하다보면 지치고 머리가 핑 돌 때도 있었지만 결국은 팀원들로부터 다시 에너지를 얻고 자극을 받아서 4주를 버틸 수 있었다. 코드가 돌아가면 같이 박수치며 좋아하고 안되면 어떻게든 도움이 되고자 소스를 찾아오고 가끔은 그냥 잡담을 하면서 머리를 식히기도 했다. 아래는 JK님이 한땀한땀 이어붙인 온라인 수료식 기념사진😆
 
 ![challenge-pic](https://user-images.githubusercontent.com/35067611/91627836-4dd0a480-e9f5-11ea-8e0d-b7373f245724.JPG)
+<img width="431" alt="letters" src="https://user-images.githubusercontent.com/35067611/91629838-647ff700-ea07-11ea-9d12-792633f849c7.png">
 
 # 부캠을 하고 제 인생이 바뀌었습니다!? 🏃
 
