@@ -10,6 +10,8 @@ permalink: /about/
 - - -  
 
 ## 나의 타임라인!  
+* 2020.08 - 2020.12 네이버 부스트캠프 5기  
+
 * 2019.09 - 2020.06 <a href='#capstone'>캡스톤 프로젝트</a>  
 
 * 2019.11 [대경권 프로그래밍 경시대회 본선 진출](https://sihyungyou.github.io/%EB%8C%80%EA%B2%BD%EA%B6%8C%EB%B3%B8%EC%84%A0/)  
