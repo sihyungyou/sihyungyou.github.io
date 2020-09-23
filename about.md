@@ -10,13 +10,17 @@ permalink: /about/
 - - -  
 
 ## 나의 타임라인!  
-* 2020.08 - 2020.12 네이버 부스트캠프 5기  
+* 2020.09 - 2020.12 네이버 부스트캠프 5기  
+
+* 2020.09 - 2020.12 CRA 부회장  
+
+* 2020.08 2020한국컴퓨터종합학술대회 학부생/주니어 논문경진대회 최우수상🥇  
 
 * 2019.09 - 2020.06 <a href='#capstone'>캡스톤 프로젝트</a>  
 
 * 2019.11 [대경권 프로그래밍 경시대회 본선 진출](https://sihyungyou.github.io/%EB%8C%80%EA%B2%BD%EA%B6%8C%EB%B3%B8%EC%84%A0/)  
 
-* 2019.11 [ACM-ICPC 예선 교내 3위, 본선 진출](https://sihyungyou.github.io/acmicpc2019/)  
+* 2019.11 [ACM-ICPC 예선 교내 3위🥉, 본선 진출](https://sihyungyou.github.io/acmicpc2019/)  
 
 * 2019.11 한동대학교 SW Festival 스마트 애플리케이션 부문 우수상 (한입만)  
 
@@ -33,6 +37,8 @@ permalink: /about/
 * 2018.09 <a href='#onebite'>배달 애플리케이션 한입만 개발</a>  
 
 * 2018.05 - 2018.12 CREWCIALS 회장  
+
+* 2018.05 한동교내농구대회 HBL 우승🏆  
 
 * 2018.05 <a href='#crewcials'>농구동호회 CREWCIALS 창단</a>  
 
