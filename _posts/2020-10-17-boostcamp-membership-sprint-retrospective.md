@@ -30,12 +30,12 @@ comments: true
 
 아무튼 한 커밋에 포함되는 변경사항들이 많아지면서 리뷰해주시는 리뷰어님도 많이 힘드셨을 것 같다. 기능추가, 개선, 코드정리 등 온갖 것들을 한번에 보고 이해해야하니.. 죄송합니다😭
 
-![commits](https://user-images.githubusercontent.com/35067611/97100097-60a0e600-16d3-11eb-9d12-39affd55d730.png)  
+![commits](https://user-images.githubusercontent.com/35067611/97100097-60a0e600-16d3-11eb-9d12-39affd55d730.png)
 ⬆️ 나름 커밋 메세지에 본문을 포함하려 애쓰는 모습;
 
 커밋을 못하면 PR이라도 잘 쓰자!라는 마인드로 PR 메세지에 영혼을 담았다. 구현한 기능에 대한 설명, 그렇게 생각한 이유, 간략한 코드와 설명, 그리고 프로젝트 진행과정을 항상 써서 PR을 날렸더니 마지막 리뷰에서 따뜻한 칭찬도 받을 수 있었다🤩
 
-![last-review](https://user-images.githubusercontent.com/35067611/97100100-639bd680-16d3-11eb-9987-0c21c60214a8.png)  
+![last-review](https://user-images.githubusercontent.com/35067611/97100100-639bd680-16d3-11eb-9987-0c21c60214a8.png)
 이제 팀프로젝트가 시작되니 기억하자! 커밋은 함수단위로, PR은 기능단위로!
 
 ## 모각코👨‍👩‍👧‍👦 #모여서 #각자 #코딩
