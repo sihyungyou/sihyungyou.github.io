@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[부스트캠프 5기] 학습스프린트 회고"
+title: "[부스트캠프 5기] 멤버십 학습스프린트 회고"
 tags: [부스트캠프, 일상]
 comments: true
 ---
