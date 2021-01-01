@@ -19,9 +19,9 @@ comments: true
 
 ## 3주간의 결과
 
-[boostcamp-2020/IssueTracker-15](https://github.com/boostcamp-2020/IssueTracker-15)
+[이슈트래커 GitHub 바로가기](https://github.com/boostcamp-2020/IssueTracker-15)
 
-[[부스트캠프 5기] 팀 프로젝트 15조 오합지존 팀 3주차 데모](https://youtu.be/JfGMH_VjZQY)
+[이슈트래커 데모 영상](https://youtu.be/JfGMH_VjZQY)
 
 물론 과정도 중요하겠지만 결국에는 결과로 보여줘야하는 것도 개발자의 역량이라고 생각한다. 다행히도 우리팀은 무난히 기능요구사항을 잘 마무리한 것 같다. 그런데 요구사항을 만족했다는 사실보다 웹팀과의 협업을 경험할 수 있었다는 게 정말 큰 수확이다. 함께 API 명세를 정의하거나 GitHub OAuth 기능을 구현하는 등 몇몇 협업포인트가 있었다. 실제 현업에서도 이렇게 한다고들 하던데.. 이 경험이 또 언젠가 잘 쓰일 거라고 믿는다. (아니면 자소설에 한줄 추가 가능할지도?)
 
@@ -57,9 +57,9 @@ comments: true
 
 ## 켠김에 왕까지!
 
-[GitHub 레포](https://github.com/boostcamp-2020/Project18-A-BoostPocket)
+[부스트포켓 GitHub 바로가기](https://github.com/boostcamp-2020/Project18-A-BoostPocket)
 
-[앱스토어 링크](https://apps.apple.com/us/app/부스트포켓/id1544070685)
+[앱스토어 다운로드](https://apps.apple.com/us/app/부스트포켓/id1544070685)
 
 우리팀은 주제를 정할 때 두 가지 방향성에 대해 고민했다. 하나는 기술적 도전(예를 들어 RxSwift, SwiftUI 등 가보지 않은 영역에 대한 도전)을 할 것인가, 나머지 하나는 우리가 할 수 있는 것을 극대화시켜서 시간을 효율적으로 사용하되 완성도를 최대한 높일 것인가였다. 결국 후자를 택했기에 우리는 완성도에 집착했다. 이 때 외적으로 보이는 UI/UX 뿐 아니라 데이터흐름 등에 대한 테스트코드까지 작성해서 코드 내부의 완성도에도 무척 신경을 썼다.
 
