@@ -7,7 +7,7 @@ comments: true
 
 > CodeForces  
 
-### [A번 링크] (https://codeforces.com/contest/1266/problem/A)  
+### [A번 링크](https://codeforces.com/contest/1266/problem/A)  
 
 ### 접근  
 배수 판정법을 이용한 수학문제다. 60의 배수는 3의배수일 조건 : 각 자리 숫자의 합이 3의 배수, 20의 배수일 조건 : 십의 자리가 0, 2, 4, 6, 8이고 일의 자리가 0인 수를 만족하면 된다.
