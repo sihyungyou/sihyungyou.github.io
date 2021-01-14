@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "View & Window"
+title: "View & Window 알아보기"
 tags: [iOS, Swift]
 comments: true
 ---

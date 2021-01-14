@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Scenes"
+title: "Scenes 알아보기"
 tags: [iOS, Swift]
 comments: true
 ---
