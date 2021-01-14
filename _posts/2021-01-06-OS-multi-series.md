@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "멀티프로그래밍, 멀티프로세싱, 멀티스레딩, 멀티태스킹"
-tags: [iOS]
+tags: [OS]
 comments: true
 ---
 
