@@ -144,12 +144,12 @@ GCD에서는 큐의 타입(serial vs. concurrent) 뿐 아니라 작동방식(syn
 
 [Grand Central Dispatch Tutorial for Swift 4: Part 1/2](https://www.raywenderlich.com/5370-grand-central-dispatch-tutorial-for-swift-4-part-1-2)
 
-[iOS ) GCD - Dispatch Queue사용법 (1)](https://zeddios.tistory.com/516)
+[제드님 블로그 - GCD - Dispatch Queue사용법 (1)](https://zeddios.tistory.com/516)
 
 [[iOS Boostcourse] 동시성과 병렬성 그리고 비동기 프로그래밍](https://baked-corn.tistory.com/134)
 
 [[iOS] 동시성, 비동기 프로그래밍 톺아보기](https://k-elon.tistory.com/20)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/foundation/operationqueue)
+[Apple Developer Documentation - OperationQueue](https://developer.apple.com/documentation/foundation/operationqueue)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/dispatch/dispatchqueue)
+[Apple Developer Documentation - DispatchQueue](https://developer.apple.com/documentation/dispatch/dispatchqueue)

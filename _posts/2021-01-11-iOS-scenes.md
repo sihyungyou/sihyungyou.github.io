@@ -49,8 +49,8 @@ WWDC 2019 영상에서는 AppDelegate, SceneDelegate 구조로 나뉘게 되는 
 
 ## References
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/app_and_environment/scenes)
+[Apple Developer Documentation - Scenes](https://developer.apple.com/documentation/uikit/app_and_environment/scenes)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiwindowscene)
+[Apple Developer Documentation - UIWindowScene](https://developer.apple.com/documentation/uikit/uiwindowscene)
 
 [Architecting Your App for Multiple Windows - WWDC 2019 - Videos - Apple Developer](https://developer.apple.com/videos/play/wwdc2019/258/)

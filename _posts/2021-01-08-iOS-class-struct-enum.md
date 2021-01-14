@@ -147,4 +147,4 @@ print(littleAirplane)
 
 [Swift: Value Types vs Reference Types, and When to Use Each](https://www.codementor.io/blog/value-vs-reference-6fm8x0syje)
 
-[Swift ( Enums VS Structures VS Classes)](https://saad-eloulladi.medium.com/swift-enums-vs-structures-vs-classes-938a4cd76c0d)
+[Swift (Enums VS Structures VS Classes)](https://saad-eloulladi.medium.com/swift-enums-vs-structures-vs-classes-938a4cd76c0d)

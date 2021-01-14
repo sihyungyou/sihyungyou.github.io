@@ -78,4 +78,4 @@ setNeedsLayout과 마찬가지로 layoutSubviews를 트리거하는 또 다른 �
 
 [[ios] setNeedsLayout vs layoutIfNeeded](https://baked-corn.tistory.com/105)
 
-[iOS ) View/레이아웃 업데이트 관련 메소드](https://zeddios.tistory.com/359)
+[제드님 블로그](https://zeddios.tistory.com/359)

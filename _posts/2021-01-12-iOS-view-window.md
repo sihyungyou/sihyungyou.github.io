@@ -106,10 +106,10 @@ UIView의 역할은 워낙 눈에 보이는 모든 behavior, content와 직접�
 
 ## References
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621460-view)
+[Apple Developer Documentation - view](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621460-view)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiview)
+[Apple Developer Documentation - UIView](https://developer.apple.com/documentation/uikit/uiview)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiview/1622456-window)
+[Apple Developer Documentation - window](https://developer.apple.com/documentation/uikit/uiview/1622456-window)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiwindow)
+[Apple Developer Documentation - UIWindow](https://developer.apple.com/documentation/uikit/uiwindow)

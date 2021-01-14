@@ -86,14 +86,14 @@ bounds는 superview의 좌표시스템을 따르지 않고 자기자신만의 �
 
 ## References
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiview/1622621-frame)
+[Apple Developer Documentation - Frame](https://developer.apple.com/documentation/uikit/uiview/1622621-frame)
 
-[Apple Developer Documentation](https://developer.apple.com/documentation/uikit/uiview/1622580-bounds)
+[Apple Developer Documentation - Bounds](https://developer.apple.com/documentation/uikit/uiview/1622580-bounds)
 
 [[ios] Bounds vs Frame?](https://baked-corn.tistory.com/81)
 
 [https://www.youtube.com/watch?v=Nfzy1qgxSAg&feature=youtu.be](https://www.youtube.com/watch?v=Nfzy1qgxSAg&feature=youtu.be)
 
-[iOS ) Frame과 Bounds의 차이 (1/2)](https://zeddios.tistory.com/203)
+[제드님 블로그 - Frame과 Bounds의 차이 (1/2)](https://zeddios.tistory.com/203)
 
-[iOS ) Frame과 Bounds의 차이 (2/2)](https://zeddios.tistory.com/231)
+[제드님 블로그 - Frame과 Bounds의 차이 (2/2)](https://zeddios.tistory.com/231)
