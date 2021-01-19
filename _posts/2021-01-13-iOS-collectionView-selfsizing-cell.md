@@ -41,7 +41,7 @@ override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionV
     var frame = layoutAttributes.frame
     frame.size.height = ceil(size.height)
 
-		layoutAttributes.frame = frame
+	layoutAttributes.frame = frame
     return layoutAttributes
 }
 ```
