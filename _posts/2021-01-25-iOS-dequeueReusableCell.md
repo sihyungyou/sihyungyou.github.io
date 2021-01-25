@@ -125,6 +125,7 @@ extension BadTableViewController: UITableViewDataSource {
 ## 개선점을 찾아보자
 
 이렇게 dequeue하는 방식으로 메모리 사용량을 줄이는 방법이 일반적인 상황에서는 충분하다. 하지만 여기서 조금 더 개선해볼 수 없을까? 예를 들어 셀에 이미지가 포함되는 경우를 생각해보자. 아마 실제 상용되는 앱에서도 가끔 경험했을 수 있는데, 인터넷 상황이 좋지 않은 상황에서(이미지 로드에 시간이 더 걸리는 상황에서) 너무 빠르게 스크롤을 하다보면 이미지가 있어야할 곳이 아닌 다른 셀에서 보여지는 경우가 종종있다. 이것은 셀이 재사용되기 때문인데 텍스트와 이미지가 rolled over(뭐라고 번역해야할지..) 되어 올바른 셀에 위치하지 않는 것이다.
+![4](https://user-images.githubusercontent.com/35067611/105666258-381bc880-5f1c-11eb-94f0-a6df3b33de7d.gif)  
 
 이런 현상 역시 `prepareForReuse()` 메소드를 통해 해결(개선)할 수 있다.
 
@@ -136,8 +137,7 @@ override func prepareForReuse() {
 ```
 
 위 코드처럼 셀이 dequeue되기 직전 이미지 요청이 있다면 취소하고, imageView의 image를 nil로 바꾸는 것만으로도 이미지가 로드되지 않았는데 엉뚱한 이미지가 보여지는 현상을 고칠 수 있다.
-
-![4](https://user-images.githubusercontent.com/35067611/105666258-381bc880-5f1c-11eb-94f0-a6df3b33de7d.gif) ![5](https://user-images.githubusercontent.com/35067611/105666266-3b16b900-5f1c-11eb-8d95-3c909b32dbbb.gif)
+![5](https://user-images.githubusercontent.com/35067611/105666266-3b16b900-5f1c-11eb-8d95-3c909b32dbbb.gif)
 
 ## 세 줄 요약
 
