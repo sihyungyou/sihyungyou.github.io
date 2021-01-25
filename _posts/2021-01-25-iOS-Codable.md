@@ -9,8 +9,6 @@ comments: true
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
-# Codable
-
 오늘은 손쉽게 JSON 인코딩/디코딩 과정을 처리해주는 `Codable` 프로토콜에 대해 알아보자.
 
 ## Codable 프로토콜이란?
