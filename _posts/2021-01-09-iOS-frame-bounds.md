@@ -82,7 +82,7 @@ bounds는 superview의 좌표시스템을 따르지 않고 자기자신만의 �
 
 - Frame은 superview의 좌표계기준, bounds는 자기자신의 좌표계를 기준으로 origin과 size가 결정된다.
 - Frame은 단순히 UIView와 동일한 위치나 크기가 아니라 view가 회전되었을 때도 감쌀 수 있는 사각형을 의미한다.
-- Bounds를 옮기면 마치 subview가 움직이는 것 처럼 보이는데 이 현상은 bounds 값의 변경이 해당 view가 superview 기준에서 위치가 옮겨짐을 의미하지 않기 때문이다.
+- Bounds를 옮기면 마치 subview가 움직이는 것 처럼 보이는데 이 현상은 superview의 frame은 변하지 않고 그대로 있되, subview들을 그리는 좌표계의 기준이 달라졌기 때문이다.  
 
 ## References
 
