@@ -97,7 +97,7 @@ class SelfSizingCell: UICollectionViewCell {
         super.awakeFromNib()
 
         self.layer.cornerRadius = 5
-				// width 고정
+		// width 고정
         mainView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 40).isActive = true
     }
 
