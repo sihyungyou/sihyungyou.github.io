@@ -19,7 +19,7 @@ iOS 개발을 하다보면 Dependency Injection(의존성 주입)이라는 덕�
 
 ```swift
 class ViewController: UIViewController {
-	var requestManager: RequestManager?
+    var requestManager: RequestManager?
 }
 ```
 
@@ -46,17 +46,17 @@ viewController.requestManager = RequestManager()
 
 ```swift
 protocol Serializer {
-	func serialize(data: Any) -> Data?
+    func serialize(data: Any) -> Data?
 }
 
 class RequestSerializer: Serializer {
-	func serialize(data: Any) -> Data? {
-		return nil
-	}
+    func serialize(data: Any) -> Data? {
+        return nil
+    }
 }
 
 class DataManager {
-	var serializer: Serializer?
+    var serializer: Serializer?
 }
 ```
 
@@ -93,11 +93,11 @@ dataManager.serializer = OtherSerializer() // 이와 같이 필요에 맞게 다
 
 ```swift
 class DataManager {
-	private let serializer: Serializer
+    private let serializer: Serializer
 
-	init(serializer: Serializer) {
-			self.serializer = serializer
-	}
+    init(serializer: Serializer) {
+        self.serializer = serializer
+    }
 }
 ```
 
@@ -107,7 +107,7 @@ class DataManager {
 
 ```swift
 class DataManager {
-		var serializer: Serializer?
+    var serializer: Serializer?
 }
 
 // 외부 코드
@@ -121,9 +121,9 @@ dataManager.serializer = RequestSerializer()
 
 ```swift
 class DataManager {
-	func serializerRequest(_ request: Request, with serializer: Serializer) -> Data? {
-		return nil
-	}
+    func serializerRequest(_ request: Request, with serializer: Serializer) -> Data? {
+        return nil
+    }
 }
 ```
 
