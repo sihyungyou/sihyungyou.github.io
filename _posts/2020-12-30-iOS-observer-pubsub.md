@@ -49,4 +49,4 @@ In ‘Publisher-Subscriber’ pattern, senders of messages, called publishers, d
 
 ## References
 
-[Observer vs Pub-Sub pattern | Hacker Noon](https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c)
+[Observer vs Pub-Sub pattern - Hacker Noon](https://hackernoon.com/observer-vs-pub-sub-pattern-50d3b27f838c)
