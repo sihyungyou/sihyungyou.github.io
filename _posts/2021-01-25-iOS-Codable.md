@@ -122,13 +122,13 @@ CodingKeys 열거형에서 raw value로 사용되는 string 값들이 encoding, 
 ```swift
 // before
 {
-	"a": "aa",
-	"b": "bb"
+    "a": "aa",
+    "b": "bb"
 }
 
 // after
 {
-	"a": "aa"
+    "a": "aa"
 }
 ```
 

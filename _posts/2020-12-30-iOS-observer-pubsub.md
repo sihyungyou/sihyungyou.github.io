@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Observer vs. Pub/Sub 패턴"
+title: "iOS) Observer vs. Pub/Sub 패턴"
 tags: [iOS]
 comments: true
 ---

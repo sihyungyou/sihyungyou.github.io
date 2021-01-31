@@ -104,15 +104,14 @@ public func downloadJSONData(_ url: URL, completionHandler: @escaping (_ respons
 ```swift
 class HTMLElement {
     let name: String
-		let text: String?
-
-		lazy var asHTML: () -> String = { [unowned self] in
-				if let text = self.text {
-						return "<\(self.name)>\(text)<\(self.name)>"
-				} else {
-						return "<\(self.name)>"
-				}
-		}
+    let text: String?
+    lazy var asHTML: () -> String = { [unowned self] in
+        if let text = self.text {
+            return "<\(self.name)>\(text)<\(self.name)>"
+        } else {
+            return "<\(self.name)>"
+        }
+    }
 }
 ```
 
@@ -122,7 +121,7 @@ class HTMLElement {
 
 참고로 위 예시에서 unowned가 아니라 [weak self]를 사용해도 동일한 효과를 갖는다. 둘의 차이는 Optional type 여부에서 갈린다. 약한참조는 객체를 계속 추적하면서 객체가 사라지면 nil로 바꾸는 반면 unowned는 객체가 사라지면 댕글링 포인터가 남아서 crash가 날 위험이 있다. 즉 unowned 키워드는 절대 사라지지 않을 것이라고 보장되는 객체에만 설정해줘야한다. (그냥 weak을 쓰자)
 
-언제 쓰이는가?
+## 언제 쓰이는가?
 
 strong : 레퍼런스 카운트를 증가시켜 ARC로 인한 메모리 해제를 피하고 객체를 안전히 사용하고자 할 때
 

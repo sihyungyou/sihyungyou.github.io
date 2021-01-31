@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "setNeedsDisplay"
+title: "iOS) setNeedsDisplay"
 tags: [iOS, Swift]
 comments: true
 ---

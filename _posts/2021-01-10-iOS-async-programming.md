@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Asynchronous Programming in iOS"
+title: "iOS) Asynchronous Programming in iOS"
 tags: [iOS, Swift]
 comments: true
 ---
@@ -111,7 +111,7 @@ OperationQueue에 들어온 operation들은 readiness, priority level, and inter
 
 An object that manages the execution of tasks serially or concurrently on your app's main thread or on a background thread.
 
-GCD 역시 비동기 프로그래밍을 위해 메인 스레드가 아닌 background 스레드에서 여러 task들을 `dispatch queues`를 통해 serially/concurrently 실행시킨다.. OperationQueue와 다른 점은 프로그래머가 컨트롤할 여지가 매우 적다는 것이다. 예를 들어 GCD의 경우, 큐에 작업이 들어오면 시스템이 알아서 thread pool에서 스레드를 골라 실행시켜주는데 이 때 어떤 스레드가 선택되는지 장담할 수 없다. (참고로 GCD도 thread-safe함)
+GCD 역시 비동기 프로그래밍을 위해 메인 스레드가 아닌 background 스레드에서 여러 task들을 `dispatch queues`를 통해 serially/concurrently 실행시킨다. OperationQueue와 다른 점은 프로그래머가 컨트롤할 여지가 매우 적다는 것이다. 예를 들어 GCD의 경우, 큐에 작업이 들어오면 시스템이 알아서 thread pool에서 스레드를 골라 실행시켜주는데 이 때 어떤 스레드가 선택되는지 장담할 수 없다. (참고로 GCD도 thread-safe함)
 
 GCD는 동기/비동기적으로 모두 실행시킬 수 있다. 동기적으로 실행시키면 모든 작업이 끝날 때까지 코드가 해당 라인에서 멈춰있을 것이고 비동기적으로 실행시키면 코드 실행흐름이 막히지 않고 계속 진행된다.
 

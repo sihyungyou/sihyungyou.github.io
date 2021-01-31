@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "코어데이터 정복하기"
-tags: [iOS]
+title: "iOS) 코어데이터 정복하기"
+tags: [iOS, Swift]
 comments: true
 ---
 

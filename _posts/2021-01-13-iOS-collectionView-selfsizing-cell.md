@@ -41,7 +41,7 @@ override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionV
     var frame = layoutAttributes.frame
     frame.size.height = ceil(size.height)
 
-	layoutAttributes.frame = frame
+    layoutAttributes.frame = frame
     return layoutAttributes
 }
 ```
@@ -80,7 +80,7 @@ override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionV
 
 즉, 정리하면 레이블과 버튼이 Cell의 사이즈에 여유공간이 많이 남아서 둘 중 하나는 커져야한다면 레이블을 크게 만들되, 버튼의 intrinsic size보다는 커지지 못하게 우선순위를 정해주면 된다.
 
-1. Content Hugging Priority : **버튼 250, 레이블 251**
+1. Content Hugging Priority : **버튼 251, 레이블 250**
 2. Compression Resistance Priority : **버튼 751, 레이블 750**
 
 ![4](https://user-images.githubusercontent.com/35067611/104598816-5aab1780-56ba-11eb-841b-0e8f0c7a4eb0.png)

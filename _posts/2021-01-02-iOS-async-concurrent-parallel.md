@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "비동기, 동시성, 병렬성"
+title: "iOS) 비동기, 동시성, 병렬성"
 tags: [iOS]
 comments: true
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Delegate 패턴"
+title: "iOS) Delegate 패턴"
 tags: [iOS]
 comments: true
 ---

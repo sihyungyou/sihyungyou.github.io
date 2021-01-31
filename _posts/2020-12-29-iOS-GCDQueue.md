@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "GCD Queue에 대하여"
-tags: [iOS]
+title: "iOS) GCD Queue에 대하여"
+tags: [iOS, Swift]
 comments: true
 ---
 

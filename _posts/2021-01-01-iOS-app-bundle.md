@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS 앱 번들 구조와 샌드박스 방식"
+title: "iOS) iOS 앱 번들 구조와 샌드박스 방식"
 tags: [iOS]
 comments: true
 ---
@@ -23,7 +23,7 @@ comments: true
 
 - **Info.plist** 파일: 앱을 위한 컨피규레이션 정보를 담은 런타임 컨피규레이션 파일.
 - **Executable**: 모든 앱은 반드시 실행가능한 파일이 필요하다. 앱의 main entry point와 앱 타겟과 정적으로 link된 모든 코드를 포함한다.
-- **Resource** files: Executable file 밖에 있는 데이터들을 의미한다. 보통 이미지, 아이콘, 사운드, nib 파일, 문자열 파일, 컨피규레이션 파일, 데이터 파일 등을 포함한다. 모든 리소스 파일들은 localized 혹은 nonlocalized 될 수 있으며 localized 된 파일이라면 Resources 서브디렉토리 내에 대응하는 언어나 locale정보에 `lproj` 확장자를 가진 파일로 저장된다.
+- **Resource files**: Executable file 밖에 있는 데이터들을 의미한다. 보통 이미지, 아이콘, 사운드, nib 파일, 문자열 파일, 컨피규레이션 파일, 데이터 파일 등을 포함한다. 모든 리소스 파일들은 localized 혹은 nonlocalized 될 수 있으며 localized 된 파일이라면 Resources 서브디렉토리 내에 대응하는 언어나 locale정보에 `lproj` 확장자를 가진 파일로 저장된다.
 - **Other support files**: 맥의 앱에는 추가적인 high-level 리소스(예를 들어 private framework, plug-in, 다큐먼트 템플릿, 커스텀 데이터 리소스 등)을 추가할 수 있다. iOS에서는 custom data resource를 포함하는 것이 가능하지만 custom framework, plug-ins는 불가능하다.
 
 애플리케이션 번들 중 리소스는 거의 대부분 옵셔널하지만 항상 그런 것은 아니다. 예를 들어 iOS 앱은 보통 추가적인 아이콘 이미지를 요구하기도한다.

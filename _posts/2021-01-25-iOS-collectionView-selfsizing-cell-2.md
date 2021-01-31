@@ -79,7 +79,7 @@ if let collectionViewLayout = collectionView.collectionViewLayout as? UICollecti
 
 Set this constant as the value for the `estimatedItemSize` property to enable self-sizing cells for your collection view. This is a non-zero, placeholder value that tells the collection view to query each cell for its actual size using the cell’s `preferredLayoutAttributesFitting(_:)` method.
 
-컬렉션뷰의 셀이 self-sizing 되도록 하기 위해서는 이 값을 estimatedItemSize에 대입하라고 설명한다. 그러면 preferredLayoutAttributesFitting 메소드를 활용해 셀의 실제 사이즈를 불러오도록 할 수 있다고 한다. 이 메소드는 [이전 포스팅](https://sihyungyou.github.io/iOS-collectionView-selfsizing-cell/)에서 다룬 적이 있는데 역시 self-sizing cell에 대한 이야기이다. 결국 기존에 포스팅한 방법을 좀 더 코드 레벨에서 쉽게 구현해주는 방법인 것이다!
+컬렉션뷰의 셀이 self-sizing 되도록 하기 위해서는 이 값을 estimatedItemSize에 대입하라고 설명한다. 그러면 **preferredLayoutAttributesFitting** 메소드를 활용해 셀의 실제 사이즈를 불러오도록 할 수 있다고 한다. 이 메소드는 [이전 포스팅](https://sihyungyou.github.io/iOS-collectionView-selfsizing-cell/)에서 다룬 적이 있는데 역시 self-sizing cell에 대한 이야기이다. 결국 기존에 포스팅한 방법을 좀 더 코드 레벨에서 쉽게 구현해주는 방법인 것이다!
 
 ## Step 3. Width 고정
 
@@ -97,7 +97,8 @@ class SelfSizingCell: UICollectionViewCell {
         super.awakeFromNib()
 
         self.layer.cornerRadius = 5
-		// width 고정
+
+        // width 고정
         mainView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.size.width - 40).isActive = true
     }
 

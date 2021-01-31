@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "GCD vs. NSOperation"
-tags: [iOS]
+title: "iOS) GCD vs. NSOperation"
+tags: [iOS, Swift]
 comments: true
 ---
 

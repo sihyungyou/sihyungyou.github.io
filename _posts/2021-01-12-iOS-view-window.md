@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "View & Window 알아보기"
+title: "iOS) View & Window 알아보기"
 tags: [iOS, Swift]
 comments: true
 ---
@@ -93,7 +93,7 @@ UIView가 하는 일:
     - Views can adjust the size and position of their subviews.
     - Use Auto Layout to define the rules for resizing and repositioning your views in response to changes in the view hierarchy.
 - Event handling
-    - A view is a subclass of `[UIResponder](https://developer.apple.com/documentation/uikit/uiresponder)` and can respond to touches and other types of events.
+    - A view is a subclass of `UIResponder` and can respond to touches and other types of events.
     - Views can install gesture recognizers to handle common gestures.
 
 UIView의 역할은 워낙 눈에 보이는 모든 behavior, content와 직접적이라서 거의다 사용해본 것 같다.

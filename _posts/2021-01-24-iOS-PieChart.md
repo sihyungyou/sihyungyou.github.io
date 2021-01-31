@@ -121,7 +121,7 @@ func animateChart() {
 }
 
 extension PieChartView: CAAnimationDelegate {
-		// addSlice 함수가 끝나면 (그리는 작업이 끝나면) 불리는 함수로 다음 슬라이스가 있는지 확인한다
+    // addSlice 함수가 끝나면 (그리는 작업이 끝나면) 불리는 함수로 다음 슬라이스가 있는지 확인한다
     // 있다면 다음 슬라이스에 대해 그리는 과정을 반복하는 함수
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {

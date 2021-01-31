@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Frame vs. Bounds"
+title: "iOS) Frame vs. Bounds"
 tags: [iOS, Swift]
 comments: true
 ---
@@ -92,7 +92,7 @@ bounds는 superview의 좌표시스템을 따르지 않고 자기자신만의 �
 
 [[ios] Bounds vs Frame?](https://baked-corn.tistory.com/81)
 
-[https://www.youtube.com/watch?v=Nfzy1qgxSAg&feature=youtu.be](https://www.youtube.com/watch?v=Nfzy1qgxSAg&feature=youtu.be)
+[Sean Allen 유튜브](https://www.youtube.com/watch?v=Nfzy1qgxSAg&feature=youtu.be)
 
 [제드님 블로그 - Frame과 Bounds의 차이 (1/2)](https://zeddios.tistory.com/203)
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "setNeedsLayout vs. layoutIfNeeded"
+title: "iOS) setNeedsLayout vs. layoutIfNeeded"
 tags: [iOS, Swift]
 comments: true
 ---
@@ -17,7 +17,7 @@ iOS 개발을 하다보면 심심치 않게 `setNeedsLayout`, `layoutIfNeeded` �
 
 ![1](https://user-images.githubusercontent.com/35067611/104595160-8b3c8280-56b5-11eb-9e06-ee2afae77021.png)
 
-위 사진처럼 iOS 애플리케이션은 유저 인터랙션을 모두 이벤트 큐에 넣고, 런 루프가 큐에서 이벤트를 하나씩 빼와 애플리케이션 오브젝트에게 dispatch 해주면서 처리하는 방식으로 동작한다. 이 이벤트 핸들러들이 모두 처리되고 반환되면 다시 메인 런 루프로 돌아오는 것이다. 그리고 이 때 핸들러가 처리되면서 뷰에 일어난 변경사항을 적용하여뷰들을 다시 그리고 배치하는 작업을  `update cycle`가 담당하게 된다.
+위 사진처럼 iOS 애플리케이션은 유저 인터랙션을 모두 이벤트 큐에 넣고, 런 루프가 큐에서 이벤트를 하나씩 빼와 애플리케이션 오브젝트에게 dispatch 해주면서 처리하는 방식으로 동작한다. 이 이벤트 핸들러들이 모두 처리되고 반환되면 다시 메인 런 루프로 돌아오는 것이다. 그리고 이 때 핸들러가 처리되면서 뷰에 일어난 변경사항을 적용하여 뷰들을 다시 그리고 배치하는 작업을  `update cycle`가 담당하게 된다.
 
 ## Update Cycle
 
@@ -33,7 +33,7 @@ iOS 개발을 하다보면 심심치 않게 `setNeedsLayout`, `layoutIfNeeded` �
 
 ### layoutSubviews()
 
-이 메소드는 UIView의 메소드로 해당 뷰와 모든 하위뷰의 **repositioning**, **resizing**을 handle한다.즉, 시스템은 뷰의 프레임을 다시 계산해야할 때 이 메소드를 호출한다. 그러므로 프레임을 세팅하거나 위치와 크기에 대해서 specify 해야 할 때는 이 메소드를 override 해야한다. 단, 해당뷰와 모든 하위뷰에 대해서 작동하기 때문에 이 메소드는 상당히 expensive하다. (모든 하위뷰의 layoutSubviews 메소드도 각각 불린다는 뜻이다) 그러므로 이 메소드는 개발자가 명시적으로 호출해서는 안되고, 시스템이 호출하도록 둬야한다. (그래서 항상 override를 통해 재정의만 한다)
+이 메소드는 UIView의 메소드로 해당 뷰와 모든 하위뷰의 **repositioning**, **resizing**을 handle한다. 즉, 시스템은 뷰의 프레임을 다시 계산해야할 때 이 메소드를 호출한다. 그러므로 프레임을 세팅하거나 위치와 크기에 대해서 specify 해야 할 때는 이 메소드를 override 해야한다. 단, 해당뷰와 모든 하위뷰에 대해서 작동하기 때문에 이 메소드는 상당히 expensive하다. (모든 하위뷰의 layoutSubviews 메소드도 각각 불린다는 뜻이다) 그러므로 이 메소드는 개발자가 명시적으로 호출해서는 안되고, 시스템이 호출하도록 둬야한다. (그래서 항상 override를 통해 재정의만 한다)
 
 다만 시스템으로 하여금 이 메소드가 호출될 수 있도록 트리거하는 less expensive한 메소드가 존재하는데 그것이 바로 setNeedsLayout, layoutIfNeeded 이다. 이 메소드들은 **업데이트 싸이클이 아니라 메인 런 루프 시점에** layoutSubviews를 트리거한다! 또한 이런 명시적인 메소드 외에도 시스템 내부에서 자동으로 layoutSubviews를 트리거하는 경우가 있다. 이들은 모두 레이아웃에 변경이 일어나는 이벤트들인데 아래와 같다.
 
@@ -78,4 +78,4 @@ setNeedsLayout과 마찬가지로 layoutSubviews를 트리거하는 또 다른 �
 
 [[ios] setNeedsLayout vs layoutIfNeeded](https://baked-corn.tistory.com/105)
 
-[제드님 블로그](https://zeddios.tistory.com/359)
+[제드님 블로그 - View/레이아웃 업데이트 관련 메소드](https://zeddios.tistory.com/359)

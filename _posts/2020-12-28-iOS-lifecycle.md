@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "앱/Scene 생명주기"
+title: "iOS) 앱/Scene 생명주기"
 tags: [iOS]
 comments: true
 ---

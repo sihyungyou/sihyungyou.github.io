@@ -23,7 +23,7 @@ comments: true
 
 ```swift
 struct Korean {
-		// 정적(static) 변수로 데이터 영역에 할당
+	// 정적(static) 변수로 데이터 영역에 할당
     static let country = "Korea"
 }
 

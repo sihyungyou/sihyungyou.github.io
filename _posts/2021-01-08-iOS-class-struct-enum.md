@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Struct vs. Class vs. Enum"
+title: "iOS) Struct vs. Class vs. Enum"
 tags: [iOS, Swift]
 comments: true
 ---
@@ -17,10 +17,10 @@ comments: true
 
 ```swift
 class Person {
-		var name: String
-		init(name: String) {
-				self.name = name
-		}
+	var name: String
+	init(name: String) {
+		self.name = name
+	}
 }
 
 var p1 = Person(name: "Jason")
@@ -31,10 +31,10 @@ p1.name = "Daniel" // p2.name 또한 Daniel일 것
 
 ```swift
 struct Person {
-		var name: String
-		init(name: String) {
-				self.name = name
-		}
+	var name: String
+	init(name: String) {
+		self.name = name
+	}
 }
 
 var p1 = Person(name: "Jason")

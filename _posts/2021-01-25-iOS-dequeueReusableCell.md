@@ -9,7 +9,7 @@ comments: true
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
-부스트포켓 프로젝트를 진행하다가 아래와 같은 버그를 경험한 적이 있다. 오늘은 이 버그를 해결할 수 있었던 방법과 해결과정에서 추가적으로 공부할 수 있었던 `DequeueReusableCellWithIdentifier` 과정에 대한 이해와 사용 이유를 정리해보았다.
+부스트포켓 프로젝트를 진행하다가 아래와 같은 버그를 경험한 적이 있다. 오늘은 이 버그를 해결할 수 있었던 방법과 해결과정에서 추가적으로 공부할 수 있었던 `dequeueReusableCellWithIdentifier` 과정에 대한 이해와 사용 이유를 정리해보았다.
 
 ## 현상
 ![1](https://user-images.githubusercontent.com/35067611/105666246-30f4ba80-5f1c-11eb-9d91-a2124efc6afb.gif)
@@ -45,9 +45,9 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
     let currentCountry = countries[indexPath.row]
 
-		if currentCountry.isSelected {
-				cell.accessoryType = .checkmark
-		}
+    if currentCountry.isSelected {
+        cell.accessoryType = .checkmark
+    }
 
     cell.configure(with: currentCountry)
 
@@ -57,7 +57,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
 
 ## 굳이 왜 DequeueReusableCellWithIdentifier를 사용할까?
 
-이쯤되면 이런 생각이 든다. "애초에 dequeue 하는 방식이 아니라 실제 데이터소스 개수 만크 cell 객체 생성해서 테이블뷰에 보여줬으면 되는 거 아닌가?" 물론 가능하다. 예를 들면 아래와 같이 코드를 작성하는 방법이 있다. 테이블뷰에 보여줘야 할 데이터가 1000개라고 가정한 경우이다.
+이쯤되면 이런 생각이 든다. "애초에 dequeue 하는 방식이 아니라 실제 데이터소스 개수 만큼 cell 객체를 생성해서 테이블뷰에 보여줬으면 되는 거 아닌가?" 물론 가능하다. 예를 들면 아래와 같이 코드를 작성하는 방법이 있다. 테이블뷰에 보여줘야 할 데이터가 1000개라고 가정한 경우이다.
 
 ```swift
 import UIKit
@@ -95,10 +95,6 @@ extension BadTableViewController {
 
 }
 
-extension BadTableViewController: UITableViewDelegate {
-
-}
-
 extension BadTableViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -111,8 +107,8 @@ extension BadTableViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-				// 위에서 생성해놓은 1000개의 cell 인스턴스 배열에서 꺼내쓰기만 하면 된다.
-				// 즉, dequeu 과정이 없다!
+        // 위에서 생성해놓은 1000개의 cell 인스턴스 배열에서 꺼내쓰기만 하면 된다.
+        // 즉, dequeu 과정이 없다!
         let cell = cells[indexPath.row]
         return cell
     }
