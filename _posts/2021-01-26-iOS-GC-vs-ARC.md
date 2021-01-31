@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "타 언어의 GC와 Swift ARC의 차이"
+title: "iOS) 타 언어의 GC와 Swift ARC의 차이"
 tags: [iOS, Swift]
 comments: true
 ---

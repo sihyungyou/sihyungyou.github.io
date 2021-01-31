@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "CollectionView Self-Sizing Cell 2탄"
+title: "iOS) CollectionView Self-Sizing Cell 2탄"
 tags: [iOS, Swift]
 comments: true
 ---

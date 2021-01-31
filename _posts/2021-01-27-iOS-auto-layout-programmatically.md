@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Auto Layout 설정하기 (programmatically)"
+title: "iOS) Auto Layout 설정하기 (programmatically)"
 tags: [iOS, Swift]
 comments: true
 ---

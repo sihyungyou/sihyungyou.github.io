@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Core Animation 맛보기"
+title: "iOS) Core Animation 맛보기"
 tags: [iOS, Swift]
 comments: true
 ---

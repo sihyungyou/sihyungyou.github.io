@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS의 메모리구조 - Code, Data, Stack, Heap"
+title: "iOS) 메모리구조 - Code, Data, Stack, Heap"
 tags: [iOS, Swift]
 comments: true
 ---

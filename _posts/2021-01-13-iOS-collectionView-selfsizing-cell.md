@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "CollectionView Self-Sizing Cell"
+title: "iOS) CollectionView Self-Sizing Cell"
 tags: [iOS, Swift]
 comments: true
 ---

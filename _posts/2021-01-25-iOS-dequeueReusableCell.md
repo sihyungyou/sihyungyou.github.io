@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "dequeueReusableCellWithIdentifier 과정과 사용이유"
+title: "iOS) dequeueReusableCellWithIdentifier 과정과 사용이유"
 tags: [iOS, Swift]
 comments: true
 ---

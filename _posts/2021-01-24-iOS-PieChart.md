@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "PieChart 그려보기"
+title: "iOS) PieChart 그려보기"
 tags: [iOS, Swift]
 comments: true
 ---

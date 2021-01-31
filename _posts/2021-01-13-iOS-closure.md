@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Swift의 클로저"
+title: "iOS) Swift의 클로저"
 tags: [iOS, Swift]
 comments: true
 ---
