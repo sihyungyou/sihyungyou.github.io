@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS) Swift의 Hash Collision 해결"
+title: "iOS) Swift는 해시충돌을 어떻게 해결할까?"
 tags: [iOS, Swift]
 comments: true
 ---
