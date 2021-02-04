@@ -15,7 +15,7 @@ Java를 예로 들면 jdk7까지는 linked list를 사용한 separte chaining �
 
 의외로 답은 금방 찾았다. Set에 대한 [미디엄 글](https://heartbeat.fritz.ai/diving-into-data-structures-in-swift-sets-e972c5a26b72)을 읽다가 "this is how Swift resolves collisions in sets and dictionaries—open addressing with linear probing" 이라는 문구를 발견했다. 또, [스택오버플로우](https://stackoverflow.com/questions/28379809/how-are-hash-collisions-handled)우에서도 찾을 수 있었는데, 어떤 용자들이 `NSDictionary` 코드를 뜯어보고 결론 내리기를 역시 linear probing 방식으로 해시충돌을 해결한다고 한다.
 
-A this point, the only way to find out how Swift handles collisions would be disassembling the library (that is, unless you work for Apple, and have access to the source code). Curious people did that to NSDictionary, and determined that it uses **linear probing**, the simplest variation of the open addressing technique.
+"A this point, the only way to find out how Swift handles collisions would be disassembling the library (that is, unless you work for Apple, and have access to the source code). Curious people did that to NSDictionary, and determined that it uses **linear probing**, the simplest variation of the open addressing technique."
 
 ## Hashable, Equatable
 
