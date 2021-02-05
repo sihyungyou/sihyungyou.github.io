@@ -55,3 +55,5 @@ GC는 Mark and Sweep 프로세스를 통해 메모리에서 필요없는 부분�
 [소들이님 블로그 - iOS) 메모리 관리 (1/3) - ARC(Automatic Reference Counting)](https://babbab2.tistory.com/26)
 
 [가비지 컬렉터(Garbage Collector)와 Mark & Sweep](https://imasoftwareengineer.tistory.com/103)
+
+[StackOverflow - How does Java solve retain cycles in garbage collection?](https://stackoverflow.com/a/20993931)
