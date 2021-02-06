@@ -5,7 +5,7 @@ tags: [iOS, Swift]
 comments: true
 ---
 
-> Cocoa Design Pattern - Singleton  
+> Swift Interview Questions and Answers - Beginner  
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
