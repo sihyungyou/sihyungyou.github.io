@@ -41,6 +41,8 @@ var tutorial2 = tutorial1
 
 만약 Tutorial이 클래스였다면 tutorial1.difficulty, tutorial2.difficulty 모두 2일 것이다. 클래스는 Swift의 참조타입으로 tutorial1의 프로퍼티를 변경하면 tutorial2에도 영향을 미치고 역도 동일하다.
 
+---
+
 ### #2
 
 You’ve declared view1 with var, and you’ve declared view2 with let. What’s the difference, and will the last line compile?
@@ -73,6 +75,8 @@ view2 = view1 // Error: view2 is immutable
 let view2 = UIView()
 view2.alpha = 0.5 // Yes!
 ```
+
+---
 
 ### #3
 
