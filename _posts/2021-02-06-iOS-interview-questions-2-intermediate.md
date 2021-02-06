@@ -9,7 +9,7 @@ comments: true
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
-[Swift 면접 질문 - Beginner](https://sihyungyou.github.io/iOS-interview-questions-beginner/)에 이어지는 글로, 본 글은 Intermediate 레벨의 문답이다.
+[Swift 면접 질문 - Beginner](https://sihyungyou.github.io/iOS-interview-questions-1-beginner/)에 이어지는 글로, 본 글은 Intermediate 레벨의 문답이다.
 
 ### Question #1
 
