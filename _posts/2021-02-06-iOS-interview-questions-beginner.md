@@ -11,7 +11,7 @@ comments: true
 
 raywenderlich에서 Swift 인터뷰 질문들에 대한 문답을 Beginner, Intermediate, Advanced 단계로 나누어 정리해놓은 글을 발견했다. 각 레벨의 질문과 답에 대해 내 나름대로 답을 써보고, 영어로 제공되는 답을 번역해보려한다. 본 글은 Beginner 레벨이다.
 
-### #1
+### #1 What are the values of `tutorial1.difficulty` and `tutorial2.difficulty`? Would this be any different if Tutorial was a class? Why or why not?
 
 ```swift
 struct Tutorial {
@@ -22,8 +22,6 @@ var tutorial1 = Tutorial()
 var tutorial2 = tutorial1
 tutorial2.difficulty = 2
 ```
-
-What are the values of `tutorial1.difficulty` and `tutorial2.difficulty`? Would this be any different if Tutorial was a class? Why or why not?
 
 ### 나의 답
 
@@ -43,9 +41,7 @@ var tutorial2 = tutorial1
 
 ---
 
-### #2
-
-You’ve declared view1 with var, and you’ve declared view2 with let. What’s the difference, and will the last line compile?
+### #2 You’ve declared view1 with var, and you’ve declared view2 with let. What’s the difference, and will the last line compile?
 
 ```swift
 import UIKit
@@ -78,9 +74,7 @@ view2.alpha = 0.5 // Yes!
 
 ---
 
-### #3
-
-This complicated code sorts an array of names alphabetically. Simplify the closure as much as you can.
+### #3 This complicated code sorts an array of names alphabetically. Simplify the closure as much as you can.
 
 ```swift
 var animals = ["fish", "cat", "chicken", "dog"]
