@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[번역] Managing a Shared Resource Using a Singleton"
+title: "iOS) [번역] Managing a Shared Resource Using a Singleton"
 tags: [iOS, Swift]
 comments: true
 ---

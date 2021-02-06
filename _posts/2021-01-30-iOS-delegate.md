@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[번역] Using Delegates to Customize Object Behavior"
+title: "iOS) [번역] Using Delegates to Customize Object Behavior"
 tags: [iOS, Swift]
 comments: true
 ---
