@@ -37,20 +37,20 @@ Here's a model of a thermometer as a class and a struct. The compiler will compl
 
 ```swift
 public class ThermometerClass {
-		private(set) var temperature: Double = 0.0
-	  public func registerTemperature(_ temperature: Double) {
-	    self.temperature = temperature
-	  }
+    private(set) var temperature: Double = 0.0
+    public func registerTemperature(_ temperature: Double) {
+        self.temperature = temperature
+    }
 }
 
 let thermometerClass = ThermometerClass()
 thermometerClass.registerTemperature(56.0)
 
 public struct ThermometerStruct {
-	  private(set) var temperature: Double = 0.0
-	  public mutating func registerTemperature(_ temperature: Double) {
-	    self.temperature = temperature
-	  }
+    private(set) var temperature: Double = 0.0
+    public mutating func registerTemperature(_ temperature: Double) {
+        self.temperature = temperature
+    }
 }
 
 let thermometerStruct = ThermometerStruct()
@@ -75,7 +75,7 @@ What will this code print and why?
 var thing = "cars"
 
 let closure = { [thing] in
-	  print("I love \(thing)")
+    print("I love \(thing)")
 }
 
 thing = "airplanes"
@@ -95,7 +95,7 @@ closure()
 var thing = "cars"
 
 let closure = {    
-	  print("I love \(thing)")
+    print("I love \(thing)")
 }
 
 thing = "airplanes"
@@ -109,12 +109,13 @@ Here's a global function that counts the number of unique values in an array:
 
 ```swift
 func countUniques<T: Comparable>(_ array: Array<T>) -> Int {
-	  let sorted = array.sorted()
-	  let initial: (T?, Int) = (.none, 0)
-	  let reduced = sorted.reduce(initial) {
-		    ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
-	  }
-	  return reduced.1
+    let sorted = array.sorted()
+    let initial: (T?, Int) = (.none, 0)
+    let reduced = sorted.reduce(initial) {
+        ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
+    }
+
+    return reduced.1
 }
 ```
 
@@ -140,7 +141,7 @@ extension Array where Element : Comparable {
         let sorted = self.sorted()
         let initial: (Element?, Int) = (.none, 0)
         let reduced = sorted.reduce(initial) {
-          ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
+            ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
         }
         return reduced.1
     }
@@ -153,14 +154,14 @@ countUniques 함수를 Array의 `extension`으로 작성할 수 있다.
 
 ```swift
 extension Array where Element: Comparable {
-	  func countUniques() -> Int {
-		    let sortedValues = sorted()
-		    let initial: (Element?, Int) = (.none, 0)
-		    let reduced = sortedValues.reduce(initial) {
-			      ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
-		    }
-		    return reduced.1
-	  }
+    func countUniques() -> Int {
+        let sortedValues = sorted()
+        let initial: (Element?, Int) = (.none, 0)
+        let reduced = sortedValues.reduce(initial) {
+            ($1, $0.0 == $1 ? $0.1 : $0.1 + 1)
+        }
+        return reduced.1
+    }
 }
 ```
 
@@ -185,6 +186,7 @@ func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
     if divisor == 0 {
         return nil
     }
+
     return dividend! / divisor!
 }
 ```
@@ -207,21 +209,17 @@ func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
 
 ```swift
 func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
-	  guard let dividend = dividend else { return nil }
-	  guard let divisor = divisor else { return nil }
-	  guard divisor != 0 else { return nil }
-	  return dividend / divisor
+    guard let dividend = dividend else { return nil }
+    guard let divisor = divisor else { return nil }
+    guard divisor != 0 else { return nil }
+    return dividend / divisor
 }
 ```
 
 ```swift
 func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
-    guard
-        let dividend = dividend,
-        let divisor = divisor,
-        divisor != 0
-        else {
-            return nil
+    guard let dividend = dividend, let divisor = divisor, divisor != 0 else {
+        return nil
     }
     return dividend / divisor
 }
@@ -247,10 +245,7 @@ func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
 
 ```swift
 func divide(_ dividend: Double?, by divisor: Double?) -> Double? {
-    if
-        let dividend = dividend,
-        let divisor = divisor,
-        divisor != 0 {
+    if let dividend = dividend, let divisor = divisor, divisor != 0 {
         return dividend / divisor
     } else {
         return nil
@@ -296,7 +291,7 @@ To declare a static property or function, you use the static modifier on value t
 
 ```swift
 struct Sun {
-	  static func illuminate() {}
+    static func illuminate() {}
 }
 ```
 
@@ -313,8 +308,9 @@ static 키워드는 프로퍼티나 함수를 static하게 만들지만 override
 ```swift
 class Star {
     class func spin() {}
-    static func illuminate() {}
+        static func illuminate() {}
 }
+
 class Sun : Star {
     override class func spin() {
         super.spin()
