@@ -9,9 +9,9 @@ comments: true
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
-raywenderlich에서 Swift 인터뷰 질문들에 대한 문답을 Beginner, Intermediate, Advanced 단계로 나누어 정리해놓은 글을 발견했다. 각 레벨의 질문과 답에 대해 내 나름대로 답을 써보고, 영어로 제공되는 답을 번역해보려한다. 본 글은 Beginner 레벨이다.
+[raywenderlich](https://www.raywenderlich.com/762435-swift-interview-questions-and-answers#toc-anchor-013)에서 Swift 인터뷰 질문들에 대한 문답을 Beginner, Intermediate, Advanced 단계로 나누어 정리해놓은 글을 발견했다. 각 레벨의 질문과 답에 대해 내 나름대로 답을 써보고, 영어로 제공되는 답을 번역해보려한다. 본 글은 Beginner 레벨이다.
 
-### #1 What are the values of `tutorial1.difficulty` and `tutorial2.difficulty`? Would this be any different if Tutorial was a class? Why or why not?
+### Question #1
 
 ```swift
 struct Tutorial {
@@ -22,6 +22,8 @@ var tutorial1 = Tutorial()
 var tutorial2 = tutorial1
 tutorial2.difficulty = 2
 ```
+
+What are the values of `tutorial1.difficulty` and `tutorial2.difficulty`? Would this be any different if Tutorial was a class? Why or why not?
 
 ### 나의 답
 
@@ -39,9 +41,9 @@ var tutorial2 = tutorial1
 
 만약 Tutorial이 클래스였다면 tutorial1.difficulty, tutorial2.difficulty 모두 2일 것이다. 클래스는 Swift의 참조타입으로 tutorial1의 프로퍼티를 변경하면 tutorial2에도 영향을 미치고 역도 동일하다.
 
----
+### Question #2
 
-### #2 You’ve declared view1 with var, and you’ve declared view2 with let. What’s the difference, and will the last line compile?
+You’ve declared view1 with var, and you’ve declared view2 with let. What’s the difference, and will the last line compile?
 
 ```swift
 import UIKit
@@ -72,9 +74,9 @@ let view2 = UIView()
 view2.alpha = 0.5 // Yes!
 ```
 
----
+### Question #3
 
-### #3 This complicated code sorts an array of names alphabetically. Simplify the closure as much as you can.
+This complicated code sorts an array of names alphabetically. Simplify the closure as much as you can.
 
 ```swift
 var animals = ["fish", "cat", "chicken", "dog"]
@@ -116,7 +118,7 @@ animals.sort { $0 < $1 }
 animals.sort(by: <)
 ```
 
-### #4
+### Question #4
 
 This code creates two classes: Address and Person. It then creates two Person instances to represent Ray and Brian.
 
@@ -168,7 +170,7 @@ What's going on here? How can you fix the problem?
 
 `Address`는 클래스이며 참조 시멘틱(reference semantics)이므로 `headquarters`는 ray나 brian 중 어떤 객체를 통해 접근해도 동일한 인스턴스이다. headquarters의 주소를 바꿈으로써 두 쪽 모두 바꾸게 될 것이다. 이를 해결하기 위한 방법은 brian을 위한 Address를 새로 생성하든지 Address를 구조체로 바꾸는 것이다.
 
-### #4
+### Question #5
 
 What is an optional and which problem do optionals solve?
 
@@ -182,7 +184,7 @@ What is an optional and which problem do optionals solve?
 
 Swift는 값의 부재를 참조와 값 타입 모두에 대해 확장한다. 옵셔널 변수는 특정 값이나 nil을 가질 수 있다.
 
-### #5
+### Question #6
 
 Summarize the main differences between a structure and a class.
 
@@ -195,7 +197,7 @@ Summarize the main differences between a structure and a class.
 - 클래스는 상속을 지원한다. 구조체는 불가능하다
 - 클래스는 참조타입이다. 구조체는 값 타입이다.
 
-### #6
+### Question #7
 
 What are generics and which problem do they solve?
 
@@ -237,7 +239,7 @@ areTheyEqual(1, 1)
 
 이 경우에는 equality를 체크하는 메소드이기 때문에 매개변수로 전달되는 모든 타입은 Equatable 프로토콜을 구현해야한다.
 
-### #7
+### Question #8
 
 In some cases, you can't avoid using implicitly unwrapped optionals. When? Why?
 
@@ -252,7 +254,7 @@ implicitly unwrapped optionals를 사용하는 가장 일반적인 이유는 아
 - instantiation time에 의해 nil이 아닌 프로퍼티를 초기화할 수 없을 때. 가장 대표적인 예로 자신의 owner보다 항상 늦게 초기화되는 Interface Builder outlet이 있다. 이런 경우(Interface Builder에서 올바르게 configure 되었다고 가정하는 경우)에는 outlet이 사용하기 전에 non-nil이라는 것을 보장할 수 있다.
 - 두 인스턴스가 서로를 참조하고 서로 non-nil 참조여야 하는 순환참조(strong reference cycle) 문제를 해결할 때. 이런 경우엔 한쪽의 참조를 unowned로 선언하고 다른쪽은 implicitly unwrapped optional을 사용한다.
 
-### #8
+### Question #9
 
 What are the various ways to unwrap an optional? How do they rate in terms of safety?
 
