@@ -45,8 +45,8 @@ p1.name = "Daniel" // p2.name은 여전히 Jason!
 
 ```swift
 enum Language {
-    case italian
-    case english
+	case italian
+	case english
 }
 
 var italian = Language.italian

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS) updateConstraints vs. setNeedsUpdateConstraints"
+title: "iOS) setNeedsUpdateConstraints vs. updateConstraintsIfNeeded"
 tags: [iOS, Swift]
 comments: true
 ---

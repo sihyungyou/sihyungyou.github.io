@@ -81,7 +81,7 @@ extension BadTableViewController {
 
     func cellsSetup() {
         for _ in 0...1000 {
-						// 여기서 1000개의 Cell 인스턴스를 직접 생성하고 append하는 것에 주목하자
+            // 여기서 1000개의 Cell 인스턴스를 직접 생성하고 append하는 것에 주목하자
             let cell = UITableViewCell()
             cell.textLabel?.text = "Wow so bad"
             cells.append(cell)

@@ -23,7 +23,7 @@ self-contained 라는 표현이 좀 와닿지 않아 Language Guide 문서를 �
 
 ## Capturing Values
 
-클로저를 본격적으로 다루기 이전에 글로만 봐서는 감이 당최 오지 않았던 개념이 변수캡처링이었다.
+클로저를 본격적으로 다루기 이전에 글로만 봐서는 감이 당최 오지 않았던 변수캡처링 개념에 대해 다시 생각해보자.
 
 A closure can capture constants and variables from the surrounding context in which it is defined. The closure can then refer to and modify the values of those constants and variables from within its body, even if the original scope that defined the constants and variables no longer exists.
 
