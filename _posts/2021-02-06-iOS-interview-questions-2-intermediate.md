@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS) Swift 면접 질문 - Intermediate"
+title: "iOS) [번역] Swift 면접 질문 - Intermediate"
 tags: [iOS, Swift]
 comments: true
 ---
