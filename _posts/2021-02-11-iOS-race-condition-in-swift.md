@@ -9,7 +9,7 @@ comments: true
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
-[이전포스팅](https://sihyungyou.github.io/iOS-coredata-multithreaded/)에서 멀티스레딩 환경에서의 코어데이터 사용 시 어떻게 충돌을 방지할 수 있는지 살펴보았다. 그러다가 Swift 언어 전체적으로 봤을 때 어떻게 race condition을 해결할 수 있는지 궁금해졌다. 실제로 그동안 멀티 스레딩이 필요할 때마다 GCD가 잘 처리를 해줬기에 이 외에 다른 해결방법에 대해 생각해본 적이 없었다. 역시나 이번에도 좋은 글을 발견했고 번역하며 학습한 내용을 정리해보려한다.  
+[이전포스팅](https://sihyungyou.github.io/iOS-coredata-multithreaded/)에서 멀티스레딩 환경에서의 코어데이터 사용 시 어떻게 충돌을 방지할 수 있는지 살펴보았다. 그러다가 Swift 언어 전체적으로 봤을 때 어떻게 race condition을 해결할 수 있는지 궁금해졌다. 실제로 그동안 멀티 스레딩이 필요할 때마다 GCD가 잘 처리를 해줬기에 이 외에 다른 해결방법에 대해 생각해본 적이 없었다. 이번에도 [좋은 글](https://www.swiftbysundell.com/articles/avoiding-race-conditions-in-swift/)을 발견했고 번역하며 학습한 내용을 정리해보려한다.  
 
 ---
 
