@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "iOS) 코어데이터 정복하기"
+title: "iOS) 코어데이터 알아보기"
 tags: [iOS, Swift]
 comments: true
 ---
 
-> 사실 정복은 하지 못했다고 한다..  
+> Core Data  
 
 ⚠ iOS알못의 글이므로 틀린 정보가 있을 수 있습니다.  
 
