@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS) [번역] Swift에서 race condition 해결하기 "
+title: "iOS) [번역] Swift에서 race condition 해결하기"
 tags: [iOS, Swift]
 comments: true
 ---
