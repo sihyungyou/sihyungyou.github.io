@@ -1,13 +1,11 @@
 ---
 layout: post
-title: "[번역] 다중상속에 관하여 (1)"
+title: "[번역] 다중상속 (1) - Diamond Problem"
 tags: [iOS, Swift]
 comments: true
 ---
 
 > 다중상속의 문제점과 해결방법  
-
-# 다중상속에 관하여
 
 면접에서 다중상속에 대해서 질문을 받았는데 제대로 이해하고 있지 않아 대답을 하지 못했다. 그래서 복기를 하던 중 [좋은 글](https://medium.com/free-code-camp/multiple-inheritance-in-c-and-the-diamond-problem-7c12a9ddbbec)을 발견하여 번역을 해보려한다! 이 글은 다중상속의 문제점과 이에 대한 해결책으로 가상상속에 대해 간단히 언급하고 있다. 하지만 가상상속과 이런 점들을 Swift 언어 관점에 대해서는 서술하고 있지 않아 번역을 마치고 추가적으로 고민해본 점들을 정리할 예정이다.
 
