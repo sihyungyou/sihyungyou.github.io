@@ -7,7 +7,7 @@ comments: true
 
 > Swift에서의 다중상속  
 
-지난 포스팅에서 다중상속은 무엇이며 문제점과 (다중상속을 지원하는 언어 C++에서의) 해결방법을 알아보았다. 오늘은 언어 레벨에서 다중상속을 지원하지 않는 Swift에서는 이와 같은 기능을 어떻게 흉내내는지 알아보자. 이와 관련해서 잘 설명한 [글](https://www.vadimbulavin.com/multiple-inheritance-swift/)을 번역하며 공부해보자!
+[지난 포스팅](https://sihyungyou.github.io/iOS-multiple-inheritance-1/)에서 다중상속은 무엇이며 문제점과 (다중상속을 지원하는 언어 C++에서의) 해결방법을 알아보았다. 오늘은 언어 레벨에서 다중상속을 지원하지 않는 Swift에서는 이와 같은 기능을 어떻게 흉내내는지 알아보자. 이와 관련해서 잘 설명한 [글](https://www.vadimbulavin.com/multiple-inheritance-swift/)을 번역하며 공부해보자!
 
 ---
 
