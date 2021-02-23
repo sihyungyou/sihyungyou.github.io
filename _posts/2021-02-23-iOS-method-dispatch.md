@@ -71,7 +71,7 @@ comments: true
 
 이 동적 디스패치 기법은 가장 동적이라고 할 수 있다. 사실 이 기법은 매우 좋아서 (최적화 측면을 제외하면) Cocoa 프레임워크에서도 KVO, 코어데이터와 같은 곳에서 자주 사용된다.
 
-또한 이 방법은 런타임에 메소드의 기능(functionality)를 바꾸는 `method swizzling`을 가능하게 한다.
+또한 이 방법은 런타임에 메소드의 기능(functionality)를 바꾸는 `method swizzling`을 가능하게 한다. (Method Swizzling은 원래의 메소드를 runtime 때 원하는 메소드로 바꾸어 사용할 수 있도록 하는 기법)
 
 Swift 컴파일러는 이 기법을 Obejctive-C 런타임을 사용해 achieve한다. 명시적으로 메시지 디스패치를 사용하기 위해서는 dynamic 키워드를 사용한다. Swift 4.0 이전에는 dynamic, objc 키워드가 암시적으로 추가되었지만 그 이후부터는 objec 키워드를 마크해주어야한다.
 
