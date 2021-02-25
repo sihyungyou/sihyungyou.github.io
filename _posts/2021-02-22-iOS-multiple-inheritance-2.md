@@ -15,7 +15,7 @@ Swift에서는 다중상속을 지원하지 않지만 이를 가능케하는 여
 
 ### Understanding Multiple Inheritance
 
-다중상속은 클래스가 한 개 이상의 부모 클래스로부터 행동(behvavior), 속성(attribute)를 상속받을 수 있는 객체지향 컨셉이다. 단일상속와 합성과 함께 다중상속은 여러 클래스간 코드를 공유할 수 있도록 해준다.
+다중상속은 클래스가 한 개 이상의 부모 클래스로부터 행동(behvavior), 속성(attribute)를 상속받을 수 있는 객체지향 컨셉이다. 단일상속, 합성과 함께 다중상속은 여러 클래스간 코드를 공유할 수 있도록 해준다.
 
 ### Multiple Inheritance in Swift
 
