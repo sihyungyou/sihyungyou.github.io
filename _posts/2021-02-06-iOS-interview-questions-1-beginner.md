@@ -319,3 +319,6 @@ Hint: There are seven ways.
         print(a)
     }
     ```
+
+## References  
+[Swift Interview Questions and Answers](https://www.raywenderlich.com/762435-swift-interview-questions-and-answers#toc-anchor-013)

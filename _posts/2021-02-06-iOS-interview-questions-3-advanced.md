@@ -135,20 +135,6 @@ struct Lombardis: Pizzeria {
 }
 ```
 
-You'll now define the restaurant Lombardi’s as follows:
-
-```swift
-struct Lombardis: Pizzeria {
-    func makePizza(_ ingredients: [String]) -> Pizza {
-        return Pizza(ingredients: ingredients)
-    }
-
-    func makeMargherita() -> Pizza {
-        return makePizza(["tomato", "basil", "mozzarella"])
-    }
-}
-```
-
 The following code creates two instances of Lombardi's. Which of the two will make a margherita with basil?
 
 ```swift
@@ -342,3 +328,6 @@ enum List<T> {
     indirect case node(T, List<T>)
 }
 ```
+
+## References  
+[Swift Interview Questions and Answers](https://www.raywenderlich.com/762435-swift-interview-questions-and-answers#toc-anchor-013)

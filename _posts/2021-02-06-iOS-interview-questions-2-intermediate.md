@@ -275,7 +275,7 @@ What are the differences between them?
 
 ### 해설
 
-`const`는 컴파일 타임에 반드시 해결되어야하는(must be resolved) 컴파일 타임에 값(value)나 구문(expression)과 함께 초기화되는 변수이다.
+`const`는 컴파일 타임에 반드시 해결되어야하는(must be resolved) 값(value)나 구문(expression)과 함께 컴파일 타임에 초기화되는 변수이다.
 
 `let` 키워드로 생성된 immutable은 런타임에 결정되는 상수이다. 그러므로 static, dynamic expression과 함께 초기화가 가능하다. 아래와 같은 코드도 가능하다.
 
@@ -346,4 +346,7 @@ What is a protocol in Swift?
 
 프로토콜은 메소드, 프로퍼티와 다른 요구사항에 대한 청사진을 정의하는 타입이다. 클래스, 구조체, 열거형은 프로토콜을 채택하여 요구사항을 구현할 수 있다.
 
-프로토콜은 함수를 직접 구현하지 않고 정의만 한다. 프로토콜을 extend 하여 특정 요구사항에 대해 기본 구현(default implementation)이나 추가적인 기능(additional functionality)을 제공할 수 있다.
+프로토콜은 함수를 직접 구현하지 않고 정의만 한다. 프로토콜을 extend 하여 특정 요구사항에 대해 기본 구현(default implementation)이나 추가적인 기능(additional functionality)을 제공할 수 있다.  
+
+## References  
+[Swift Interview Questions and Answers](https://www.raywenderlich.com/762435-swift-interview-questions-and-answers#toc-anchor-013)
