@@ -174,4 +174,4 @@ race condition을 완벽히 피하는 방법은 없지만 queuing이나 GCD를 �
 
 ## References
 
-[https://www.swiftbysundell.com/articles/avoiding-race-conditions-in-swift/](https://www.swiftbysundell.com/articles/avoiding-race-conditions-in-swift/)
+[Avoiding race conditions in Swift](https://www.swiftbysundell.com/articles/avoiding-race-conditions-in-swift/)

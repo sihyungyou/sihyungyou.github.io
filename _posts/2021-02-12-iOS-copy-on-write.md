@@ -56,8 +56,8 @@ Copy-on-Write behavior를 직접 구현할 수도 있다. (프로그래머가 �
 
 ```swift
 final class Ref<T> {
-  var val : T
-  init(_ v : T) {val = v}
+    var val : T
+    init(_ v : T) {val = v}
 }
 
 struct Box<T> {
