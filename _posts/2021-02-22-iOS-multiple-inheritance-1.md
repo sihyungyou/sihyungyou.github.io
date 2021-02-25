@@ -141,23 +141,23 @@ C++는 다중상속처럼 여러 강력한 기능을 제공한다. 하지만 제
 
 ```cpp
 class BaseIO {
-	public:
-		int mode;
+public:
+    int mode;
 };
 
 class In : virtual public BaseIO {
-	public:
-		int readPos;
+public:
+    int readPos;
 };
 
 class Out : virtual public BaseIO {
-	public:
-		int writePos;
+public:
+    int writePos;
 };
 
 class InOut: public In, public Out {
-	public:
-		bool safe;
+public:
+    bool safe;
 };
 ```
 
@@ -171,7 +171,7 @@ class InOut: public In, public Out {
 
 Swift 뿐만 아니라 다른 여러 언어에서도 다중상속을 지원하지 않는 경우가 많다. 이는 Diamond Problem 때문인데 (물론 위에서 설명된 C++의 가상상속 등을 통해 해결할 수는 있지만) 이러한 문제점을 컨트롤 하는 것을 개발자에게 일임하지 않으려는 경향이 있어서 다중상속 자체를 불가능하도록 막아두는 것 같다. 이 외에도 클래스와 인터페이스(혹은 프로토콜)의 객체지향적 성격을 나누기 위한 의도도 있는 것으로 생각된다.
 
-하지만 Java나 Swift 같이 다중상속을 막아놓은 언어에서도 Interface나 Protocol을 통해 다중상속의 기능은 흉내내면서도 Diamond Problem 같은 문제를 일으키지 않도록 지원한다. 다음 포스팅에서는 Swift의 Protocol은 어떻게 다중상속의 기능을 흉내내고 있는지 알아보도록 하겠다.
+하지만 Java나 Swift 같이 다중상속을 막아놓은 언어에서도 Interface나 Protocol을 통해 다중상속의 기능은 흉내내면서도 Diamond Problem 같은 문제를 일으키지 않도록 지원한다. [다음 포스팅](https://sihyungyou.github.io/iOS-multiple-inheritance-2/)에서는 Swift의 Protocol은 어떻게 다중상속의 기능을 흉내내고 있는지 알아보도록 하겠다.
 
 ## References
 
