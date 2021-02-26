@@ -39,7 +39,7 @@ struct Landmark: Codable {
 }
 ```
 
-위와 같이 own type에 Codable을 채택함으로써 이 구조체에 대해서도 build-in 데이터타입으로 serialize 가능하게 되었다. 예를 들면 Landmark 구조체는 property list나 JSON을 handle하는 코드 없이도 Property ListEncoder와 JSONEncoder 클래스를 사용해 encode될 수 있는 것이다.
+위와 같이 own type에 Codable을 채택함으로써 이 구조체에 대해서도 built-in 데이터타입으로 serialize 가능하게 되었다. 예를 들면 Landmark 구조체는 property list나 JSON을 handle하는 코드 없이도 Property ListEncoder와 JSONEncoder 클래스를 사용해 encode될 수 있는 것이다.
 
 또한, 아래 코드와 같이 구조체 내의 구조체를 정의하는 방법으로 하위 구조까지 모두 Codable이 가능하다.
 
