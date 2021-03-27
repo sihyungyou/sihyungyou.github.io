@@ -25,7 +25,7 @@ navigation:
     url: /
   - name: About
     url: /about
-  - name: Archive
+  - name: Posts
     url: /archive
   - name: Tags
     url: /tags

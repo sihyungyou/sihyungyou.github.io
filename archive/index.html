@@ -1,14 +1,14 @@
 ---
 layout: page
-title: Archive
-permalink: /archive/
+title: Posts
+permalink: /posts/
 ---
 
 {% if site.posts.size == 0 %}
   <h2>No post found</h2>
 {% endif %}
 
-<ul class="archive">
+<ul class="posts">
   {% for post in site.posts %}
     {% unless post.next %}
       <h2>{{ post.date | date: '%Y' }}</h2>
