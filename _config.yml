@@ -21,7 +21,7 @@ avatar : https://user-images.githubusercontent.com/35067611/76837157-6305ac80-68
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
 # it from the list(Delete '- name: ' and 'url: ', too!)
 navigation:
-  - name: Blog
+  - name: Home
     url: /
   - name: About
     url: /about
