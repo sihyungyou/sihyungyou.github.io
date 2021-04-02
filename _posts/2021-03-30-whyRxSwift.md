@@ -19,7 +19,7 @@ iOS 개발자들 사이에서 RxSwift가 상당히 핫하다. 2020 Let's Swift �
 
 먼저 `Rx`가 무엇인지 알아야한다. RxSwift는 하나의 새로운 언어가 아니라 Rx가 지원하는 여러 언어 중 하나이기 때문이다. (RxJava, RxScala 등 여러 언어에서 Rx가 지원된다)
 
-Rx는 `Reactive Extensions`을 사용하는 라이브러리이다. 즉, [Reactive Programming](https://www.notion.so/What-is-Reactive-Programming-05da1d51efe84e9fb727e50b8112a3b0)을 쉽게 할 수 있도록 돕는 역할을 한다. `Reactive Programming`은 데이터의 흐름과 그에 대한 처리를 정의해놓고, 흐름에서 변경사항이 생기면 미리 정의해둔 방식에 따라 변화를 주는 프로그래밍 방식이다. 결국 이름부터 반응형인데 변화에 실시간으로 반응하기 때문인 것 같다.
+Rx는 `Reactive Extensions`을 사용하는 라이브러리이다. 즉, Reactive Programming을 쉽게 할 수 있도록 돕는 역할을 한다. `Reactive Programming`은 데이터의 흐름과 그에 대한 처리를 정의해놓고, 흐름에서 변경사항이 생기면 미리 정의해둔 방식에 따라 변화를 주는 프로그래밍 방식이다. 결국 이름부터 반응형인데 변화에 실시간으로 반응하기 때문인 것 같다.
 
 여기서 중요한 포인트는 Reactive Programming은 하나의 패러다임일 뿐이기에 Rx를 사용하지 않아도 reactive하게 프로그램을 구현할 수 있다. 다만, Rx는 Extension 이라는 단어에서 알 수 있듯, 이를 더 편하고 간단하게 구현할 수 있도록 돕는 도구이다.
 
@@ -80,12 +80,12 @@ private func downloadJSON(completion: @escaping (String?) -> Void) {
 
 ```swift
 @IBAction func onLoad(_ sender: Any) {
-		// step 3 : 비동기의 결과를 return 값으로 (동기적으로) 받기
-		let json: JSONData<String?> = downloadJSON(with: URLSTRING)
+    // step 3 : 비동기의 결과를 return 값으로 (동기적으로) 받기
+    let json: JSONData<String?> = downloadJSON(with: URLSTRING)
 
-		json.whenArrived { [weak self] json in
-		   self?.textView.text = json
-		}
+    json.whenArrived { [weak self] json in
+        self?.textView.text = json
+    }
 }
 ```
 
@@ -128,9 +128,9 @@ import RxSwift
 
 @IBAction func onLoad(_ sender: Any) {
     // step 4 : 실제 RxSwift 적용
-		let json = URLSession.shared.rx
-          .data(request: URLRequest(url: URL(string: URLSTRING)!))
-          .map { String(data: $0, encoding: .utf8) }
+    let json = URLSession.shared.rx
+        .data(request: URLRequest(url: URL(string: URLSTRING)!))
+        .map { String(data: $0, encoding: .utf8) }
 
     json.bind(to: textView.rx.text)
 }
