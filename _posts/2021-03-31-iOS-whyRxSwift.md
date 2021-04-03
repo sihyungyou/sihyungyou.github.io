@@ -31,7 +31,7 @@ Rx는 `Reactive Extensions`을 사용하는 라이브러리이다. 즉, Reactive
 
 여기서 이야기할 간결함이라는 단어는 코드의 길이, 가독성, 이해도보다는 `비동기적 작업의 동기화`라는 측면에서의 간결함이다. 개발을 하면서 특정 작업을 비동기적으로 처리해야하는 상황을 종종 마주하게된다. 아주 간단한 예로 JSON 데이터를 다운로드 받고 그 결과를 화면에 보여주는 프로그램을 생각해보자.
 
-![2](https://user-images.githubusercontent.com/35067611/113367889-36490800-9398-11eb-8ceb-36403d787349.gif)
+<img src = "https://user-images.githubusercontent.com/35067611/113367889-36490800-9398-11eb-8ceb-36403d787349.gif" width="400px">
 
 예제 출처 : [곰튀김님 RxSwift 4시간만에 끝내기 시즌2](https://youtu.be/iHKBNYMWd5I)
 
@@ -146,7 +146,7 @@ import RxSwift
 
 이번엔 상태, 관찰, 그리고 리액티브 프로그래밍 패러다임이라는 관점에서 RxSwift를 살펴보자.
 
-![3](https://user-images.githubusercontent.com/35067611/113367890-377a3500-9398-11eb-9b79-56d3f6d2310c.gif)
+<img src = "https://user-images.githubusercontent.com/35067611/113367890-377a3500-9398-11eb-9b79-56d3f6d2310c.gif" width="400px">
 
 면접에서 비동기적으로 작동하는 태스크 A, B, C가 있는데 그것들이 모두 끝났는지 어떻게 알 수 있냐는 질문을 받은 적이 있다. 답변을 횡설수설했는데 각 비동기 태스크의 완료여부를 표시하는 flag 변수를 하나 두고 무한루프에서 이 변수를 관찰(Rx적으로 말하자면 subscribe)하는 방법이 가능할 것 같다. 혹은 DispatchGroup을 사용하는 방법도 떠오른다. (직접 코드로 짜보질 않아서 확신은 없다)
 
@@ -203,7 +203,8 @@ task1, 2, 3의 진행정도를 저장하는 task1Progress, task2Progress, task3P
 
 이번엔 RxSwift가 MVVM 아키텍처 패턴과 쌍을 이룰 때 어떤 이점을 갖는지 알아보자.
 
-![4](https://user-images.githubusercontent.com/35067611/113367891-3812cb80-9398-11eb-9084-7471facdb31f.gif)
+<img src = "https://user-images.githubusercontent.com/35067611/113367891-3812cb80-9398-11eb-9084-7471facdb31f.gif" width="400px">
+
 
 예제 출처 : [곰튀김님 RxSwift 4시간만에 끝내기 시즌2](https://youtu.be/iHKBNYMWd5I)
 
